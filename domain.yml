@@ -11,9 +11,6 @@ intents:
     - user.topic.food
     - user.topic.travel
   
-entities:
-    - topic
-    - sentiment
     
 slots:
     topic:
