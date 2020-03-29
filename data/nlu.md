@@ -1,227 +1,56 @@
-## intent:affirm
-- coool
-- correct
-- fine okay
-- I agree
-- I guess
-- i love that
-- let's do it
-- oh okay
-- ok yes
-- okay buddy
-- okay cool
-- okay that's fine
-- okey
-- right
-- right on
-- that is ok
-- that's correct
-- uh yes
-- um yes
-- ya
-- ye
-- yea
-- yea fine
-- yeah 
-- YEAH
-- yeah a cheap restaurant serving international food
-- yeah exactly
-- yeah fine
-- yeah sure
-- yep
-- yep okay
-- yes
-- yes and i dont care
-- yes it is
-- yes knocking
-- yes right
-- yes yes
-- yew
-- yup
+## intent:greet
+- hey
+- hello
+- hi
+- good morning
+- good evening
+- hey there
 
-## intent:deny
-- don't
-- don't want
-- need not
-- don't come 
-- never help
-- never
-- not needed
-- of course not
-- never
-- not at this time
-- not exactly
-- absolutely no
-- no forget
-- do not
-- no thanks
-- no don't want
-- sorry no
-- don't want your help
-- I don't you help
-- I don't want your assistance
-- get out goodbye
-- i do not want your help
-- i don't need your help
-- i don't want your help
-- i am not okay with your help
-- don't want
-- do not
-- I don't need anything from you
-- okay keep it in mind
-- nope i dont need your help
-- Don't show off
-- nope
-
-## intent:user.bye
-- okay see you later
-- hope to see you later
-- bye for now
-- till next time
-- I must go
+## intent:goodbye
 - bye
 - goodbye
-- see you
-- see you soon
-- bye-bye
-- bye bye good night
-- good bye
-- bye bye see you
-- bye bye see you soon
-- bye bye take care
-- I said bye
-- never mind bye
-- now bye
-- that's all goodbye
-- that's it goodbye
-- leave me alone
-- go to bed
-- goodbye for now
-- talk to you later
-- you can go now
-- get lost
-- goodbye see you later
-- alright bye
-- see ya
-- thanks bye bye
-- okay bye
-- okay thank you bye
-- see you tomorrow
-- ok bye
-- c u
+- see you around
+- see you later
 
-## intent:user.good
-- I am good
-- I'm doing just great
-- I'm doing fine
+## intent:affirm
+- yes
+- indeed
+- of course
+- that sounds good
+- correct
+
+## intent:deny
+- no
+- never
+- I don't think so
+- don't like that
+- no way
+- not really
+
+## intent:mood_great
+- perfect
+- very good
+- great
+- amazing
+- wonderful
+- I am feeling very good
+- I am great
 - I'm good
-- I'm doing good
-- I'm great thanks
-- I'm super good
-- I'm feeling great
-- I'm in a good mood
-- I'm doing really good
-- good
-- It's good
-- I feel good
-- That's good
-- That feels good
-- I feel very good
-- i am pretty good
-- I feel good today
-- I am really good
 
-## intent:user.hello
-- greetings
-- hallo
-- heeey
-- hello
-- hello again
-- hello everybody
-- hello friend
-- hello hi
-- hello is anybody there
-- hello robot
-- hello there
-- hey
-- Hey bot
-- hey bot!
-- hey buddy
-- hey hey
-- hey man
-- hey there
-- hey there
-- heya
-- hi
-- hi again
-- Hi bot
-- hi folks
-- hi hi
-- hi Mister
-- hi pal!
-- hi there
-- hola
-- howdy
-- oka
-- yo
-- yo man
+## intent:mood_unhappy
+- sad
+- very sad
+- unhappy
+- bad
+- very bad
+- awful
+- terrible
+- not very good
+- extremely sad
+- so sad
 
-## intent:user.sad
-- I'm in a sad mood
-- I am sad
-- I'm grieving
-- I am depressed
-- I am feeling sad
-- I am upset
-- I'm unhappy
-- I'm having a bad day
-- I want to cry
-- I'm not happy
-- feeling sad
-- I felt sad for no reason
-- Now I'm sad
-- It makes me sad
-- I am sad to hear it
-- I am a very sad person
-- I feel sad every now and then
-- I am as sad and lonely as can be
-- feeling so down
-- i am not in a good mood
-
-## intent:user.thank
-- you helped a lot thank you
-- appreciate your help
-- cheers
-- thank you
-- thanks
-- thanks a lot
-- terrific thank you
-- great thank you
-- thanks so much
-- thank you so much
-- thanks for your help
-- thank you for your help
-- nice thank you
-- I appreciate it
-- I thank you
-- thank you that will be all
-- thanks buddy
-- thanks love
-- thank you my friend
-- well thanks
-- very good thank you
-- good thanks
-- thanks again
-- thank you again
-- all thank you
-- alright thank you
-- alright thanks
-- no thank you that's all
-- perfect thank you
-- so nice of you
-- well thank you
-- well thanks
-- thnx
-- thank you
-- tqsm
-- ty
+## intent:bot_challenge
+- are you a bot?
+- are you a human?
+- am I talking to a bot?
+- am I talking to a human?
