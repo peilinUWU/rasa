@@ -1,17 +1,17 @@
 ## story sport
 * sport {"topic" : "sport"}
   - utter_sport
-    
+
 ## story animal 
-* user.topic.animal {"topic" : "animal"}
+* animal {"topic" : "animal"}
   - utter_animal
 
 ## story food 
-* user.topic.food {"topic" : "food"}
+* food {"topic" : "food"}
   - utter_food
 
 ## story travel 
-* user.topic.travel {"topic" : "travel"}
+* travel {"topic" : "travel"}
   - utter_travel
     
     
@@ -26,21 +26,19 @@
 * sport OR animal OR food OR travel
   - action_choose_topic
   - slot{"topic" : "food"}
-    
+
 ## story 02
 * user.thank
   - utter_reply.to_thank
-    
+
 ## story 03
 * user.sad
   - utter_reply.to_sad
-    
+
 ## story 04
 * user.good
-  - utter_reply.to_good      
-    
+  - utter_reply.to_good
+
 ## story 05
 * user.bye  
   - utter_temp
-  
-  
