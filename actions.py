@@ -73,45 +73,6 @@
 #         dispatcher.utter_message("Thanks!")
 #         return []
 
-from typing import Dict, Text, Any, List, Union, Optional
-
-from rasa_sdk import Tracker
-from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormAction
-
-
-class TopicForm(FormAction):
-    """Example of a custom form action"""
-    
-    def name(self):
-        """Unique identifier of the form"""
-        
-        return "topic_form"
-    
-    
-    @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-        
-        # possible to introduce logic
-#         if tracker.get_slot('cuisine') == 'greek':
-        return ["topic"]
-
-
-    def submit(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict]:
-        
-        
-        """Define what the form has to do
-            after all required slots are filled"""
-
-        # utter submit template
-        dispatcher.utter_message("Submitted!")
-        return []
     
     
 #     def slot_mappings(slef):
