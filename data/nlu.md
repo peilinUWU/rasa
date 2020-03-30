@@ -556,7 +556,6 @@
 - which kind
 - who are the engineers at rasa?
 - who are they?
-- who is [Sharon Zeches](name)
 - who is the MD of samsung bangalore ?
 - who is the president of india ?
 - who is your favourite robot?
