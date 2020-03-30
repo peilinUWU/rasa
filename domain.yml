@@ -27,7 +27,7 @@ responses:
   utter_temp:
   - text: Bye! I will remember that you are interested in the topic {topic}!
   utter_greet.ask_topic:
-  - text: Good to see you! Tell me a hobby of yours!
+  - text: Good to see you! Pick one of your interest!
     buttons:
     - title: sport
       payload: /sport{"topic":"sport"}
