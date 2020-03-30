@@ -265,8 +265,6 @@
 - Can you make sandwiches?
 - Can you please send me an uber
 - Do I have to accept?
-- Do you know [Kevin Pelton](name)
-- Find nearest [pizzahut](company)
 - Have we met before?
 - HomeBase is advertised as a community. Is there a way to interact with other members of the community?
 - How long does it take to set up a Rasa bot?
@@ -326,8 +324,6 @@
 - Why is my TRUST score set to 50 after I completed the registration process?
 - Won't you ask me how I am?
 - You'r blue.
-- [Kristin](name), I want to marry you
-- [german](language)?
 - a tamed mouse will arrive at your doorstep in the next couple of days
 - aRE YOU SINGLE
 - again?
@@ -341,7 +337,6 @@
 - are you human ?
 - are you russian?
 - are you sick
-- are you using Rasa [Core](product) and [NLU](product) ?
 - are you vegan
 - better than you
 - book a ticket
@@ -394,14 +389,11 @@
 - google?
 - great, I'd like to buy a house
 - hang on let me find it
-- have you ever seen [Keith Reilly](name)?
-- help with [Alma Abrams](name)
 - help with my life
 - hey little mama let em whisper in your ear
 - hey, I contacted you a couple of days ago but didn't get any response, any news?
 - how
 - how about NYC
-- how are [Alicia Jackson](name)'s cats doing?
 - how are the kids
 - how can i get them?
 - how can i test this
@@ -446,7 +438,6 @@
 - i want to order a pizza
 - i want to see your happy customers
 - i will tame a mouse for you
-- is [John Lewis](name) still married to you
 - is it a wasteland full of broken robot parts?
 - is it allow to
 - is rasa a studio?
@@ -511,7 +502,6 @@
 - what did you eat for lunch?
 - what do oyu think about siri?
 - what do you think abou siri?
-- what do you think about [Stanley Ramirez](name)?
 - what do you think of alexa
 - what does your soul feel my friend
 - what doing
