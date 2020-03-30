@@ -20,8 +20,8 @@ slots:
         type: unfeaturized
         auto_fill: false
         
-forms:
-    - topic_form
+#forms:
+#    - topic_form
     
 # actions:
 #     - action_chitchat
@@ -141,9 +141,6 @@ responses:
     utter_default:   # utterance sent by action_default_fallback
     - text: "Sorry, I didn't get that, can you rephrase it?"
     
-    # temporary utter
-    utter_temp:
-    - text: "I see! So you like {topic}!"
         
 session_config:
     session_expiration_time: 60
