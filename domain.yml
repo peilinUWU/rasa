@@ -75,6 +75,14 @@ responses:
   - text: Oh, don't be sad. Go do something you enjoy.
   - text: Sad? Writing down what's troubling you may help.
   - text: If you're feeling down, how about drawing or painting something?
+  utter_thumbsup:
+  - text: 👍
+  - text: Okay.
+  - text: Got it.
+  utter_great:
+  - text: Great! 👍
+  - text: That's great! 🙌
+  - text: Awesome! 🎉
 actions:
 - action_choose_topic
 - utter_temp
