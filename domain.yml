@@ -10,7 +10,16 @@ intents:
   - user.topic.animal
   - user.topic.food
   - user.topic.travel
-
+  
+slots:
+  topic:
+    type: categorical
+      values:
+      - sport
+      - animal
+      - food
+      - travel
+      
 responses:
   utter_greet.ask_topic:
   - text: "Good to see you! Tell me a hobby of yours!"
