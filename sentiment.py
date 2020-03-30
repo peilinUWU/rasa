@@ -12,7 +12,15 @@ class SentimentAnalyzer(Component):
 
     name = "sentiment"
 #     provides = ["entities"]
-    requires = []
+    # requires = []  # is depricated
+    # Which components are required by this component.
+    # Listed components should appear before the component itself in the pipeline.
+    @classmethod
+    def required_components(cls) -> List[Type[Component]]:
+        """Specify which components need to be present in the pipeline."""
+
+        return []
+    
     defaults = {}
     language_list = ["en"]
 
