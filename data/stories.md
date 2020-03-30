@@ -1,35 +1,31 @@
-## story 01
-* user.hello
-    - utter_greet.hi.2
-    
-## story 02
-* user.thank
-    - utter_reply.to_thank
-    
-## story 03
-* user.sad
-    - utter_reply.to_sad
-    
-## story 04
-* user.good
-    - utter_reply.to_good      
-    
-## story 05
-* user.bye
-    - utter_greet.bye
-    
-## story sport
-* user.topic.sport
-    - utter_sport
-    
-## story animal
-* user.topic.animal
-    - utter_animal
+## happy path
+* greet
+  - utter_greet
+* mood_great
+  - utter_happy
 
-## story food
-* user.topic.food
-    - utter_food
+## sad path 1
+* greet
+  - utter_greet
+* mood_unhappy
+  - utter_cheer_up
+  - utter_did_that_help
+* affirm
+  - utter_happy
 
-## story travel
-* user.topic.travel
-    - utter_travel
+## sad path 2
+* greet
+  - utter_greet
+* mood_unhappy
+  - utter_cheer_up
+  - utter_did_that_help
+* deny
+  - utter_goodbye
+
+## say goodbye
+* goodbye
+  - utter_goodbye
+
+## bot challenge
+* bot_challenge
+  - utter_iamabot
