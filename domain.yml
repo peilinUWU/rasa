@@ -13,7 +13,6 @@ intents:
 
 entities:
   - topic
-  - sentiment
 
 slots: 
   topic: 
