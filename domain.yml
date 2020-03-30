@@ -1,151 +1,32 @@
 intents:
-    - affirm
-    - deny
-    - user.bye
-    - user.good
-    - user.hello
-    - user.sad
-    - user.thank
-    - user.topic.sport
-    - user.topic.animal
-    - user.topic.food
-    - user.topic.travel
-  
-# entities:
-#     - topic
-#     - sentiment
-    
-slots:
-    topic:
-        type: unfeaturized
-        auto_fill: false
-        
-forms:
-    - topic_form
-    
-# actions:
-#     - action_chitchat
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
 
 responses:
-    utter_greet.hi:
-    - text: "Hi there! I'm a Rasbert."
-    - text: "Hi, I'm a Rasbert."
-    - text: "Hey, I'm a Rasbert."
-    - text: "Hey there! I'm a Rasbert."
-    - text: "Good day, I'm a Rasbert."
-    - text: "Hello. I'm a Rasbert."
-    - text: "Greetings, I'm a Rasbert."
-    
+  utter_greet:
+  - text: "Hey! How are you?"
 
-    utter_greet.bye:
-    - text: "See you soon!"
-    - text: "Bye bye!"
-    - text: "Till next time!"
-    - text: "Bye."
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
 
-    utter_greet.how_are_you:
-    - text: "How are you getting on?"
-    - text: "How's your day going"
-    - text: "How are you?"
-    - text: "Is everything all right?"
-    - text: "How are you doing?"
-    - text: "How are the things going"
-    - text: "How are you feeling"
-    - text: "How are you today?"
-    - text: "How do you do?"
-    - text: "How is it going?"
-    - text: "How is your day"
-    
-    
-    utter_greet.hi.2:
-    - text: "Good to see you! Tell me a hobby of yours!"
-      buttons:
-       - title: "sport"
-         payload: '/user.topic.sport'
-       - title: "animal"
-         payload: '/user.topic.animal'
-       - title: "food"
-         payload: '/user.topic.food'
-       - title: "travel"
-         payload: '/user.topic.travel'
+  utter_did_that_help:
+  - text: "Did that help you?"
 
-#     utter_general:
-#     - text: "What are the top 3 things on your bucket list?"
-#     - text: "What are you most passionate about?"
-#     - text: "What is your favorite thing to do?"
-#     - text: "What’s your dream job?"
-#     - text: "What did you study?"
-#     - text: "What did you want to be growing up?"
-#     - text: "What talent do you wish you had?"
-#     - text: "What is your favorite weekend activity?"
+  utter_happy:
+  - text: "Great, carry on!"
 
-    utter_sport:
-    - text: "What sport do you play?"
-    - text: "What sport would you like to play?"
-    - text: "What sport do you like to watch?"
-    - text: "Which sport do you like to play?"
-    - text: "What is your favorite sport?"
+  utter_goodbye:
+  - text: "Bye"
 
-    utter_animal:
-    - text: "Which animal at the zoo do you like best?"
-    - text: "Are you a cat person or a dog person?"
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
 
-    utter_food:
-    - text: "What is your favorite ice cream flavor?"
-    - text: "If you never have to eat one vegetable, which would it be?"
-    - text: "What do you like to cook the most?"
-    - text: "What is the one food you could eat for the rest of your life?"
-    - text: "Do you like tea or coffee?"
-    - text: "What is your favorite cuisine?"
-    - text: "What food do you absolutely hate?"
-    - text: "What’s the perfect meal to go out on?"
-
-    utter_travel: 
-    - text: "What is your favorite place in the entire world?"
-    - text: "If you could live anywhere in the world, where would it be?"
-    - text: "Where do you want to go on the next family vacation?"
-    - text: "Where would you like to travel next?"
-    - text: "Where is the most relaxing place you have been?"
-    
-    
-
-    utter_reply.how_are_you:
-    - text: "Doing great, thanks!"
-    - text: "I'm doing very well. Thanks!"
-    - text: "Feeling wonderful!"
-    - text: "Wonderful! Thanks for asking."
-
-    utter_reply.to_good:
-    - text: "Great! Glad to hear it."
-    - text: "Excellent. I'm here to help keep it that way."
-
-    utter_reply.to_sad:
-    - text: "Oh, don't be sad. Go do something you enjoy."
-    - text: "Sad? Writing down what's troubling you may help."
-    - text: "If you're feeling down, how about drawing or painting something?"
-    
-    utter_reply.to_thank:
-    - text: "No problem! You're so polite!"
-    - text: "No problem!"
-    - text: "Not a problem!"
-    - text: "Not at all!"
-    - text: "Any time!"
-   
-    utter_telljoke:
-    - text: "Why are eggs not very much into jokes? - Because they could crack up."
-    - text: "What's a tree's favorite drink? - Root beer!"
-    - text: "Why do the French like to eat snails so much? - They can't stand fast food."
-    - text: "Why did the robot get angry? - Because someone kept pushing its buttons."
-    - text: "Why did the robot cross the road? - Because he was programmed to. Duh!"
-      
-    utter_default:   # utterance sent by action_default_fallback
-    - text: "Sorry, I didn't get that, can you rephrase it?"
-    
-    # temporary utter
-    utter_temp:
-    - text: "I see! So you like {topic}!"
-        
 session_config:
-    session_expiration_time: 60
-    carry_over_slots_to_new_session: true
-
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
