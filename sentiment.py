@@ -11,18 +11,17 @@ class SentimentAnalyzer(Component):
     """A pre-trained sentiment component"""
 
     name = "sentiment"
-#     provides = ["entities"]
-    # requires = []  # is depricated
-    # Which components are required by this component.
-    # Listed components should appear before the component itself in the pipeline.
+    # provides = ["entities"] # depricated 
+    # requires = []           # depricated 
+    defaults = {}
+    language_list = ["en"]
+    
     @classmethod
     def required_components(cls) -> List[Type[Component]]:
         """Specify which components need to be present in the pipeline."""
 
         return []
     
-    defaults = {}
-    language_list = ["en"]
 
     def __init__(self, component_config=None):
         super(SentimentAnalyzer, self).__init__(component_config)
