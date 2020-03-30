@@ -20,8 +20,8 @@ slots:
         type: unfeaturized
         auto_fill: false
         
-#forms:
-#    - topic_form
+forms:
+    - topic_form
     
 # actions:
 #     - action_chitchat
