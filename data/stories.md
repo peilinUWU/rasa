@@ -23,6 +23,8 @@
 * user.hello
   - utter_greet.hi
   - utter_greet.ask_topic
+* sport OR animal OR food OR travel
+  - action_choose_topic
     
 ## story 02
 * user.thank
@@ -37,7 +39,7 @@
   - utter_reply.to_good      
     
 ## story 05
-* user.bye
-  - utter_greet.bye
+* user.bye  
+  - utter_temp
   
   
