@@ -2,8 +2,7 @@
 # https://rasa.com/docs/rasa/nlu/components/
 language: en
 pipeline:
-  - name: ConveRTTokenizer
-  - name: ConveRTFeaturizer
+  - name: WhitespaceTokenizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
@@ -25,4 +24,3 @@ policies:
     max_history: 5
     epochs: 100
   - name: MappingPolicy
-  - name: FormPolicy
