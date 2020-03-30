@@ -27,18 +27,26 @@
   - action_choose_topic
   - slot{"topic" : "food"}
 
-## story 02
+## story - thank
 * user.thank
   - utter_reply.to_thank
 
-## story 03
+## story - sad
 * user.sad
   - utter_reply.to_sad
 
-## story 04
+## story - good
 * user.good
   - utter_reply.to_good
 
-## story 05
+## story - bye
 * user.bye  
   - utter_temp
+
+## story - affirm / deny
+* affirm OR deny
+  - utter_thumbsup
+
+## story - affirm v2
+* affirm 
+  - utter_great
