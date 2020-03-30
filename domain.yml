@@ -12,8 +12,6 @@ intents:
   - user.topic.travel
 
 responses:
-
-
   utter_greet.ask_topic:
     - text: "Good to see you! Tell me a hobby of yours!"
       buttons:
@@ -76,6 +74,9 @@ responses:
     - text: "Oh, don't be sad. Go do something you enjoy."
     - text: "Sad? Writing down what's troubling you may help."
     - text: "If you're feeling down, how about drawing or painting something?"
+    
+  utter_default:   # utterance sent by action_default_fallback
+    - text: "Sorry, I didn't get that, can you rephrase it?"
     
 session_config:
   session_expiration_time: 60
