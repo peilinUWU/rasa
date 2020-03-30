@@ -10,28 +10,43 @@ intents:
   - user.topic.animal
   - user.topic.food
   - user.topic.travel
-  
-slots:
-  topic:
+  - sport
+  - animal
+  - food
+  - travel
+
+entities:
+  - topic
+  - sentiment
+
+slots: 
+  topic: 
     type: categorical
-      values:
-      - sport
-      - animal
-      - food
-      - travel
-      
+    values:
+    - sport
+    - animal
+    - food
+    - travel
+
+actions:
+  - action_choose_topic
+
 responses:
+
+  utter_temp:
+  - text: "Bye! I will remember that you are interested in the topic {topic}!"
+
   utter_greet.ask_topic:
   - text: "Good to see you! Tell me a hobby of yours!"
     buttons:
     - title: "sport"
-      payload: "/user.topic.sport"
+      payload: "/sport{\"topic\":\"sport\"}"
     - title: "animal"
-      payload: "/user.topic.animal"
+      payload: "/animal{\"topic\":\"animal\"}"
     - title: "food"
-      payload: "/user.topic.food"
+      payload: "/food{\"topic\":\"food\"}"
     - title: "travel"
-      payload: "/user.topic.travel"
+      payload: "/travel{\"topic\":\"travel\"}"
 
   utter_sport:
   - text: "What sport do you play?"
