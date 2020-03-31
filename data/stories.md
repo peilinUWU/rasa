@@ -26,8 +26,23 @@
 * sport OR animal OR food OR travel
   - action_choose_topic
   - slot{"topic" : "food"}
-  - utter_thumbsup
+  - utter_great
+  - utter_proceed
+* affirm
+  - utter_greet.ask_topic
 
+## story 02
+* user.hello
+  - utter_greet.hi
+  - utter_greet.ask_topic
+* sport OR animal OR food OR travel
+  - action_choose_topic
+  - slot{"topic" : "food"}
+  - utter_great
+  - utter_proceed
+* deny
+  - utter_thumbsup
+  
 ## story - thank
 * user.thank
   - utter_reply.to_thank
