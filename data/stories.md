@@ -26,6 +26,7 @@
 * sport OR animal OR food OR travel
   - action_choose_topic
   - slot{"topic" : "food"}
+  - utter_thumbsup
 
 ## story - thank
 * user.thank
