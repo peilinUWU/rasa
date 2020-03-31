@@ -55,7 +55,10 @@
 <!--     out of scope       -->
 <!---------------------------->
 
-## out of scope
-* out_of_scope
-  - respond_out_of_scope
+## out of scope - non english
+* out_of_scope_non_english
+  - utter_reply.to_out_of_scope_non_english
     
+## out of scope - other
+* out_of_scope_other
+  - utter_reply.to_out_of_scope_other
