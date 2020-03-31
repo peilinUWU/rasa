@@ -13,8 +13,8 @@ intents:
 - animal
 - food
 - travel
-- out_of_scope_non_english
-- out_of_scope_other
+- out.of.scope.non.english
+- out.of.scope.other
 entities:
 - topic
 slots:
