@@ -226,7 +226,7 @@
 - tqsm
 - ty
 
-## intent:out_of_scope_non_english
+## intent:out.of.scope.non.english
 - Wie fange ich mit Rasa an?
 - hilf mir beim start
 - tschüssikowski
@@ -249,7 +249,7 @@
 - tu parles francais?
 - tudo bom
 
-## intent:out_of_scope_other
+## intent:out.of.scope.other
 - I am asking you an out of scope question
 - 4 + 2 = ?
 - After registration I see that I have an available balance of 0.00000000. What does this balance represent?
