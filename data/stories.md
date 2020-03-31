@@ -55,3 +55,11 @@
 <!--     out of scope       -->
 <!---------------------------->
 
+
+## out of scope - non english
+* out.of.scope.non.english
+  - utter_reply.to_out_of_scope_non_english
+    
+## out of scope - other
+* out.of.scope.other
+  - utter_reply.to_out_of_scope_other
