@@ -18,12 +18,7 @@ entities:
 
 slots: 
   topic: 
-    type: categorical
-    values:
-    - sport
-    - animal
-    - food
-    - travel
+    type: list
 
 actions:
   - action_choose_topic
@@ -32,6 +27,9 @@ responses:
 
   utter_temp:
   - text: "Bye! I will remember that you are interested in the topic {topic}!"
+  
+  utter_proceed:
+  - text: "Would you like to choose another topic of your interest?"
 
   utter_greet.ask_topic:
   - text: "Good to see you, please pick one topic that interests you!"
