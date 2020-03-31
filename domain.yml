@@ -34,7 +34,7 @@ responses:
   - text: "Bye! I will remember that you are interested in the topic {topic}!"
 
   utter_greet.ask_topic:
-  - text: "Good to see you! Tell me a hobby of yours!"
+  - text: "Good to see you, please pick one topic that interests you!"
     buttons:
     - title: "sport"
       payload: "/sport{\"topic\":\"sport\"}"
