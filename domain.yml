@@ -102,3 +102,7 @@ actions:
 - utter_reply.to_thank
 - utter_reply.to_good
 - utter_reply.to_sad
+- utter_thumbsup
+- utter_great
+- utter_reply.to_out_of_scope_non_english
+- utter_reply.to_out_of_scope_other
