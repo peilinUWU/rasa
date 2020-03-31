@@ -91,18 +91,3 @@ responses:
   - text: I can't help you with that, I'm sorry.
 actions:
 - action_choose_topic
-- utter_temp
-- utter_greet.ask_topic
-- utter_sport
-- utter_animal
-- utter_food
-- utter_travel
-- utter_greet.hi
-- utter_greet.bye
-- utter_reply.to_thank
-- utter_reply.to_good
-- utter_reply.to_sad
-- utter_thumbsup
-- utter_great
-- utter_reply.to_out_of_scope_non_english
-- utter_reply.to_out_of_scope_other
