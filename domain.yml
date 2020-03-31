@@ -1,93 +1,117 @@
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
 intents:
-- affirm
-- deny
-- user.bye
-- user.good
-- user.hello
-- user.sad
-- user.thank
-- sport
-- animal
-- food
-- travel
-- out.of.scope.non.english
-- out.of.scope.other
+  - affirm
+  - deny
+  - user.bye
+  - user.good
+  - user.hello
+  - user.sad
+  - user.thank
+  - sport
+  - animal
+  - food
+  - travel
+  - out.of.scope.non.english
+  - out.of.scope.other
+
 entities:
-- topic
-slots:
-  topic:
+  - topic
+
+slots: 
+  topic: 
     type: categorical
     values:
     - sport
     - animal
     - food
     - travel
-responses:
-  utter_temp:
-  - text: Bye! I will remember that you are interested in the topic {topic}!
-  utter_greet.ask_topic:
-  - text: Good to see you! Pick one of your interest!
-    buttons:
-    - title: sport
-      payload: /sport{"topic":"sport"}
-    - title: animal
-      payload: /animal{"topic":"animal"}
-    - title: food
-      payload: /food{"topic":"food"}
-    - title: travel
-      payload: /travel{"topic":"travel"}
-  utter_sport:
-  - text: What sport do you play?
-  - text: What sport would you like to play?
-  utter_animal:
-  - text: Which animal at the zoo do you like best?
-  - text: Are you a cat person or a dog person?
-  utter_food:
-  - text: What is your favorite ice cream flavor?
-  - text: If you never have to eat one vegetable, which would it be?
-  utter_travel:
-  - text: What is your favorite place in the entire world?
-  - text: If you could live anywhere in the world, where would it be?
-  utter_greet.hi:
-  - text: Hi there! I'm a Rasbert.
-  - text: Hi, I'm a Rasbert.
-  - text: Hey, I'm a Rasbert.
-  - text: Hey there! I'm a Rasbert.
-  - text: Good day, I'm a Rasbert.
-  - text: Hello. I'm a Rasbert.
-  - text: Greetings, I'm a Rasbert.
-  utter_greet.bye:
-  - text: See you soon!
-  - text: Bye bye!
-  - text: Till next time!
-  - text: Bye.
-  utter_reply.to_thank:
-  - text: No problem! You're so polite!
-  - text: No problem!
-  - text: Not a problem!
-  - text: Not at all!
-  - text: Any time!
-  utter_reply.to_good:
-  - text: Great! Glad to hear it.
-  - text: Excellent. I'm here to help keep it that way.
-  utter_reply.to_sad:
-  - text: Oh, don't be sad. Go do something you enjoy.
-  - text: Sad? Writing down what's troubling you may help.
-  - text: If you're feeling down, how about drawing or painting something?
-  utter_thumbsup:
-  - text: 👍
-  - text: Okay.
-  - text: Got it.
-  utter_great:
-  - text: Great! 👍
-  - text: That's great! 🙌
-  - text: Awesome! 🎉
-  utter_reply.to_out_of_scope_non_english:
-  - text: I only understand English, I'm sorry.
-  utter_reply.to_out_of_scope_other:
-  - text: I can't help you with that, I'm sorry.
+
 actions:
-- action_choose_topic
+  - action_choose_topic
+
+responses:
+
+  utter_temp:
+  - text: "Bye! I will remember that you are interested in the topic {topic}!"
+
+  utter_greet.ask_topic:
+  - text: "Good to see you! Tell me a hobby of yours!"
+    buttons:
+    - title: "sport"
+      payload: "/sport{\"topic\":\"sport\"}"
+    - title: "animal"
+      payload: "/animal{\"topic\":\"animal\"}"
+    - title: "food"
+      payload: "/food{\"topic\":\"food\"}"
+    - title: "travel"
+      payload: "/travel{\"topic\":\"travel\"}"
+
+  utter_sport:
+  - text: "What sport do you play?"
+  - text: "What sport would you like to play?"
+
+  utter_animal:
+  - text: "Which animal at the zoo do you like best?"
+  - text: "Are you a cat person or a dog person?"
+
+  utter_food:
+  - text: "What is your favorite ice cream flavor?"
+  - text: "If you never have to eat one vegetable, which would it be?"
+
+  utter_travel: 
+  - text: "What is your favorite place in the entire world?"
+  - text: "If you could live anywhere in the world, where would it be?"
+    
+  # --------------------------- #
+  #    generic conversations    #
+  # --------------------------- #
+  
+  utter_greet.hi:
+  - text: "Hi there! I'm a Rasbert."
+  - text: "Hi, I'm a Rasbert."
+  - text: "Hey, I'm a Rasbert."
+  - text: "Hey there! I'm a Rasbert."
+  - text: "Good day, I'm a Rasbert."
+  - text: "Hello. I'm a Rasbert."
+  - text: "Greetings, I'm a Rasbert."
+    
+  utter_greet.bye:
+  - text: "See you soon!"
+  - text: "Bye bye!"
+  - text: "Till next time!"
+  - text: "Bye."
+    
+  utter_reply.to_thank:
+  - text: "No problem! You're so polite!"
+  - text: "No problem!"
+  - text: "Not a problem!"
+  - text: "Not at all!"
+  - text: "Any time!"
+    
+  utter_reply.to_good:
+  - text: "Great! Glad to hear it."
+  - text: "Excellent. I'm here to help keep it that way."
+    
+  utter_reply.to_sad:
+  - text: "Oh, don't be sad. Go do something you enjoy."
+  - text: "Sad? Writing down what's troubling you may help."
+  - text: "If you're feeling down, how about drawing or painting something?"
+    
+  utter_thumbsup:
+  - text: "👍"
+  - text: "Okay."
+  - text: "Got it."
+
+  utter_great:
+  - text: "Great! 👍"
+  - text: "That's great! 🙌"
+  - text: "Awesome! 🎉"
+
+  utter_reply.to_out_of_scope_non_english:
+  - text: "I only understand English, I'm sorry."
+
+  utter_reply.to_out_of_scope_other:
+  - text: "I can't help you with that, I'm sorry."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
