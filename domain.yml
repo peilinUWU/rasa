@@ -86,7 +86,7 @@ responses:
   - text: That's great! 🙌
   - text: Awesome! 🎉
   utter_reply.to_out_of_scope_non_english:
-  -text: I only understand English, I'm sorry.
+  - text: I only understand English, I'm sorry.
   utter_reply.to_out_of_scope_other:
   - text: I can't help you with that, I'm sorry.
 actions:
