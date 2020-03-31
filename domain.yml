@@ -108,6 +108,10 @@ responses:
   - text: "That's great! 🙌"
   - text: "Awesome! 🎉"
 
+  # --------------------------- #
+  #         out of scope        #
+  # --------------------------- #
+  
   utter_reply.to_out_of_scope_non_english:
   - text: "I only understand English, I'm sorry."
 
