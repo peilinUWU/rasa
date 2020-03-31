@@ -19,29 +19,33 @@ entities:
 slots: 
   topic: 
     type: list
-
+    
 actions:
   - action_choose_topic
 
 responses:
-
   utter_temp:
   - text: "Bye! I will remember that you are interested in the topic {topic}!"
   
   utter_proceed:
   - text: "Would you like to choose another topic of your interest?"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
 
   utter_greet.ask_topic:
   - text: "Good to see you, please pick one topic that interests you!"
     buttons:
-    - title: "sport"
+    - title: "Sport"
       payload: "/sport{\"topic\":\"sport\"}"
-    - title: "animal"
+    - title: "Animal"
       payload: "/animal{\"topic\":\"animal\"}"
-    - title: "food"
+    - title: "Food"
       payload: "/food{\"topic\":\"food\"}"
-    - title: "travel"
-      payload: "/travel{\"topic\":\"travel\"}"
+    - title: "Travel"
+      payload: "/travel{\"topic\":\"travel\"}"      
 
   utter_sport:
   - text: "What sport do you play?"
