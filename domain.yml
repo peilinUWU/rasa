@@ -13,9 +13,8 @@ intents:
 - animal
 - food
 - travel
-- out_of_scope:
-    triggers: respond_out_of_scope
-    use_entities: []
+- out_of_scope_non_english
+- out_of_scope_other
 entities:
 - topic
 slots:
@@ -86,6 +85,10 @@ responses:
   - text: Great! 👍
   - text: That's great! 🙌
   - text: Awesome! 🎉
+  utter_reply.to_out_of_scope_non_english:
+  -text: I only understand English, I'm sorry.
+  utter_reply.to_out_of_scope_other:
+  - text: I can't help you with that, I'm sorry.
 actions:
 - action_choose_topic
 - utter_temp
@@ -99,4 +102,3 @@ actions:
 - utter_reply.to_thank
 - utter_reply.to_good
 - utter_reply.to_sad
-- respond_out_of_scope
