@@ -19,6 +19,8 @@ entities:
 slots: 
   topic: 
     type: list
+  answer:
+    type: list
     
 actions:
   - action_choose_topic
