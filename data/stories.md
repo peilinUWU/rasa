@@ -43,7 +43,7 @@
 * user.bye  
   - utter_temp
 
-## story - affirm / deny
+## story - affirm deny
 * affirm OR deny
   - utter_thumbsup
 
