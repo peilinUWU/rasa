@@ -1,43 +1,55 @@
 intents:
   - affirm
   - deny
+  - inform
+  - inform_reason
   - user.bye
   - user.good
   - user.hello
   - user.sad
   - user.thank
+  - topic
   - sport
   - animal
   - food
   - travel
   - out.of.scope.non.english
   - out.of.scope.other
+  - bot_challenge
+
+actions:
+  - action_get_intent
 
 entities:
   - topic
+  - sport
+  - animal
+  - reason
 
-slots: 
+slots:
+  intent_slot:
+    type: unfeaturized
   topic: 
-    type: list
-  answer:
-    type: list
+    type: unfeaturized
+  type_of_sport:
+    type: unfeaturized
+  reason_sport:
+    type: unfeaturized
+  type_of_animal:
+    type: unfeaturized
+  reason_animal:
+    type: unfeaturized
+  user_answer:
+    type: unfeaturized
     
-actions:
-  - action_choose_topic
+forms:
+  - answer_form
 
 responses:
   utter_temp:
   - text: "Bye! I will remember that you are interested in the topic {topic}!"
   
-  utter_proceed:
-  - text: "Would you like to choose another topic of your interest?"
-    buttons:
-    - title: "Yes"
-      payload: "/affirm"
-    - title: "No"
-      payload: "/deny"
-
-  utter_greet.ask_topic:
+  utter_ask_topic:
   - text: "Good to see you, please pick one topic that interests you!"
     buttons:
     - title: "Sport"
@@ -49,13 +61,19 @@ responses:
     - title: "Travel"
       payload: "/travel{\"topic\":\"travel\"}"      
 
-  utter_sport:
-  - text: "What sport do you play?"
-  - text: "What sport would you like to play?"
+  utter_ask_type_of_sport:
+  - text: "What's one sport that you like?"
+  - text: "What's your one favorite sport?"
 
-  utter_animal:
-  - text: "Which animal at the zoo do you like best?"
+  utter_ask_reason_sport:
+  - text: "Cool! Why do you like {type_of_sport}?"
+  - text: "Interesting! What do you like about {type_of_sport}?"
+  - text: "I see! Why does {type_of_sport} interest you?"
+
+  utter_ask_type_of_animal:
+  - text: "What's one animal that you like the most?"
   - text: "Are you a cat person or a dog person?"
+  - text: "What's your one favorite animal?"
 
   utter_food:
   - text: "What is your favorite ice cream flavor?"
@@ -119,6 +137,9 @@ responses:
 
   utter_reply.to_out_of_scope_other:
   - text: "I can't help you with that, I'm sorry."
+
+  utter_iamabot:
+  - text: "I am a beta bot, powered by Rasa."
 
 session_config:
   session_expiration_time: 60

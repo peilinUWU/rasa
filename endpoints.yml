@@ -18,6 +18,16 @@ action_endpoint:
 # https://rasa.com/docs/rasa/api/tracker-stores/
 
 #tracker_store:
+#    type: SQL
+#    dialect: "postgresql"  # the dialect used to interact with the db
+#    url: "localhost"  # (optional) host of the sql db, e.g. "localhost"
+#    db: "rasa"  # path to your db
+#    username:  # username used for authentication
+#    password:  # password used for authentication
+
+
+
+#tracker_store:
 #    type: redis
 #    url: <host of the redis instance, e.g. localhost>
 #    port: <port of your redis instance, usually 6379>
