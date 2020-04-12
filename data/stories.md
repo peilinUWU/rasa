@@ -1,48 +1,82 @@
-## story sport
-* sport {"topic" : "sport"}
-  - utter_sport
+## story 001
+* topic
+  - action_get_topic
+  - answer_form
+  - form{"name": "answer_form"}
+  - slot{"requested_slot": "type_of_sport"}
+* form: inform{"sport": "football"}
+  - action_get_detail
+  - form: answer_form
+  - slot{"type_of_sport": "football"}
+  - slot{"requested_slot": "reason_sport"}
+* form: inform_reason{"reason":"cool"}
+  - form: answer_form
+  - slot{"reason_sport": "cool"}
+  - form{"name": null}
+  - utter_great
 
-## story animal 
-* animal {"topic" : "animal"}
-  - utter_animal
-
-## story food 
-* food {"topic" : "food"}
-  - utter_food
-
-## story travel 
-* travel {"topic" : "travel"}
-  - utter_travel
-    
-    
-<!---------------------------->
-<!-- generic conversations  -->
-<!---------------------------->
+## story 002
+* topic
+  - action_get_topic
+  - answer_form
+  - form{"name": "answer_form"}
+  - slot{"requested_slot": "type_of_animal"}
+* form: inform{"animal": "cat"}
+  - form: answer_form
+  - slot{"type_of_animal": "cat"}
+  - slot{"requested_slot": "reason_animal"}
+* form: inform_reason{"reason":"cute"}
+  - form: answer_form
+  - slot{"reason_animal": "cute"}
+  - form{"name": null}
+  - utter_great
 
 ## story 01
 * user.hello
   - utter_greet.hi
-  - utter_greet.ask_topic
-* sport OR animal OR food OR travel
-  - action_choose_topic
-  - slot{"topic" : "food"}
+  - utter_ask_topic
+* sport
+  - action_get_topic
+  - answer_form
+  - form{"name": "answer_form"}
+  - slot{"requested_slot": "type_of_sport"}
+* form: inform{"sport": "football"}
+  - action_get_detail
+  - form: answer_form
+  - slot{"type_of_sport": "football"}
+  - slot{"requested_slot": "reason_sport"}
+* form: inform_reason{"reason":"cool"}
+  - form: answer_form
+  - slot{"reason_sport": "cool"}
+  - form{"name": null}
   - utter_great
-  - utter_proceed
-* affirm
-  - utter_greet.ask_topic
 
 ## story 02
 * user.hello
   - utter_greet.hi
-  - utter_greet.ask_topic
-* sport OR animal OR food OR travel
-  - action_choose_topic
-  - slot{"topic" : "food"}
+  - utter_ask_topic
+* animal
+  - action_get_topic
+  - answer_form
+  - form{"name": "answer_form"}
+  - slot{"requested_slot": "type_of_animal"}
+* form: inform{"animal": "dog"}
+  - action_get_detail
+  - form: answer_form
+  - slot{"type_of_animal": "dog"}
+  - slot{"requested_slot": "reason_animal"}
+* form: inform_reason{"reason":"fun"}
+  - form: answer_form
+  - slot{"reason_animal": "fun"}
+  - form{"name": null}
   - utter_great
-  - utter_proceed
-* deny
-  - utter_thumbsup
   
+
+<!---------------------------->
+<!-- generic conversations  -->
+<!---------------------------->
+
+
 ## story - thank
 * user.thank
   - utter_reply.to_thank
@@ -67,6 +101,7 @@
 * affirm 
   - utter_great
   
+
 <!---------------------------->
 <!--     out of scope       -->
 <!---------------------------->
@@ -79,3 +114,7 @@
 ## out of scope - other
 * out.of.scope.other
   - utter_reply.to_out_of_scope_other
+
+## bot challenge
+* bot_challenge
+  - utter_iamabot
