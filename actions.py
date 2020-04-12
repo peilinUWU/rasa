@@ -75,9 +75,9 @@ class AnswerForm(FormAction):
 
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
-        if tracker.get_slot('topic') == 'sport':
+        if tracker.get_slot('type_of_topic') == 'sport':
             return ["type_of_sport", "reason_sport"]
-        elif tracker.get_slot('topic') == 'animal':
+        elif tracker.get_slot('type_of_topic') == 'animal':
             return ["type_of_animal", "reason_animal"]
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
@@ -104,12 +104,16 @@ class AnswerForm(FormAction):
         domain: Dict[Text, Any],
         ) -> List[Dict]:
 
-        topic = tracker.get_slot("topic_slot")
-        detail = tracker.get_slot("detail_slot")
+        topic = tracker.get_slot("type_of_topic")
+
+        if topic == 'sport':
+            topic_detail = tracker.get_slot("type_of_sport")
+        elif topic == 'animal':
+            topic_detail = tracker.get_slot("type_of_animal")
         
         Data = { 'Name': 'placeholder',
-                 'Topic': [topic_slot],
-                 'Detail': [detail_slot],
+                 'Topic': [topic],
+                 'Detail': [topic_detail],
                  }
 
         df = pd.DataFrame(Data, columns = ['Name', 'Topic', 'Detail'])
@@ -132,7 +136,7 @@ class ActionGetTopic(Action):
         intent = tracker.latest_message['intent'].get('name')
         dispatcher.utter_message("Rasa got topic: "+intent)
 
-        return [SlotSet('topic_slot', intent)]
+        return [SlotSet('type_of_sport', intent)]
 
 
 class ActionGetDetail(Action):
@@ -145,4 +149,4 @@ class ActionGetDetail(Action):
         intent = tracker.latest_message['intent'].get('name')
         dispatcher.utter_message("Rasa got detail: "+intent)
 
-        return [SlotSet('detail_slot', intent)]
+        return [SlotSet('reason_sport', intent)]
