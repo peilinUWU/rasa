@@ -29,7 +29,7 @@ entities:
 slots:
   intent_slot:
     type: unfeaturized
-  topic: 
+  type_of_topic: 
     type: unfeaturized
   type_of_sport:
     type: unfeaturized
@@ -47,19 +47,19 @@ forms:
 
 responses:
   utter_temp:
-  - text: "Bye! I will remember that you are interested in the topic {topic}!"
+  - text: "Bye! I will remember that you are interested in the topic {type_of_topic}!"
   
   utter_ask_topic:
   - text: "Good to see you, please pick one topic that interests you!"
     buttons:
     - title: "Sport"
-      payload: "/sport{\"topic\":\"sport\"}"
+      payload: "/sport{\"type_of_topic\":\"sport\"}"
     - title: "Animal"
-      payload: "/animal{\"topic\":\"animal\"}"
+      payload: "/animal{\"type_of_topic\":\"animal\"}"
     - title: "Food"
-      payload: "/food{\"topic\":\"food\"}"
+      payload: "/food{\"type_of_topic\":\"food\"}"
     - title: "Travel"
-      payload: "/travel{\"topic\":\"travel\"}"      
+      payload: "/travel{\"type_of_topic\":\"travel\"}"      
 
   utter_ask_type_of_sport:
   - text: "What's one sport that you like?"
