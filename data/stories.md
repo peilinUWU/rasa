@@ -1,35 +1,3 @@
-## story 001
-* topic
-  - action_get_topic
-  - answer_form
-  - form{"name": "answer_form"}
-  - slot{"requested_slot": "type_of_sport"}
-* form: inform{"sport": "football"}
-  - action_get_detail
-  - form: answer_form
-  - slot{"type_of_sport": "football"}
-  - slot{"requested_slot": "reason_sport"}
-* form: inform_reason{"reason":"cool"}
-  - form: answer_form
-  - slot{"reason_sport": "cool"}
-  - form{"name": null}
-  - utter_great
-
-## story 002
-* topic
-  - action_get_topic
-  - answer_form
-  - form{"name": "answer_form"}
-  - slot{"requested_slot": "type_of_animal"}
-* form: inform{"animal": "cat"}
-  - form: answer_form
-  - slot{"type_of_animal": "cat"}
-  - slot{"requested_slot": "reason_animal"}
-* form: inform_reason{"reason":"cute"}
-  - form: answer_form
-  - slot{"reason_animal": "cute"}
-  - form{"name": null}
-  - utter_great
 
 ## story 01
 * user.hello
@@ -44,33 +12,17 @@
   - action_get_detail
   - form: answer_form
   - slot{"type_of_sport": "football"}
-  - slot{"requested_slot": "reason_sport"}
-* form: inform_reason{"reason":"cool"}
-  - form: answer_form
-  - slot{"reason_sport": "cool"}
   - form{"name": null}
-  - utter_great
+  - action_ask_reason
 
-## story 02
-* user.hello
-  - utter_greet.hi
-  - utter_ask_topic
-* animal
-  - action_get_topic
-  - answer_form
-  - form{"name": "answer_form"}
-  - slot{"requested_slot": "type_of_animal"}
-* form: inform{"animal": "dog"}
-  - action_get_detail
-  - form: answer_form
-  - slot{"type_of_animal": "dog"}
-  - slot{"requested_slot": "reason_animal"}
-* form: inform_reason{"reason":"fun"}
-  - form: answer_form
-  - slot{"reason_animal": "fun"}
-  - form{"name": null}
+
+## story - reply to reason 1
+* inform_reason{"reason":"cool"}
+  - utter_thumbsup
+
+## story - reply to reason 2
+* inform_reason{"reason":"cool"}
   - utter_great
-  
 
 <!---------------------------->
 <!-- generic conversations  -->
