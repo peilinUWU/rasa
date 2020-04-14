@@ -74,11 +74,12 @@ class AnswerForm(FormAction):
         return "answer_form"
 
     @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
+    def required_slots(tracker) -> List[Text]:
         if tracker.get_slot('type_of_topic') == 'sport':
-            return ["type_of_sport", "reason_sport"]
-        elif tracker.get_slot('type_of_topic') == 'animal':
-            return ["type_of_animal", "reason_animal"]
+            return ["type_of_sport"]
+        else:
+##        elif tracker.get_slot('type_of_topic') == 'animal':
+            return ["type_of_animal"]
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
 ##        user_intent = tracker.latest_message["intent"].get("name")
@@ -86,14 +87,8 @@ class AnswerForm(FormAction):
             "type_of_sport": [
                 self.from_entity(entity="sport"),
                 ],
-            "reason_sport": [
-                self.from_entity(entity="reason"),
-                ],
             "type_of_animal": [
                 self.from_entity(entity="animal"),
-                ],
-            "reason_sport": [
-                self.from_entity(entity="reason"),
                 ],
             }
 
@@ -126,6 +121,7 @@ class AnswerForm(FormAction):
         return []
       
 
+## used to set slot type_of_topic
 class ActionGetTopic(Action):
     """Returns the explanation for the sales form questions"""
 
@@ -135,10 +131,14 @@ class ActionGetTopic(Action):
     def run(self, dispatcher, tracker, domain):
         intent = tracker.latest_message['intent'].get('name')
         dispatcher.utter_message("Rasa got topic: "+intent)
+##        answer = topic_detail = tracker.get_slot("type_of_topic")
+##        dispatcher.utter_message("type of topic: "+type_of_topic)
 
-        return [SlotSet('type_of_sport', intent)]
+        return [SlotSet('type_of_topic', intent)]
 
 
+
+## used to set specific topic related slots
 class ActionGetDetail(Action):
     """Returns the explanation for the sales form questions"""
 
@@ -146,7 +146,41 @@ class ActionGetDetail(Action):
         return "action_get_detail"
 
     def run(self, dispatcher, tracker, domain):
-        intent = tracker.latest_message['intent'].get('name')
-        dispatcher.utter_message("Rasa got detail: "+intent)
+##        intent = tracker.latest_message['intent'].get('name')
+##        dispatcher.utter_message("Rasa got detail: "+intent)
 
-        return [SlotSet('reason_sport', intent)]
+
+        topic = tracker.get_slot("type_of_topic")
+
+        if topic == 'sport':
+            ent = next(tracker.get_latest_entity_values(topic), None)
+##            dispatcher.utter_message("Rasa got detail: "+ent)
+            return [SlotSet('type_of_sport', ent)]
+        elif topic == 'animal':
+            ent = next(tracker.get_latest_entity_values(topic), None)           
+##            dispatcher.utter_message("Rasa got detail: "+ent)
+            return [SlotSet('type_of_animal', ent)]
+
+
+
+class ActionAskReason(Action):
+    """Returns the explanation for the sales form questions"""
+
+    def name(self) -> Text:
+        return "action_ask_reason"
+
+    def run(self, dispatcher, tracker, domain):
+        intent = tracker.latest_message['intent'].get('name')
+##        dispatcher.utter_message("Rasa got detail: "+intent)
+
+        topic = tracker.get_slot("type_of_topic")
+
+        intent = tracker.latest_message["intent"].get("name")
+
+        # retrieve the correct chitchat utterance dependent on the intent
+        if topic in [
+            "sport",
+            "animal",
+        ]:
+            dispatcher.utter_message(template=f"utter_ask_reason_{topic}")
+        return []
