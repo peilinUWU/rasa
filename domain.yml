@@ -18,7 +18,9 @@ intents:
   - bot_challenge
 
 actions:
-  - action_get_intent
+  - action_get_topic
+  - action_get_detail
+  - action_ask_reason
 
 entities:
   - topic
@@ -53,27 +55,27 @@ responses:
   - text: "Good to see you, please pick one topic that interests you!"
     buttons:
     - title: "Sport"
-      payload: "/sport{\"type_of_topic\":\"sport\"}"
+      payload: "/sport"
     - title: "Animal"
-      payload: "/animal{\"type_of_topic\":\"animal\"}"
-    - title: "Food"
-      payload: "/food{\"type_of_topic\":\"food\"}"
-    - title: "Travel"
-      payload: "/travel{\"type_of_topic\":\"travel\"}"      
+      payload: "/animal" 
 
   utter_ask_type_of_sport:
   - text: "What's one sport that you like?"
   - text: "What's your one favorite sport?"
+
+  utter_ask_type_of_animal:
+  - text: "What's one animal that you like the most?"
+  - text: "Are you a cat person or a dog person?"
+  - text: "What's your one favorite animal?"
 
   utter_ask_reason_sport:
   - text: "Cool! Why do you like {type_of_sport}?"
   - text: "Interesting! What do you like about {type_of_sport}?"
   - text: "I see! Why does {type_of_sport} interest you?"
 
-  utter_ask_type_of_animal:
-  - text: "What's one animal that you like the most?"
-  - text: "Are you a cat person or a dog person?"
-  - text: "What's your one favorite animal?"
+  utter_ask_reason_animal:
+  - text: "Cool! Why do you like {type_of_animal}?"
+  - text: "Interesting! What do you like about {type_of_animal}?"
 
   utter_food:
   - text: "What is your favorite ice cream flavor?"
@@ -88,13 +90,13 @@ responses:
   # --------------------------- #
   
   utter_greet.hi:
-  - text: "Hi there! I'm a Rasbert."
-  - text: "Hi, I'm a Rasbert."
-  - text: "Hey, I'm a Rasbert."
-  - text: "Hey there! I'm a Rasbert."
-  - text: "Good day, I'm a Rasbert."
-  - text: "Hello. I'm a Rasbert."
-  - text: "Greetings, I'm a Rasbert."
+  - text: "Hi there! I'm a Rasa bot."
+  - text: "Hi, I'm a Rasa bot."
+  - text: "Hey, I'm a Rasa bot."
+  - text: "Hey there! I'm a bot powered by Rasa."
+  - text: "Good day, I'm a bot powered by Rasa."
+  - text: "Hello. I'm a bot powered by Rasa."
+  - text: "Greetings, I'm a bot powered by Rasa."
     
   utter_greet.bye:
   - text: "See you soon!"
