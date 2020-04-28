@@ -73,20 +73,12 @@
 - Don't show off
 - nope
 
-## intent:topic
-- i want to talk about [sport](topic)
-- [sport](topic)
-- can we talk about [sport](topic)
-- i like to talk about [sport](topic)
-- let's discuss [sport](topic)
-- i want to talk about [animal](topic)
-- [animal](topic)
-- can we talk about [animal](topic)
-- i like to talk about [animal](topic)
-- let's discuss [animal](topic)
 
-## intent:inform
+## intent:enter_data
+- my favorite sport is [football](sport)
+- favorite is [ice hockey](sport)
 - i like [football](sport)
+- i really like [squash](sport)
 - [baseball](sport)
 - i like playing [tennis](sport)
 - i love [soccer](sport)
@@ -96,6 +88,7 @@
 - i like to play [table tennis](sport)
 - i enjoy [bowling](sport)
 - i play [golf](sport)
+- i really like [squash](sport)
 - i like [dog](animal)
 - i like [cat](animal)
 - i like [sheep](animal)
@@ -111,8 +104,6 @@
 - [bird](animal)
 - [mini pig](animal)
 - [squirrel](animal)
-
-## intent:inform_reason
 - because it is [fun](reason)
 - because [i like](reason) it
 - because it's [cool](reason)
@@ -120,6 +111,54 @@
 - it's a good [exercise](reason)
 - it makes you [healthy](reason)
 - it's [cool](reason)
+- cuz i [like](reason) it
+- cuz it's really [fun](reason)
+- because it's really [fun](reason)
+- because i really [like](reason) competitive activity 
+- my email is Elizabeth@yahoo.com
+- It is Drew@Mccarthy.com
+- My email is Richard@Simmons.com
+- Carolyn.Eisenhauer@Watkins.com
+- Ebony@gmail.com
+- J_Herrera@gmail.com
+- K_Claytor@yahoo.com
+- K_Rainey@Yochum.net
+- Kristin@yahoo.com
+- Robert.Sparks@gmail.com
+- Willie@gmail.com
+- a@b.com
+- abhbose3k@gmail.com
+- E_Conder@gmail.com instead?
+- email = Patti.Salazar@gmail.com
+- it's R_Iuliucci@yahoo.com
+- it's Shannon.Adelman@Hurt.com
+- mail: Geneva.Favors@yahoo.com
+- James@Anast.com
+- my mail is s_Dibenedetto@Simpson.net
+- my email is Carole@Hart.com
+- my email is Elinor_Stock@Higgenbotham.com
+- my email is K_Spivey@yahoo.com
+- my email is Kelly@Coulter.net
+- my email is M_Jones@Luna.com
+- my email is Mia_Gainey@gmail.com
+- my email is S_Calderon@Cofield.com
+- my email is Virginia@Brown.com
+- my emayl is V_Comley@Nelson.com
+- ok it's Hee@yahoo.com
+- ok its P_Simpkins@Suehs.com
+- Edward@Paul.com 
+- my email is R_Grove@gmail.com
+- Joseph_Pyles@yahoo.com
+- my email is Mabel@Brown.com
+- M_Moore@yahoo.com
+- Marcus.Miller@yahoo.com
+- Robert@yahoo.com
+- gregory_lilley@yahoo.com
+- Carolyn_Caskey@yahoo.com
+- Bruce_harryman@Olsen.com 
+- Denise@gmail.com 
+- my email Evan@Palmer.net
+
 
 ## intent:user.bye
 - okay see you later
@@ -236,6 +275,7 @@
 - feeling so down
 - i am not in a good mood
 
+
 ## intent:user.thank
 - you helped a lot thank you
 - appreciate your help
@@ -281,6 +321,17 @@
 - am I talking to a human?
 
 
+## intent:user.reject
+- i don't like you
+- i don't like
+- i don't like anything
+- i don't like any thing
+- i dont like anything
+- i dont like any thing
+- i hate you
+- i hate it
+- i dont like you!
+
 ## intent:out.of.scope.non.english
 - Wie fange ich mit Rasa an?
 - hilf mir beim start
@@ -307,7 +358,6 @@
 - 4 + 2 = ?
 - After registration I see that I have an available balance of 0.00000000. What does this balance represent?
 - Are you ready?
-
 - But you're an english site :(
 - Can I ask you questions first?
 - Can I die

@@ -1,28 +1,71 @@
-
-## story 01
+## conversation initialization
 * user.hello
   - utter_greet.hi
-  - utter_ask_topic
-* sport
-  - action_get_topic
-  - answer_form
-  - form{"name": "answer_form"}
-  - slot{"requested_slot": "type_of_sport"}
-* form: inform{"sport": "football"}
-  - action_get_detail
-  - form: answer_form
-  - slot{"type_of_sport": "football"}
+  - request_email
+  - form{"name": "request_email"}
   - form{"name": null}
-  - action_ask_reason
+  - action_start_conversation
 
 
-## story - reply to reason 1
-* inform_reason{"reason":"cool"}
-  - utter_thumbsup
 
-## story - reply to reason 2
-* inform_reason{"reason":"cool"}
-  - utter_great
+## story path - first time conversation happy path continue
+* user.first_time
+  - request_sport
+  - form{"name": "request_sport"}
+  - form{"name": null}
+  - utter_ask_continue
+* affirm
+  - request_sport
+  - form{"name": "request_sport"}
+  - form{"name": null}
+
+
+
+## story path - first time conversation happy path discontinue
+* user.first_time
+  - request_sport
+  - form{"name": "request_sport"}
+  - form{"name": null}
+  - utter_ask_continue
+* deny
+  - utter_greet.bye
+
+
+
+## story path - first time conversation generated
+* user.first_time
+  - request_sport
+  - form{"name": "request_sport"}
+  - slot{"requested_slot": "type_of_topic"}
+* form: inform{"type_of_topic": "basketball"}
+  - form: request_sport
+  - slot{"type_of_topic": "basketball"}
+  - slot{"requested_slot": "reason_of_like"}
+* form: inform{"reason_of_like": "fun"}
+  - form: request_sport
+  - slot{"reason_of_like": "fun"}
+  - slot{"requested_slot": "recent_active"}
+* form: inform{"recent_active": True} OR affirm
+  - form: request_sport
+  - slot{"recent_active": "True"}
+  - form{"name": null}
+
+
+
+## story path - first time conversation user reject
+* user.first_time
+  - request_sport
+  - form{"name": "request_sport"}
+* deny OR user.reject 
+  - utter_reply.to.reject
+  - action_deactivate_form
+  - form{"name": null}
+
+
+
+## story path - second time conversation
+* user.second_time
+  - inquire_sport
 
 <!---------------------------->
 <!-- generic conversations  -->
@@ -70,3 +113,7 @@
 ## bot challenge
 * bot_challenge
   - utter_iamabot
+
+## user reject
+* user.reject
+  - utter_reply.to.reject
