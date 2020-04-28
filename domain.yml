@@ -1,14 +1,16 @@
 intents:
   - affirm
   - deny
-  - inform
   - inform_reason
+  - enter_data
+  - user.first_time
+  - user.second_time
   - user.bye
   - user.good
   - user.hello
   - user.sad
   - user.thank
-  - topic
+  - user.reject
   - sport
   - animal
   - food
@@ -17,22 +19,34 @@ intents:
   - out.of.scope.other
   - bot_challenge
 
+forms:
+  - request_email
+  - request_sport
+  - inquire_sport
+
 actions:
-  - action_get_topic
-  - action_get_detail
-  - action_ask_reason
+  - action_start_conversation
 
 entities:
+  - email
   - topic
   - sport
   - animal
   - reason
 
 slots:
+  email:
+    type: unfeaturized
+  user_exist:
+    type: bool
   intent_slot:
     type: unfeaturized
   type_of_topic: 
     type: unfeaturized
+  reason_of_like:
+    type: unfeaturized
+  recent_active:
+    type: bool
   type_of_sport:
     type: unfeaturized
   reason_sport:
@@ -44,68 +58,54 @@ slots:
   user_answer:
     type: unfeaturized
     
-forms:
-  - answer_form
 
 responses:
   utter_temp:
   - text: "Bye! I will remember that you are interested in the topic {type_of_topic}!"
-  
-  utter_ask_topic:
-  - text: "Good to see you, please pick one topic that interests you!"
-    buttons:
-    - title: "Sport"
-      payload: "/sport"
-    - title: "Animal"
-      payload: "/animal" 
 
-  utter_ask_type_of_sport:
+  utter_ask_email:
+  - text: "First, please enter your email address in order to proceed (you can enter a dummy address if you wish, but please remember it in case you want to erase the chat history)."
+  
+  utter_ask_type_of_topic:
   - text: "What's one sport that you like?"
   - text: "What's your one favorite sport?"
+
+  utter_ask_reason_of_like:
+  - text: "Cool! Why do you like {type_of_topic}?"
+  - text: "Interesting! What do you like about {type_of_topic}?"
+  - text: "I see! Why does {type_of_topic} interest you?"
+
+  utter_ask_recent_active:
+  - text: "Oh, did you do it recently (<30 days)?"
+  - text: "Aha, have you been doing it recently (<30 days)?"
+
+  utter_ask_continue:
+  - text: "Would you like to discuss more, perhaps topics related to animal?"
+
 
   utter_ask_type_of_animal:
   - text: "What's one animal that you like the most?"
   - text: "Are you a cat person or a dog person?"
   - text: "What's your one favorite animal?"
 
-  utter_ask_reason_sport:
-  - text: "Cool! Why do you like {type_of_sport}?"
-  - text: "Interesting! What do you like about {type_of_sport}?"
-  - text: "I see! Why does {type_of_sport} interest you?"
-
   utter_ask_reason_animal:
   - text: "Cool! Why do you like {type_of_animal}?"
   - text: "Interesting! What do you like about {type_of_animal}?"
 
-  utter_food:
-  - text: "What is your favorite ice cream flavor?"
-  - text: "If you never have to eat one vegetable, which would it be?"
-
-  utter_travel: 
-  - text: "What is your favorite place in the entire world?"
-  - text: "If you could live anywhere in the world, where would it be?"
     
   # --------------------------- #
   #    generic conversations    #
   # --------------------------- #
   
   utter_greet.hi:
-  - text: "Hi there! I'm a Rasa bot."
-  - text: "Hi, I'm a Rasa bot."
-  - text: "Hey, I'm a Rasa bot."
-  - text: "Hey there! I'm a bot powered by Rasa."
-  - text: "Good day, I'm a bot powered by Rasa."
-  - text: "Hello. I'm a bot powered by Rasa."
-  - text: "Greetings, I'm a bot powered by Rasa."
+  - text: "Hi and welcome! I'm a bot powered by Rasa."
     
   utter_greet.bye:
-  - text: "See you soon!"
-  - text: "Bye bye!"
-  - text: "Till next time!"
-  - text: "Bye."
+  - text: "Ok, see you soon!"
+  - text: "Ok, Bye."
+  - text: "Alright, until next time!"
     
   utter_reply.to_thank:
-  - text: "No problem! You're so polite!"
   - text: "No problem!"
   - text: "Not a problem!"
   - text: "Not at all!"
@@ -113,12 +113,11 @@ responses:
     
   utter_reply.to_good:
   - text: "Great! Glad to hear it."
-  - text: "Excellent. I'm here to help keep it that way."
+  - text: "Excellent."
     
   utter_reply.to_sad:
   - text: "Oh, don't be sad. Go do something you enjoy."
   - text: "Sad? Writing down what's troubling you may help."
-  - text: "If you're feeling down, how about drawing or painting something?"
     
   utter_thumbsup:
   - text: "👍"
@@ -135,13 +134,17 @@ responses:
   # --------------------------- #
   
   utter_reply.to_out_of_scope_non_english:
-  - text: "I only understand English, I'm sorry."
+  - text: "Was that English, I didn't quite get it."
 
   utter_reply.to_out_of_scope_other:
-  - text: "I can't help you with that, I'm sorry."
+  - text: "I can't say that I fully understand what you mean."
+  - text: "Can you rephrase that last sentence? I didn't quite get it."
 
   utter_iamabot:
   - text: "I am a beta bot, powered by Rasa."
+
+  utter_reply.to.reject:
+  - text: "I see, so that's how the conversation going to end then!"
 
 session_config:
   session_expiration_time: 60

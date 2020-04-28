@@ -1,3 +1,6 @@
+import typing
+from typing import Any, Optional, Text, Dict, List, Type
+
 from rasa.nlu.components import Component
 from rasa.nlu import utils
 from rasa.nlu.model import Metadata

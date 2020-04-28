@@ -1,0 +1,10 @@
+user,topic,recent_active
+dummy0@google.com,,FALSE
+dummy1@google.com,squash,TRUE
+dummy2@google.com,football,FALSE
+dummy3@google.com,badminton,FALSE
+dummy4@google.com,baseball,FALSE
+dummy5@google.com,football,True
+dummy6@google.com,basketball,True
+dummy7@google.com,ice hockey,False
+dummy8@google.com,football,True
