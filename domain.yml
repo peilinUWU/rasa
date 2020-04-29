@@ -21,11 +21,14 @@ intents:
 
 forms:
   - request_email
-  - request_sport
-  - inquire_sport
+  - request_detail
 
 actions:
-  - action_start_conversation
+  - action_take_path
+  - action_second_time
+  - action_store_detail
+  - action_more_topic
+  - action_more_topic_process
 
 entities:
   - email
@@ -43,8 +46,8 @@ slots:
     type: unfeaturized
   type_of_topic: 
     type: unfeaturized
-  reason_of_like:
-    type: unfeaturized
+  user_first_time:
+    type: bool
   recent_active:
     type: bool
   type_of_sport:
@@ -60,9 +63,6 @@ slots:
     
 
 responses:
-  utter_temp:
-  - text: "Bye! I will remember that you are interested in the topic {type_of_topic}!"
-
   utter_ask_email:
   - text: "First, please enter your email address in order to proceed (you can enter a dummy address if you wish, but please remember it in case you want to erase the chat history)."
   
@@ -80,7 +80,7 @@ responses:
   - text: "Aha, have you been doing it recently (<30 days)?"
 
   utter_ask_continue:
-  - text: "Would you like to discuss more, perhaps topics related to animal?"
+  - text: "Possible conversation end line 3: (This route is experimental) \nWould you like to discuss another topic?"
 
 
   utter_ask_type_of_animal:
@@ -101,8 +101,8 @@ responses:
   - text: "Hi and welcome! I'm a bot powered by Rasa."
     
   utter_greet.bye:
-  - text: "Ok, see you soon!"
-  - text: "Ok, Bye."
+  - text: "Later!"
+  - text: "Buh-bye."
   - text: "Alright, until next time!"
     
   utter_reply.to_thank:
@@ -144,7 +144,7 @@ responses:
   - text: "I am a beta bot, powered by Rasa."
 
   utter_reply.to.reject:
-  - text: "I see, so that's how the conversation going to end then!"
+  - text: "I see, so that's how the conversation going to end? Looks like we can't be friend then!"
 
 session_config:
   session_expiration_time: 60
