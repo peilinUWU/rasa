@@ -1,71 +1,59 @@
-## conversation initialization
+## story - user first time
 * user.hello
   - utter_greet.hi
   - request_email
   - form{"name": "request_email"}
   - form{"name": null}
-  - action_start_conversation
+  - action_take_path
 
 
-
-## story path - first time conversation happy path continue
-* user.first_time
-  - request_sport
-  - form{"name": "request_sport"}
+## story - user continues
+* user.hello
+  - utter_greet.hi
+  - request_email
+  - form{"name": "request_email"}
   - form{"name": null}
+  - action_take_path
+  - request_detail
+  - form{"name": "request_detail"}
+  - slot{"requested_slot": "recent_active"}
+* form: inform{"recent_active": True} OR affirm
+  - form: request_detail
+  - slot{"recent_active": "True"}
+  - form{"name": null}
+  - action_store_detail
   - utter_ask_continue
-* affirm
-  - request_sport
-  - form{"name": "request_sport"}
+* affirm 
+  - action_more_topic
+* enter_data OR out.of.scope.other OR out.of.scope.non.english
+  - action_more_topic_process
+
+
+## story - user refuse give email
+* user.hello
+  - utter_greet.hi
+  - request_email
+  - form{"name": "request_email"}
+* user.reject OR deny
   - form{"name": null}
-
-
-
-## story path - first time conversation happy path discontinue
-* user.first_time
-  - request_sport
-  - form{"name": "request_sport"}
-  - form{"name": null}
-  - utter_ask_continue
-* deny
   - utter_greet.bye
 
 
-
-## story path - first time conversation generated
-* user.first_time
-  - request_sport
-  - form{"name": "request_sport"}
+## story - user has no interest
+* user.hello
+  - utter_greet.hi
+  - request_email
+  - form{"name": "request_email"}
+  - form{"name": null}
+  - action_take_path
+  - request_detail
+  - form{"name": "request_detail"}
   - slot{"requested_slot": "type_of_topic"}
-* form: inform{"type_of_topic": "basketball"}
-  - form: request_sport
-  - slot{"type_of_topic": "basketball"}
-  - slot{"requested_slot": "reason_of_like"}
-* form: inform{"reason_of_like": "fun"}
-  - form: request_sport
-  - slot{"reason_of_like": "fun"}
-  - slot{"requested_slot": "recent_active"}
-* form: inform{"recent_active": True} OR affirm
-  - form: request_sport
-  - slot{"recent_active": "True"}
+* user.reject OR deny
+  - slot{"type_of_topic": "None"}
   - form{"name": null}
+  - utter_greet.bye
 
-
-
-## story path - first time conversation user reject
-* user.first_time
-  - request_sport
-  - form{"name": "request_sport"}
-* deny OR user.reject 
-  - utter_reply.to.reject
-  - action_deactivate_form
-  - form{"name": null}
-
-
-
-## story path - second time conversation
-* user.second_time
-  - inquire_sport
 
 <!---------------------------->
 <!-- generic conversations  -->
@@ -86,7 +74,7 @@
 
 ## story - bye
 * user.bye  
-  - utter_temp
+  - utter_greet.bye
 
 ## story - affirm deny
 * affirm OR deny
