@@ -19,8 +19,20 @@ from rasa_sdk.events import (
     FollowupAction
 )
 
+        
 
+##class ActionEntityTest(Action):
+##    def name(self) -> Text:
+##        return "action_entity_test"
+##
+##    def run(self, dispatcher, tracker, domain):
+##
+##        ent = tracker.latest_message['entities']
+##        dispatcher.utter_message("Rasa got entity: " + str(ent)) 
+##
+##        return []
 
+    
 # ----------------------------------------------------
 # Get the user's email for identification purpose
 # ----------------------------------------------------
@@ -47,16 +59,14 @@ class RequestEmail(FormAction):
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
         # Create the csv file if it's not there              
-        if not os.path.isfile('output.csv'):
-            df = pd.DataFrame(columns = ['user', 'topic', 'recent_active'])  
-            df.to_csv('output.csv', index=False, header='columns')
+        if not os.path.isfile('output2.csv'):
+            df = pd.DataFrame(columns = ['user', 'topic', 'sport', 'recent_active', 'animal', 'own'])  
+            df.to_csv('output2.csv', index=False, header='columns')
         
         #email = tracker.get_slot("email")
         #dispatcher.utter_message("Email " + email + " was recorded.")
-        dispatcher.utter_message("===============================================")
-        dispatcher.utter_message("The following message is for debug purpose and will be removed in the future!")            
-        dispatcher.utter_message("Email received, proceeding to the next step...")
-        dispatcher.utter_message("===============================================")
+         
+        dispatcher.utter_message("(Email received, proceeding to the next step...)")
         return []
 
 
@@ -75,60 +85,143 @@ class ActionTakePath(Action):
         email = tracker.get_slot("email")
 
         # Read the csv file, the first column is the email address and has heading "user"
-        user_list = pd.read_csv('output.csv', usecols=[0])
+        user_list = pd.read_csv('output2.csv', usecols=[0])
         user_list = user_list.user.tolist()
 
         # Decide on follow up action accordingly
         if email not in user_list:
-            dispatcher.utter_message("===============================================")
-            dispatcher.utter_message("The following message is for debug purpose and will be removed in the future!")            
-            dispatcher.utter_message("User is not found in the databse, requesting more details...")
-            dispatcher.utter_message("===============================================")
-            return [FollowupAction("request_detail")]
-        else:
-            dispatcher.utter_message("===============================================")
-            dispatcher.utter_message("The following message is for debug purpose and will be removed in the future!")            
-            dispatcher.utter_message("User found in database...")
-            dispatcher.utter_message("===============================================")
+           
+            dispatcher.utter_message("(User is not found in the databse, requesting more details...)")
+            return [FollowupAction("action_opening_question")]
+        else:          
+            dispatcher.utter_message("(User found in database...)")
             return [FollowupAction("action_second_time")]
 
 
 
 # ----------------------------------------------------
 # Used for first time conversation
-#   - Ask which sport the user likes
-#   - Ask when did user last do the activity
+#   - Ask what the user likes to talk about
 # ----------------------------------------------------
+class ActionOpeningQuestion(Action):
+    def name(self) -> Text:
+        return "action_opening_question"
 
-class RequestSport(FormAction):
+
+    def run(self, dispatcher, tracker, domain):
+        dispatcher.utter_message(template=f"utter_opening_question")
+        return []
+
+
+
+# ----------------------------------------------------
+# Ask user for details when user mentioned a general topic
+#   
+# ----------------------------------------------------
+class RequestDetail(FormAction):
     def name(self) -> Text:
         return "request_detail"
 
 
     @staticmethod
     def required_slots(tracker) -> List[Text]:
-        return ["type_of_topic", "recent_active"]
+        # If user's topic is general      - ask for specific
+        # If user's topic is about sport  - ask why it's interesting
+        # If user's topic is about animal - ask if user owns one
+        # Else the bot can't say much about the topic  and will take it as a request
+        # slot "topic_general" is auto filled and can be used
+        if tracker.get_slot('topic_general') != None:
+            return ["type_of_topic"]
+        else:
+            return []        
 
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         return {
             "type_of_topic": [
                 self.from_entity(entity="sport"),
-##                self.from_entity(entity="animal"),
+                self.from_entity(entity="animal"),
                 self.from_text(intent="enter_data"),
-                ],
-            "recent_active": [
-                self.from_intent(intent="affirm", value=True),
-                self.from_intent(intent="deny", value=False),
-                ],
+                ],    
             }              
-                           
+
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:   
+        return [FollowupAction("request_more_detail")]
+
+
+# ----------------------------------------------------
+# Ask user for details when user mentioned a specific topic
+#
+# ----------------------------------------------------
+class RequestMoreDetail(FormAction):
+    def name(self) -> Text:
+        return "request_more_detail"
+
+
+    @staticmethod
+    def required_slots(tracker) -> List[Text]:
+        # If user's topic is general      - ask for specific
+        # If user's topic is about sport  - ask why it's interesting
+        # If user's topic is about animal - ask if user owns one
+        # Else the bot can't say much about the topic  and will take it as a request
+        # slot "topic_general" is auto filled and can be used
+        if tracker.get_slot('sport') != None:
+            return ["reason_of_like_sport", "recent_active"]
+        elif tracker.get_slot('animal') != None:
+            return ["own_animal"]
+        else:
+            return ["topic_request"]        
+
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {                
+                "reason_of_like_sport": [
+                    self.from_text(),
+                    ],                
+                "recent_active": [
+                    self.from_intent(intent="affirm", value=True),
+                    self.from_intent(intent="deny", value=False),
+                    ],
+                "own_animal": [                    
+                    self.from_intent(intent="affirm", value=True),
+                    self.from_intent(intent="deny", value=False),
+                    ],
+                "topic_request": [
+                    self.from_text(),
+                    ],
+                }
+##        if tracker.get_slot('sport') != None:
+##            return {                
+##                "reason_of_like_sport": [
+##                    self.from_text(),
+##                    ],                
+##                "recent_active": [
+##                    self.from_intent(intent="affirm", value=True),
+##                    self.from_intent(intent="deny", value=False),
+##                    ],
+##                }
+##        elif tracker.get_slot('animal') != None:
+##            return {
+##                "own_animal": [                    
+##                    self.from_intent(intent="affirm", value=True),
+##                    self.from_intent(intent="deny", value=False),
+##                    ],
+##                }
+##        else:
+##            return {
+##                "topic_request": [
+##                    self.from_text(),
+##                    ],
+##                }       
+
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:       
         # Stop message
-        dispatcher.utter_message("Okay, the bot has gathered enough information for now. Thank you!")
+        dispatcher.utter_message("Okay, the bot has gathered enough information for now. I will now start storing them!")
 
         return [FollowupAction("action_store_detail")]
+    
 
     
 # ----------------------------------------------------
@@ -139,29 +232,37 @@ class ActionStoreDetail(Action):
     def name(self) -> Text:
         return "action_store_detail"
 
-    def run(self, dispatcher, tracker, domain): # -> List[EventType]:
-        dispatcher.utter_message("===============================================")
-        dispatcher.utter_message("The following message is for debug purpose and will be removed in the future!")            
-        dispatcher.utter_message("The bot is now remembering...")
-        dispatcher.utter_message("===============================================")
+    def run(self, dispatcher, tracker, domain): # -> List[EventType]:         
+        dispatcher.utter_message("The bot is now storing information...")
 
         user          = tracker.get_slot("email")
         type_of_topic = tracker.get_slot("type_of_topic")
+        sport         = tracker.get_slot("sport")
         recent_active = tracker.get_slot("recent_active")
+        animal        = tracker.get_slot("animal")
+        own_animal    = tracker.get_slot("own_animal")
         
         Data = { 'user': [user],
                  'topic': [type_of_topic],
-                 'recent_active': [recent_active]
+                 'sport': [sport],
+                 'recent_active': [recent_active],
+                 'animal': [animal],
+                 'own': [own_animal]
                }
         
         # Store relevant data to a csv file
-        df = pd.DataFrame(Data, columns = ['user', 'topic', 'recent_active'])
-        df.to_csv('output.csv', index=False, mode='a', header=False)
+        df = pd.DataFrame(Data, columns = ['user', 'topic', 'sport', 'recent_active', 'animal', 'own'])  
+        df.to_csv('output2.csv', index=False, mode='a', header=False)
 
         # Something for fun before ending the session
         # ConceptNet API
-        obj_has_property = requests.get('http://api.conceptnet.io/query?start=/c/en/' + type_of_topic + '&rel=/r/HasProperty').json()
-        obj_receive_action = requests.get('http://api.conceptnet.io/query?start=/c/en/' + type_of_topic + '&rel=/r/ReceivesAction').json()
+        if tracker.get_slot('sport') != None:
+            search_term = sport
+        else:
+            search_term = animal
+        
+        obj_has_property = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/HasProperty').json()
+        obj_receive_action = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/ReceivesAction').json()
 
         # Randomly pick a topic with 50/50 chance
         random_topic_pick = random.randint(0,1)
@@ -172,23 +273,15 @@ class ActionStoreDetail(Action):
 
         # Randomly pick one of the search result
         if (len(decided_topic) > 1):
-            edge_index = random.randint(0, len(decided_topic)-1)
+            edge_index = random.randint(0, len(decided_topic['edges'])-1)
             topic_property = decided_topic['edges'][edge_index]['end']['label']
-        else:
-            topic_property = decided_topic['edges'][0]['end']['label']
-
-
-        dispatcher.utter_message("===============================================")
-        dispatcher.utter_message("The following message is for debug purpose and will be removed in the future!")            
-        dispatcher.utter_message("Only one will be used in the end product.")
-        dispatcher.utter_message("===============================================")
-
-        dispatcher.utter_message("Possible conversation end line 1:")
-        dispatcher.utter_message("Before you leave, did you know that " + type_of_topic + " is " + topic_property + "?\n")
+            
+            dispatcher.utter_message("Triva: Did you know that " + search_term + " is " + topic_property + "!")
         
-        dispatcher.utter_message("Possible conversation end line 2:")
-        dispatcher.utter_message(template=f"utter_ask_reason_of_like")
-        dispatcher.utter_message(" ")
+        else:
+            dispatcher.utter_message("Thank you for participating")
+
+
 ##        dispatcher.utter_message("Possible conversation end line 3: (This route is currently not available)")
 ##        dispatcher.utter_message(template=f"utter_ask_continue:")
 
@@ -198,7 +291,12 @@ class ActionStoreDetail(Action):
             
         # Clear the following slots
         return [SlotSet("type_of_topic", None),
-                SlotSet("recent_active", None),]
+                SlotSet("recent_active", None),
+                SlotSet("reason_of_like_sport", None),
+                SlotSet("topic_general", None),
+                SlotSet("sport", None),
+                SlotSet("animal", None),
+                SlotSet("own_animal", None),]
 
 
 
@@ -229,7 +327,15 @@ class ActionMoreTopicProcess(Action):
         return "action_more_topic_process"
 
     def run(self, dispatcher, tracker, domain):
-        search_term = tracker.latest_message["text"]
+
+        ent = tracker.latest_message['entities']
+        
+        if ent == None:
+            dispatcher.utter_message("Sorry I wasn't able to get the entity from your last message.")
+            return []
+        else:
+            dispatcher.utter_message("Ok, here are some possible replies related to " + ent + ".")   
+            search_term = ent
 
         # Q1
         obj_has_prerequisite = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/HasPrerequisite').json()
@@ -266,7 +372,9 @@ class ActionMoreTopicProcess(Action):
             first_subevent = obj_has_first_subevent['edges'][edge_index]['end']['label']
             dispatcher.utter_message("Q5: Ever tried " + search_term + " without " + first_subevent + "?")
 
-        return []        
+        return []
+
+
 
 # ----------------------------------------------------
 # Custom action used for second time interaction
@@ -279,10 +387,11 @@ class ActionSecondTime(Action):
     def run(self, dispatcher, tracker, domain): # -> List[EventType]:
         
         # Define column headers
-        col_list = ["user", "topic", "recent_active"]
-
+        # col_list = ["user", "topic", "recent_active"]        
+        col_list = ['user', 'topic', 'sport', 'recent_active', 'animal', 'own']
+            
         # Read the csv file
-        df = pd.read_csv("output.csv", usecols=col_list)
+        df = pd.read_csv("output2.csv", usecols=col_list)
 
         # Extract the 'user' column and turn it into a list
         user_list = df["user"]
@@ -293,49 +402,44 @@ class ActionSecondTime(Action):
         index = user_list.index(user)
 
         # Get the user's topic and recent activity bool
-        user_topic    = df["topic"][index]          # Returns a sport type
-        recent_active = df["recent_active"][index]  # Returns a boolean
+        user_sport         = df["sport"][index]          # Returns a sport type
+        user_recent_active = df["recent_active"][index]  # Returns a boolean
+        user_animal        = df["animal"][index]         #
+        user_own_animal    = df["own"][index]
 
+        dispatcher.utter_message("User index: " + str(index) +
+                                 "\nUser own animal: " + str(user_own_animal) +
+                                 "\nUser talk about animal: " + str(user_animal)
+                                 )
 
         # - If user did the activity: ask how did it go
         # - If user did not: ask what other sport is liked
-        
-
-        
-        if recent_active:
-            dispatcher.utter_message("So last time we talked about " + user_topic +
+        if user_own_animal == "TRUE" :
+            dispatcher.utter_message("I remember that you had a " + str(user_animal) +
+                                     ". How is it?")
+        elif user_recent_active == "TRUE":
+            dispatcher.utter_message("So last time we talked about " + str(user_sport) +
                                      " and you did that recently. How did it go?")
         else:
-            dispatcher.utter_message("===============================================")
-            dispatcher.utter_message("The following message is for debug purpose and will be removed in the future!")            
-            dispatcher.utter_message("Only one will be used in the end product.")
-            dispatcher.utter_message("===============================================")
-        
-            dispatcher.utter_message("Possible reply 1:")
-            dispatcher.utter_message("So last time we talked about " + user_topic +
-                                     ", you think you will do that in the near future?\n")
-                
-            dispatcher.utter_message("Possible reply 2 (using API):")
-            
+            # User has no recent activity or doesn't own a pet
             # ConceptNet API
-            obj_url = requests.get('http://api.conceptnet.io/query?start=/c/en/' + user_topic + '&rel=/r/ExternalURL').json()
-        
-            # Randomly pick one of the search result to ask - used if recent activity is False            
-            if (len(obj_url['edges']) > 1):
-                edge_index = random.randint(0, len(obj_url['edges'])-1)
-                topic_url = obj_url['edges'][edge_index]['end']['term']
-                dispatcher.utter_message("So last time we talked about " + user_topic +
-                                         ", here is a link you might find interesting!")
-                dispatcher.utter_message(str(topic_url))
-            elif (len(obj_url['edges']) == 1):
-                topic_url = obj_url['edges'][0]['end']['term']
-                dispatcher.utter_message("You like " + user_topic +
-                                         ", right? Check this out!\n" + topic_url)
-                dispatcher.utter_message(str(topic_url))
-            else:                
-                dispatcher.utter_message("So last time we talked about " + user_topic +
-                                         ", would you like to try it sometimes in the future?")
-
+            if user_sport != "nan":
+                obj_url = requests.get('http://api.conceptnet.io/query?start=/c/en/' + user_sport + '&rel=/r/ExternalURL').json()
+                if (len(obj_url['edges']) > 0):
+                    edge_index = random.randint(0, len(obj_url['edges'])-1)
+                    topic_url = obj_url['edges'][edge_index]['end']['term']
+                    dispatcher.utter_message("Did you check out this article about " + user_sport +
+                                             "? It's quite interesting!")
+                    dispatcher.utter_message(str(topic_url))
+                else:
+                    dispatcher.utter_message("You were interested in " + str(user_sport) +
+                                             " right? Let's try that out sometime!")
+            elif user_animal != "nan":
+                dispatcher.utter_message("I remember that you like " + str(user_animal) +
+                                         ". You think you will get one as pet in the future?")                
+            else:
+                dispatcher.utter_message("Something went wrong with the database!")
+                
         return []
 
 
@@ -343,28 +447,6 @@ class ActionSecondTime(Action):
 # Start the conversation based
 # on if the user exists or not  
 # ----------------------------------------------------
-##class ActionStartConversation(Action):
-##    def name(self) -> Text:
-##        return "action_start_conversation"
-##
-##
-##    def run(self, dispatcher, tracker, domain): # -> List[EventType]:
-##
-##        # Use the email to check if user exists
-##        email = tracker.get_slot("email")
-##        user_list = pd.read_csv('output.csv', usecols=[0])
-##        user_list = user_list.user.tolist()
-##
-##        # If user exists
-##        if email in user_list:
-##            
-##        else: # User does not exist
-##            dispatcher.utter_message("User does not exist. (This message is for debug purpose and will be removed in the future!)")
-##            # Trigger the story for first time conversation
-##            #return self.start_story_events("user.first_time")
-##            return [SlotSet("user_first_time", True)]
-
-
         
 ##        intent = tracker.latest_message["intent"].get("name")
 
