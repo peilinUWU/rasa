@@ -1,43 +1,235 @@
 ## intent:affirm
-- coool
-- correct
-- fine okay
+- Accept
+- Awesome!
+- Cool
+- Good
+- Great
+- I accept
+- I accept.
 - I agree
-- I guess
-- i love that
-- let's do it
-- oh okay
-- ok yes
-- okay buddy
+- I am using it
+- I changed my mind. I want to accept it
+- I do
+- I get it
+- I guess so
+- I have used it in the past
+- I will
+- I'd absolutely love that
+- I'm sure I will!
+- I'm using it
+- Nice
+- OK
+- Ofcourse
+- Oh yes
+- Oh, ok
+- Ok
+- Ok let's start
+- Ok.
+- Okay
+- Okay!
+- PLEASE
+- SURE
+- Sure
+- Sweet
+- That would be great
+- YES
+- YUP
+- Yea
+- Yeah
+- Yeah sure
+- Yep
+- Yep that's fine
+- Yep!
+- Yepp
+- Yes
+- Yes I do
+- Yes please
+- Yes please!
+- Yes, I accept
+- Yes.
+- Yup
+- a little
+- absolutely
+- accept
+- accepted
+- agreed
+- ah ok
+- alright
+- alright, cool
+- amayzing
+- amazing!
+- awesome
+- awesome!
+- confirm
+- cool
+- cool :)
+- cool story bro
+- cool!
+- coolio
+- definitely yes without a doubt
+- done
+- fair enough
+- fcourse
+- fine
+- fuck yeah!
+- go
+- go ahead
+- go for it
+- going super well
+- good
+- good.
+- great
+- great lets do that
+- great!
+- hell yeah
+- hell yes
+- hm, i'd like that
+- how nice!
+- i accept
+- i agree
+- i am!
+- i want that
+- i will!
+- it is ok
+- its okay
+- ja
+- ja cool
+- ja thats great
+- jezz
+- jo
+- k
+- kk
+- lets do it
+- lets do this
+- nice
+- not bad
+- of course
+- ofcoure i do
+- ofcourse
+- oh awesome!
+- oh cool
+- oh good !!
+- oh super
+- ok
+- ok cool
+- ok fine
+- ok friend
+- ok good
+- ok great
+- ok i accept
+- ok sara
+- ok, I behave now
+- ok, I understood
+- ok, Sara
+- ok...
+- okay
 - okay cool
-- okay that's fine
-- okey
-- right
-- right on
-- that is ok
-- that's correct
-- uh yes
-- um yes
+- okay sure
+- okay..
+- oki doki
+- okie
+- ook
+- oui
+- perfect
+- please
+- si
+- sort of
+- sure
+- sure thing
+- sure!
+- that is cool
+- that ok
+- that sounds fine
+- that's great
+- thats fine
+- thats good
+- thats great
+- top
+- uh-huh
+- very much
+- well yes
+- y
 - ya
+- ya cool
+- ya go for it
+- ya i want
+- ya please
+- ya thats cool
+- yaah
+- yap
+- yaps
+- yas
+- yay
 - ye
+- ye splease
 - yea
-- yea fine
-- yeah 
-- YEAH
-- yeah a cheap restaurant serving international food
-- yeah exactly
-- yeah fine
+- yeah
+- yeah do that
 - yeah sure
+- yeah'=
+- yeah, why not
+- yeeeeezzzzz
+- yeeees
 - yep
-- yep okay
+- yep i want that
+- yep if i have to
+- yep please
+- yep that's nice
+- yep thats cool
+- yep, will do thank you
+- yep. :/
 - yes
-- yes and i dont care
+- yes ...
+- yes I do
+- yes accept please
+- yes baby
+- yes cool
+- yes give me information
+- yes go ahead
+- yes go for it
+- yes great
+- yes i accept
+- yes i agree
+- yes i have built a bot before
+- yes i have!
 - yes it is
-- yes knocking
-- yes right
-- yes yes
-- yew
+- yes it was okay
+- yes of course
+- yes pleae
+- yes please
+- yes please!
+- yes pls
+- yes sirfr
+- yes that's great
+- yes that's what i want
+- yes you can
+- yes'
+- yes, I'd love to
+- yes, cool
+- yes, give me information, please
+- yes,i am
+- yes.
+- yesh
+- yess
+- yessoo
+- yesss
+- yesssss
+- yesyestyes
+- yesyesyes
+- yez
+- yop
+- you asked me a yes or no question, which i answered with yes
+- you got me, I accept, if you want me to
+- yres
+- ys
 - yup
+- yyeeeh
+- considering
+- That's awesome.
+- Got it
+- will do
+
+
 
 ## intent:deny
 - don't
@@ -72,10 +264,163 @@
 - nope i dont need your help
 - Don't show off
 - nope
+- no but
+- nah
+- nope but
+- no but i used to
+- not really
+- neverrrr
+- impossible
+- no way
+- rather not
+- I don't want to
+- I don't want to give it to you
+- I don't want to say
+- I dont want to tell
+- I'm not giving you my email address
+- I'm not going to give it to you
+- NEIN
+- NO
+- NO DON"T WANT THIS!
+- Nah
+- Neither
+- Never
+- Nevermind
+- No
+- No thank you
+- No, not really.
+- No, thank you
+- No.
+- Nopes
+- Not really
+- absolutely not
+- decline
+- definitely not
+- deny
+- i decline
+- i don not like this
+- i don't think so
+- i don't want either of those
+- i don't want to
+- i don't want to give you my email
+- i dont want to
+- i dont want to accept :P lol
+- i guess it means - no
+- i'm afraid not
+- i'm not sure
+- it is going pretty badly
+- it sucks
+- it sux
+- n
+- na
+- nah
+- nah I'm good
+- nah not for me
+- nah, first time
+- nah, i'm good
+- nehi
+- nein
+- neither
+- never mind
+- no :(
+- no I dont want
+- no I haven't decided yet if I want to sign up
+- no and no again
+- no bots at all
+- no go
+- no i can't
+- no i don't accept
+- no i dont want to
+- no i dont want to accept :P lol
+- no i won't
+- no ma'am
+- no sir
+- no sorry
+- no thank s
+- no thank you
+- no thanks
+- no way
+- no you did it wrong
+- no!!!!
+- no, i hate it
+- no, my frst time
+- no, thank you
+- no, thanks
+- no, thankyou
+- no. u r idiot
+- non
+- noooooooooo
+- noooooooooooooooooooooooooooooooooooooooo
+- nop
+- nope
+- nope!
+- nope. i am good
+- not going well at all
+- not really
+- not right now
+- not yet
+- nö
+- sorry not right now
+- still dont want to tell
+- thanks but no thanks
+- this sucks
+- very bad
+- I do not need help installing
+- I don't wanna tell the name of my company
+- no stop
+- stop it, i do not care!!!
+
+
+
+## intent:wants_to_talk
+- can we talk
+- talk about
+- about
+- can we talk about 
+- do you have more 
+- do you have more to say
+- can we discuss something else
+- can we talk about something
+- can we talk more
+- do you have more topics
+- do you have more questions
+- anything els
+- are there any other options?
+- come back
+- cool! can I do something else here?
+- hello what can you do for me
+- um what now
+- so what next?
+- talk to me
+- talk to me!
+- tell me something you can do
+- show me the menu
+- show me what's possible
+- so now what
+- so what can you do
+- more info
+
 
 
 ## intent:enter_data
+- can we talk about [sport](topic_general)?
+- can we talk about [animal](topic_general)?
+- let's talk about [sport](topic_general)!
+- lets talk about [animal](topic_general)
+- sure, i want to talk about [sport](topic_general)
+- i like to talk about [animal](topic_general)
+- about [sport](topic_general)
+- [animal](topic_general)
+- [sport](topic_general)
 - my favorite sport is [football](sport)
+- I like to [bowl](sport)
+- I like to play [pool](sport) with friends 
+- I like to go [running](sport)
+- I like to go [hiking](sport)
+- i go [surfing](sport)
+- Well, I do a lot of [yoga](sport)
+- My hobbies include [biking](sport)
+- i like to [dance](sport)
 - favorite is [ice hockey](sport)
 - i like [football](sport)
 - i really like [squash](sport)
@@ -89,6 +434,43 @@
 - i enjoy [bowling](sport)
 - i play [golf](sport)
 - i really like [squash](sport)
+- [skiing](sport)
+- [boxing](sport)
+- [volleyball](sport)
+- [american football](sport)
+- [Archery](sport)
+- [Badminton](sport)
+- [Cricket](sport)
+- [Bowling](sport)
+- [Boxing](sport)
+- [Curling](sport)
+- [Tennis](sport)
+- [Skateboarding](sport)
+- [Surfing](sport)
+- [Hockey](sport)
+- [Yoga](sport)
+- [Fencing](sport)
+- [Fitness](sport)
+- [Gymnastics](sport)
+- [Karate](sport)
+- [Weightlifting](sport)
+- [Baseball](sport)
+- [Rugby](sport)
+- [Wrestling](sport)
+- [High jumping](sport)
+- [Hang gliding](sport)
+- [Car racing](sport)
+- [Cycling](sport)
+- [Running](sport)
+- [Table tennis](sport)
+- [Fishing](sport)
+- [Judo](sport)
+- [Climbing](sport)
+- [Billiards](sport)
+- [Pool](sport)
+- [Shooting](sport)
+- [Horse racing](sport)
+- [Horseback riding](sport)
 - i like [dog](animal)
 - i like [cat](animal)
 - i like [sheep](animal)
@@ -104,6 +486,41 @@
 - [bird](animal)
 - [mini pig](animal)
 - [squirrel](animal)
+- [dolphin](animal)
+- [fox](animal)
+- [rabbit](animal)
+- [deer](animal)
+- [snake](animal)
+- [ferret](animal)
+- [beaver](animal)
+- [tiger](animal)
+- [panda](animal)
+- [squirrel](animal)
+- [horse](animal)
+- [bear](animal)
+- [cow](animal)
+- [bird](animal)
+- [pig](animal)
+- [chicken](animal)
+- [duck](animal)
+- [turtle](animal)
+- [tortoise](animal)
+- [spider](animal)
+- [sheep](animal)
+- [rat](animal)
+- [mouse](animal)
+- [rabbit](animal)
+- [pig](animal)
+- [newt](animal)
+- [hedgehog](animal)
+- [hamster](animal)
+- [guinea pig](animal)
+- [goat](animal)
+- [frog](animal)
+- [toad](animal)
+- [fish](animal)
+- [ferret](animal)
+- [alpaca](animal)
 - my email is Elizabeth@yahoo.com
 - It is Drew@Mccarthy.com
 - My email is Richard@Simmons.com
@@ -149,6 +566,7 @@
 - my email Evan@Palmer.net
 
 
+
 ## intent:user.bye
 - okay see you later
 - hope to see you later
@@ -185,6 +603,309 @@
 - see you tomorrow
 - ok bye
 - c u
+- cya
+- cya later
+- farewell
+- adios
+- bye
+- bye .
+- bye :P
+- bye bot
+- bye bye bot
+- bye for now
+- bye was nice talking to you
+- bye!
+- byee
+- catch you later
+- ciao
+- cya
+- farewell
+- good bye
+- good night
+- goodbye
+- goodbye.
+- goodnight
+- gotta go
+- ok Bye
+- ok bye
+- ok, bye
+- ok.bye
+- see u later
+- see ya
+- see you
+- see you . bye
+- take care
+- then bye
+- tlak to you later
+- Exit
+- Close this talk
+
+
+## intent:user.question
+- where are you from?
+- How are you?
+- what do you like to do for fun during the weekend?
+- What do you like to do for fun around here?
+- what do you enjoy doing for fun?
+- What do you like to do for fun?
+- What do you do for fun?
+- What do you do for fun in your sparetime?
+- What do you do for fun around here?
+- What do you do in your spare time?
+- What do you like to do in your free time?
+- What do you enjoy doing in your free time?
+- What do you do in your spare time?
+- What kinds of things do you enjoy?
+- what kinds of things do you enjoy doing?
+- what kinds of things do you like to do on the weekends?
+- What kind of things do you enjoy doing in your free time?
+- What kind of hobbies do you have?
+- What kind of hobbies do you like to do?
+- What kind of hobbies do you enjoy?
+- What kind of hobbies / activities are you involved in?
+- what kind of outdoors stuff do you do?
+- what kind of fun stuf do you do outside of work?
+- What sort of things do you do in your free time?
+- what things do you enjoy doing?
+- What are your hobbies?
+- What are some of your hobbies?
+- What are your interests?
+- what are some of your interests?
+- What interests do you have?
+- What is one of your hobbies?
+- What activities are you interested in?
+- Any major hobbies?
+- Any favorite hobbies?
+- Do you have any hobbies?
+- Do you enjoy outdoor activities?
+- Do you do any outdoor activities?
+- What kind of music do you like to listen to?
+- Do you play an instrument?
+- Have you ever played an instrument?
+- what instrument do you play?
+- favorite instrument?
+- What was your first instrument?
+- Are you drawn to any particular instrument?
+- What kind of books do you like to read?
+- What genre of books do you like to read?
+- What books do you enjoy?
+- Are you reading any good books right now?
+- What genre of books do you enjoy reading?
+- Any favorite genres of television or books?
+- Do you have a favorite book?
+- Do you have a favorite book author?
+- Do you like scary movies?
+- how many movies a week do you watch?
+- been to any movies recently?
+- do you like to watch movies?
+- Have you seen any good movies?
+- See any good movies lately?
+- What are your movie/TV interests?
+- what is the most recent movie you have seen?
+- What are some of your favorite shows on netflix?
+- Watch any TV shows?
+- Have you seen any good shows lately?
+- What kinds of shows do you enjoy watching?
+- What shows do you enjoy on Netflix?
+- What kind of games do you play?
+- do you enjoy card games?
+- Do you play any video games?
+- Do you play any online video games?
+- do you play online games?
+- Are you a student?
+- Are you in school?
+- Are you a student or working?
+- are you working or in school?
+- are you in school or work or both?
+- Are you a student or do you work full-time?
+- are you in any student clubs?
+- What field are you studying in?
+- What field are you in?
+- What field do you work in?
+- What do you study?
+- What did you study?
+- What do you study in school?
+- What did you study in school?
+- What are you studying in school?
+- what do you do for work?
+- what kind of work do you do?
+- What are your career interests?
+- What career you looking for?
+- what kind of work are you ultimately interested in?
+- What type of job are you looking for?
+- What type of job do you do?
+- What type of work do you do?
+- do you go to school?
+- Do you enjoy school?
+- Do you enjoy your work?
+- Do you work?
+- Do you work out?
+- Do you have a regular job?
+- Do you have a normal job?
+- Do you like your job?
+- Where do you want to work?
+- Where do you work?
+- How do you like your job?
+- have you ever worked a full time job?
+- What do you do for a living?
+- What are your career interests?
+- What kind of research are you doing?
+- Do you have a specific area of research?
+- what type of research are you doing?
+- My name is Ian, what is your name?
+- What's your name?
+- Hello, what is your name?
+- What is your first name?
+- Can you tell me a few things about yourself?
+- What part of the world are you from?
+- What part of the country do you live in?
+- Where are you living?
+- Do you have a family?
+- do you have any kids?
+- Do you have kids?
+- how many kids do you have?
+- Any kids?
+- Do you have any children?
+- What ages are your children?
+- Do you plan to have children at any point?
+- How old are your children?
+- Do you want children?
+- Do you have any animals?
+- Do you have any pets?
+- Do you have any siblings?
+- Do you have any sisters?
+- Do you have any brothers?
+- how old are your kids?
+- Do you have dogs or cats?
+- Do you want kids?
+- Are you married?
+- Do you live in the city or country?
+- Do you live near a city or are you in the country?
+- What country are you from?
+- What part of the country are you in?
+- Are you a married person?
+- What part of the world are you from?
+- What part of the world do you live in?
+- Where in the world do you live?
+- where in the world are you?
+- Do you have dogs?
+- Do you have any dogs of your own?
+- What types of things do you like to cook?
+- what type of food do you like to cook?
+- what type of food do you like to eat?
+- How often do you play sports?
+- Are you a sports fan?
+- Do you tend to do lots of sports?
+- Do you just like playing sports or watching too?
+- Do you play or watch any sports?
+- Do you follow any professional sports team?
+- do you follow sports at all?
+- Do you like watching sports?
+- Do you have a lot of sports interests?
+- Do you play on a team?
+- Do you have a team you support?
+- do you have a favorite team?
+- What's your football team?
+- What's your favorite soccer team?
+- Who is your favorite team?
+- Have you ever played basketball?
+- Do you watch basketball at all?
+- Do you follow football?
+- do you watch a lot of football?
+- How are you today?
+- Do you have anything you'd like to do today?
+- anything fun planned today?
+- Do you have to go to work today?
+- how was your day?
+- How is your day going?
+- got any plans for the rest of the day?
+- What are your plans for the day?
+- Would you like to write a book one day?
+- How's the weather?
+- Are you enjoying the weather?
+- Do you enjoy the rainy weather?
+- Do you enjoy this weather?
+- How is the weather in Paris?
+- how's the weather today?
+- How's the weather where you are?
+- Do you like hot weather or cold weather?
+- what kind of things do you like to do when traveling?
+- Do you play any sports?
+- Do you like to play sports?
+- Which sports do you play?
+- what sports do you like to play?
+- Do you have anything fun planned for this weekend?
+- Do you have any fun summer plans?
+- Do you have any fun weekend plans?
+- did you do anything fun this weekend?
+- Do you have a fun weekend planned?
+- do you have any plans for the weekend?
+- have any big plans this weekend?
+- Do you have any special plans for the weekend?
+- What's one thing you're looking forward to doing this weekend?
+- Any plans for the weekend?
+- What's your favorite thing to do on the weekend?
+- Do you have a lot of fitness/sports interests?
+- Did you guys get a lot of snow this year?
+- do you watch a lot of movies?
+- Do you have a lot of friends?
+- Do you go to a lot of movies?
+- Are you currently attending college?
+- Are you in college?
+- did you go to college?
+- Did you attend college?
+- Do you go to college?
+- You got a lot of snow this year didn't you?
+- Did you guys get a lot of snow this year?
+- do you stay with family?
+- where does your family live?
+- Do you enjoy spending time with your family?
+- where have you traveled with your family?
+- Have you ever been out of the country?
+- Have you ever left the country before?
+- What's the best place you've been?
+- do you have a favorite place you traveled to?
+- What was the place you loved to visit?
+- Do you have a favorite place you have been?
+- What was your favorite place that you've travelled?
+- What's your favorite place in Europe?
+- Where's the coolest place you've been?
+- How's life?
+- what is your favorite thing about life?
+- Any life experience tip?
+- Any particular activites you like to do with friends?
+- Any dream places you want to live someday?
+- Do you like hanging out with friends?
+- what do you like to do with your friends?
+- what is the dumbest thing you would buy if you had 12 million bucks?
+- what's the last thing you did just for fun?
+- What is your favorite thing to do at the beach?
+- what was the last thing you watched?
+- what was the last thing you cooked?
+- Do you like snow?
+- Do you like the snow?
+- Have you ever seen snow?
+- Do you someday want to have any pets?
+- Did you have any pets growing up?
+- Where are some of the places that you have traveled to?
+- what are some places you'd like to visit?
+- What is your favorite city you've been to?
+- Do you like the winter?
+- Do you get any snow in the winter?
+- what are your winter break plans?
+- are you looking forward to winter?
+- how do you stay entertained during the winter?
+- are you a computer or a person?
+- Are you a real person?
+- Are you a person of faith?
+- how's your wednesday morning going?
+- How're you this morning?
+- how are you this morning?
+- good morning, how are you?
+- What's your favorite season?
+- How old are you?
+- What is your age?
+
 
 ## intent:user.good
 - I am good
@@ -206,6 +927,14 @@
 - i am pretty good
 - I feel good today
 - I am really good
+- haha
+- ha
+- hahahah 
+- lol
+- lmao
+- hahah
+- hehe
+- huehue
 
 ## intent:user.hello
 - greetings
@@ -241,6 +970,129 @@
 - oka
 - yo
 - yo man
+- Bom dia
+- Bonjour
+- Good Morning
+- Good morning
+- Good mourning
+- Guten Morgen
+- HELLO
+- HEY
+- HEllo
+- Hallo
+- Hei
+- Hellllooooooo
+- Hello
+- Hello Bot
+- Hello!
+- Hey
+- Hey bot
+- Heya
+- Heylo
+- Hi
+- Hi bot
+- Hi man
+- Hi there
+- Hi!
+- Hi'
+- Hi,
+- Hi, bot
+- Hieee
+- Hieeeeeeeeeeeee
+- Hola
+- I said, helllllloooooO!!!!
+- Well hello there ;)
+- What is up?
+- Whats up
+- Whats up my bot
+- Whats up?
+- ayyyy whaddup
+- bonjour
+- ey boss
+- good evening
+- good moring
+- good morning
+- greet
+- greetings
+- hai
+- hallo
+- halloo
+- halloooo
+- halo
+- heeey
+- heelio
+- hell9o
+- hellio
+- hello
+- hello everybody
+- hello friend
+- hello hi
+- hello is anybody there
+- hello it is me again
+- hello robot
+- hello sara
+- hello sweatheart
+- hello sweet boy
+- hello there
+- hello world
+- hello?
+- hello]
+- hellooo
+- helloooo
+- helo
+- hey
+- hey bot
+- hey bot!
+- hey dude
+- hey hey
+- hey rasa
+- hey sara
+- hey ther
+- hey there
+- hey there boy
+- hey there..
+- heya
+- heyho
+- heyo
+- hhola
+- hi
+- hi !
+- hi Mister
+- hi again
+- hi folks
+- hi friend
+- hi friends
+- hi hi
+- hi pal!
+- hi sara
+- hi there
+- hi there it's me
+- hi!
+- hi.........................................................
+- hi?
+- hieee
+- hii
+- hiihihi
+- hiii
+- hlo
+- hola
+- howdy
+- jojojo
+- jop
+- konichiwa
+- merhaba
+- rasa hello
+- salut
+- sup
+- wasssup
+- wasssup!
+- what up
+- whats popping
+- whats up
+- yo
+- yoo
+
+
 
 ## intent:user.sad
 - I'm in a sad mood
@@ -320,6 +1172,16 @@
 - i hate you
 - i hate it
 - i dont like you!
+- i hate
+- i hate all
+- hate
+- dislike
+- none
+- none of them
+- i hate sports
+- i don't have any
+- nothing
+
 
 ## intent:out.of.scope.non.english
 - Wie fange ich mit Rasa an?
@@ -665,3 +1527,268 @@
 - you will know it from the single red rose it carries between its teeth
 - you're a woman
 - i am learning python
+
+intent:ask_howdoing
+- Ahoy matey how are you?
+- Are you ok?
+- Do you feel good?
+- Do you have a great day?
+- HI what are you up to?
+- Hi How are you?
+- How are You?
+- How are things?
+- How are you
+- How are you men?
+- How are you today?
+- How are you?
+- How was your day?
+- How you doing?
+- How's it going
+- How's it hanging?
+- How's life treating you friend?
+- How've you been?
+- Hows it going
+- I'm fine and you
+- Is everything ok?
+- What's going on?
+- What's new?
+- What's up
+- What's up man
+- and you
+- are you alright
+- are you happy
+- are you having a good day
+- are you ok
+- are you okay
+- h r u ?
+- hello, how are you?
+- hey how are you?
+- hi how are you?
+- hi how u doing
+- hi how are you?
+- how ?
+- how are things going
+- how are things with you?
+- how are u
+- how are u?
+- how are xou
+- how are you
+- how are you ?
+- how are you doing
+- how are you doing this morning
+- how are you doing today my sweet friend
+- how are you doing today?
+- how are you doing?
+- how are you feeling
+- how are you today
+- how are you'
+- how are you?
+- how are you????
+- how are yuo
+- how do you do?
+- how have you been
+- how is it going
+- how is your day
+- how is your day going
+- how is your evening
+- how r u
+- how r u ?
+- how r u>
+- how you doing
+- how you doing?
+- how's it going?
+- how's life
+- how's life been treating you?
+- how's your day going
+- howareyou
+- hw r u?
+- is everything all right
+- is everything okay
+- nah, I'm good - how are you doing?
+- okay hi how are you?
+- wassup>
+- what about your day
+- what are you up to?
+- what's good
+- what's up
+- what's up?
+- whatchcha doing
+- whatchya upto ?
+- whats goin on
+- whats new
+- whatsapp
+- yow are you
+
+
+
+## intent:nicetomeeyou
+- Delighted to make your acquaintance.
+- Feels great to see you!
+- Glad to finally meet you!
+- Glad to make your acquaintance.
+- Glad to meet you
+- Glad to meet you!
+- Glad to meet you.
+- Glad we've met.
+- Good to meet you!
+- Good to see you!
+- Great interacting with you
+- Great seeing you
+- Great to meet you!
+- Great to meet you.
+- Happy to get to see you.
+- Hi Sara, just wanted to test you
+- Hi, glad to meet you.
+- Hi, nice to meet you!
+- I am glad I met you.
+- I am glad he introduced us.
+- I had a great meeting with you
+- I'm glad to have met you!
+- I'm glad to meet you!
+- I'm happy that we have met!
+- I'm pleased to meet you!
+- I'm so happy that I could meet you.
+- I'm thrilled to meet you!
+- It is indeed a pleasure to be able to meet you.
+- It was a pleasure to have your company.
+- It was nice to have met you
+- It's a pleasure to make your acquaintance!
+- It's a pleasure to meet you!
+- It's good that I could meet you. It was a pleasure.
+- It's great to get to know you!
+- It's great to make your acquaintance!
+- It's nice to finally meet you.
+- It's wonderful to meet you!
+- It’s a pleasure to meet you
+- It’s great connecting with you.
+- Lovely to meet you.
+- Nice to have met you.
+- Pleased to make your acquaintance!
+- Pleased to meet you!
+- Pleased to meet you.
+- See you around. It was a pleasure meeting you.
+- Thank you for this meeting. It was great to see you.
+- nice to meet you
+
+
+
+## intent:user.insult
+- FUCK
+- Fuck
+- Fuck Off
+- Fuck off
+- Fuck u
+- Fuck you
+- God you're a moron
+- I can't believe how dumb you are
+- I hate you
+- Loser
+- Stupid
+- You are a fool.
+- You are an idiot.
+- You are dumb.
+- You are shortsighted.
+- You are unintelligent.
+- You are unknowing.
+- You brain is dull.
+- You have no brains.
+- You have no intelligence.
+- You have no sense.
+- You know nothing.
+- You lack intelligence.
+- You lack understanding.
+- You're a dolt.
+- You're a dunce.
+- You're an idiot.
+- You're foolish.
+- Your intelligence is laughable.
+- Your mindset is naive.
+- a baby knows more than you
+- are u dump?
+- are you brain dead?
+- asshole
+- bitch
+- bloody dunce
+- but you are idiot
+- deal with my ass, you bitch
+- f*ck
+- fuck
+- fuck off
+- fuck rasa
+- fuck u
+- fuck you
+- fuck you machine learning bot
+- fuck you sara
+- fuck you!
+- fucking stupid
+- fucking work
+- get lost
+- go away
+- go fuck yourself
+- go to hell
+- how can you be such an idiot?
+- i hate you
+- i hate your dumb face
+- i think that you're a bullshit
+- idiot
+- insult you
+- ok fuck you
+- ok shut up
+- sara you look like a burnt sparrow
+- shit
+- shit bot
+- shut up asshole
+- so dumb
+- so fucking dumb
+- sucker
+- that wasn't very funny
+- thta was a terrible fucking joke
+- u r a piece of junk
+- ur a pussy
+- what fuck
+- yep but you are idiot
+- you are a moron
+- you are a stupid bot
+- you are an idiot
+- you are dumb
+- you are fucking stupid
+- you are fucking stupid guy！
+- you are idiot
+- you are idiotic
+- you are so ignorant
+- you are stupid
+- you are unintelligent
+- you are useless bot
+- you asshole
+- you idiot
+- you idiot bot
+- you son of a bitch
+- you suck
+- you're a loser lmao
+- you're an idiot
+- you're dumb
+- you're not smart
+- you're so dumb
+- you're the most moronic person I know
+- your mom gay
+- you are annoying
+- monkey man
+- little ugly monkey
+- you are ugly
+- you are insane
+- why are ugly
+- why are you ugly
+- your crazy
+
+
+## synonym:cat
+- cats
+- kittens
+- kitten
+- catz
+
+## synonym:dog
+- dogs
+- doggo
+- dogo
+- doge
