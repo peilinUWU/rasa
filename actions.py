@@ -218,7 +218,7 @@ class RequestMoreDetail(FormAction):
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:       
         # Stop message
-        dispatcher.utter_message("Okay, the bot has gathered enough information for now. I will now start storing them!")
+        dispatcher.utter_message("Okay, the bot has gathered enough information for now. It will now start storing them!")
 
         return [FollowupAction("action_store_detail")]
     
@@ -233,7 +233,7 @@ class ActionStoreDetail(Action):
         return "action_store_detail"
 
     def run(self, dispatcher, tracker, domain): # -> List[EventType]:         
-        dispatcher.utter_message("The bot is now storing information...")
+        dispatcher.utter_message("Storing information, thank you for participating.\nFeel free to press the 'restart' button to continue to the next session!")
 
         user          = tracker.get_slot("email")
         type_of_topic = tracker.get_slot("type_of_topic")
@@ -296,9 +296,26 @@ class ActionStoreDetail(Action):
                 SlotSet("topic_general", None),
                 SlotSet("sport", None),
                 SlotSet("animal", None),
-                SlotSet("own_animal", None),]
+                SlotSet("own_animal", None),
+                FollowupAction("action_ask_continue"),
+                ]
 
 
+
+# ----------------------------------------------------
+# Custom action for continuing for question generation
+#
+# ----------------------------------------------------
+class ActionAskContinue(Action):
+    def name(self) -> Text:
+        return "action_ask_continue"
+
+    def run(self, dispatcher, tracker, domain):
+           
+        dispatcher.utter_message("Would you like to discuss another topic?")
+        return []
+
+        
 
 # ----------------------------------------------------
 # Custom action for continuing for question generation
@@ -309,16 +326,11 @@ class ActionMoreTopic(Action):
         return "action_more_topic"
 
     def run(self, dispatcher, tracker, domain):
-        intent = tracker.latest_message['intent'].get('name')
+        
+        dispatcher.utter_message("What would you like to talk about?")
+        dispatcher.utter_message("(Enter free text. Currently it relies completely on ConceptNet, reply may be unexpected or does not make sense)")
 
-        if intent == "affirm":
-            dispatcher.utter_message("What would you like to talk about?")
-            dispatcher.utter_message("(Enter free text. Currently it relies completely on ConceptNet, reply may be unexpected or does not make sense)")
-
-            return []
-        else:            
-            dispatcher.utter_message("Okay, bye.")
-            return []
+        return []
 
 
 
@@ -407,10 +419,12 @@ class ActionSecondTime(Action):
         user_animal        = df["animal"][index]         #
         user_own_animal    = df["own"][index]
 
-        dispatcher.utter_message("User index: " + str(index) +
-                                 "\nUser own animal: " + str(user_own_animal) +
-                                 "\nUser talk about animal: " + str(user_animal)
-                                 )
+##        dispatcher.utter_message("User index: " + str(index) +
+##                                 "\nUser talk about sport: " + str(user_sport) +
+##                                 "\nUser sport activity: " + str(user_recent_active) +
+##                                 "\nUser own animal: " + str(user_own_animal) +
+##                                 "\nUser talk about animal: " + str(user_animal)
+##                                 )
 
         # - If user did the activity: ask how did it go
         # - If user did not: ask what other sport is liked
@@ -423,265 +437,23 @@ class ActionSecondTime(Action):
         else:
             # User has no recent activity or doesn't own a pet
             # ConceptNet API
-            if user_sport != "nan":
-                obj_url = requests.get('http://api.conceptnet.io/query?start=/c/en/' + user_sport + '&rel=/r/ExternalURL').json()
+            if str(user_sport) != "nan":
+                obj_url = requests.get('http://api.conceptnet.io/query?start=/c/en/' + str(user_sport) + '&rel=/r/ExternalURL').json()
                 if (len(obj_url['edges']) > 0):
                     edge_index = random.randint(0, len(obj_url['edges'])-1)
                     topic_url = obj_url['edges'][edge_index]['end']['term']
-                    dispatcher.utter_message("Did you check out this article about " + user_sport +
-                                             "? It's quite interesting!")
+                    dispatcher.utter_message("I remember that you were interested in " + str(user_sport) +
+                                             " right? Did you check out this article, it's quite interesting!")
                     dispatcher.utter_message(str(topic_url))
                 else:
-                    dispatcher.utter_message("You were interested in " + str(user_sport) +
+                    dispatcher.utter_message("I remember that you were interested in " + str(user_sport) +
                                              " right? Let's try that out sometime!")
-            elif user_animal != "nan":
+            elif str(user_animal) != "nan":
                 dispatcher.utter_message("I remember that you like " + str(user_animal) +
                                          ". You think you will get one as pet in the future?")                
             else:
-                dispatcher.utter_message("Something went wrong with the database!")
-                
+                dispatcher.utter_message("Something went wrong with the database! We will look into it shortly.")
+
+        dispatcher.utter_message("Thank you for finishing the test, you can now go back to the form to start answering a few questions.")
         return []
 
-
-# ----------------------------------------------------
-# Start the conversation based
-# on if the user exists or not  
-# ----------------------------------------------------
-        
-##        intent = tracker.latest_message["intent"].get("name")
-
-        # retrieve the correct chitchat utterance dependent on the intent
-##        if intent in [
-##            "ask_builder",
-##            "ask_weather",
-##            "ask_howdoing",
-##            "ask_whatspossible",
-##            "ask_whatisrasa",
-##            "ask_isbot",
-##            "ask_howold",
-##            "ask_languagesbot",
-##            "ask_restaurant",
-##            "ask_time",
-##            "ask_wherefrom",
-##            "ask_whoami",
-##            "handleinsult",
-##            "nicetomeeyou",
-##            "telljoke",
-##            "ask_whatismyname",
-##            "ask_howbuilt",
-##            "ask_whoisit",
-##        ]:
-##            dispatcher.utter_message(template=f"utter_{intent}")
-##        return []
-
-
-
-
-    
-
-# ----------------------------------------------------
-# Used for second time conversation,
-# i.e. user exists in the database
-#   - Check database if user's "recent_active" is true
-#       - If it's true, ask how did it go
-#       - If it's false, ask what another sport user likes
-# ----------------------------------------------------
-
-##class InquireSport(FormAction):
-##    
-##    def name(self) -> Text:
-##        return "inquire_sport"
-##    
-##    def run(self, dispatcher, tracker, domain):
-##
-##        # Get the user's email
-##        user = tracker.get_slot("email")
-##        
-##        # Define column headers
-##        col_list = ["user", "topic", "recent_active"]
-##
-##        # Read the csv file
-##        df = pd.read_csv("output.csv", usecols=col_list)
-##
-##        # Extract the 'user' column and turn it into a list
-##        user_list = df["user"]
-##        user_list = user_list.tolist()
-##
-##        # Get the user's index
-##        index = user_list.index(user)
-##
-##        # Get the user's topic and recent activity bool
-##        user_topic    = df["topic"][index]          # Returns a sport type
-##        recent_active = df["recent_active"][index]  # Returns a boolean
-##
-##        # ConceptNet API
-##        obj_url = requests.get('http://api.conceptnet.io/query?start=/c/en/' + user_topic + '&rel=/r/ExternalURL').json()
-##
-##
-##        # - If user did the activity: ask how did it go
-##        # - If user did not: ask what other sport is liked
-##        if recent_active:
-##            dispatcher.utter_message("So last time we talked about " + user_topic +
-##                                     ", and you did that recently. How did it go?")
-##        else:
-##            # Randomly pick one of the search result to ask - used if recent activity is False            
-##            if (len(obj_url['edges']) > 1):
-##                edge_index = random.randint(0, len(obj_url['edges'])-1)
-##                topic_url = obj_url['edges'][edge_index]['end']['term']
-##                dispatcher.utter_message("So last time we talked about " + user_topic +
-##                                     ", here is a link you might find interesting!")
-##                dispatcher.utter_message(str(topic_url))
-##            elif (len(obj_url['edges']) == 1):
-##                topic_url = obj_url['edges'][0]['end']['term']
-##                dispatcher.utter_message("So last time we talked about " + user_topic +
-##                                     ", here is a link you might find interesting!")
-##                dispatcher.utter_message(str(topic_url))
-##            else:                
-##                dispatcher.utter_message("So last time we talked about " + user_topic +
-##                                     ", would you like to try it sometimes in the future?")            
-##            
-##        return []
-
-
-        
-
-# ----------------------------------------------------------------------
-    
-
-##class AnswerForm(FormAction):
-##    
-##    def name(self) -> Text:
-##        return "answer_form"
-##
-##    @staticmethod
-##    def required_slots(tracker) -> List[Text]:
-##        # if the user does not exist, then we need to fill in some slots
-##        if tracker.get_slot('user_first_time') == False:
-##            return ["topic", "type_of_topic"]
-##        else:
-##            return ["type_of_animal"]
-##
-##    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-##        return {
-##            "type_of_sport": [
-##                self.from_entity(entity="sport"),
-##                ],
-##            "type_of_animal": [
-##                self.from_entity(entity="animal"),
-##                ],
-##            }
-##
-##    def submit(
-##        self,
-##        dispatcher: CollectingDispatcher,
-##        tracker: Tracker,
-##        domain: Dict[Text, Any],
-##        ) -> List[Dict]:
-##
-##        topic = tracker.get_slot("type_of_topic")
-##        user = tracker.get_slot("email")
-##
-##        search_term = topic
-##        
-##        obj_isa = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/IsA').json()
-##        obj_has_propertty = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/HasProperty').json()
-##
-##
-##        if topic == 'sport':
-##            topic_detail = tracker.get_slot("type_of_sport")
-##        elif topic == 'animal':
-##            topic_detail = tracker.get_slot("type_of_animal")
-##        
-##        Data = { 'User': [user],
-##                 'Topic': [topic],
-##                 'Detail': [topic_detail],
-##                 }
-##
-##        df = pd.DataFrame(Data, columns = ['User', 'Topic', 'Detail'])
-##
-####        if not os.path.isfile('output.csv'):
-####            df.to_csv('output.csv', index=False, header='columns')
-####        else:
-##        df.to_csv('output.csv', index=False, mode='a', header=False)
-##            
-##        return []
-      
-
-
-
-
-## used to set specific topic related slots
-##class ActionGetDetail(Action):
-##    """Returns the explanation for the sales form questions"""
-##
-##    def name(self) -> Text:
-##        return "action_get_detail"
-##
-##    def run(self, dispatcher, tracker, domain):
-##
-##        topic = tracker.get_slot("type_of_topic")
-##
-##        if topic == 'sport':
-##            ent = next(tracker.get_latest_entity_values(topic), None)
-##            return [SlotSet('type_of_sport', ent)]
-##        elif topic == 'animal':
-##            ent = next(tracker.get_latest_entity_values(topic), None)  
-##            return [SlotSet('type_of_animal', ent)]
-
-
-
-##class ActionAskReason(Action):
-##    """Returns the explanation for the sales form questions"""
-##
-##    def name(self) -> Text:
-##        return "action_ask_reason"
-##
-##    def run(self, dispatcher, tracker, domain):
-##        intent = tracker.latest_message['intent'].get('name')
-##
-##        topic = tracker.get_slot("type_of_topic")
-##
-##        intent = tracker.latest_message["intent"].get("name")
-##
-##        # retrieve the correct chitchat utterance dependent on the intent
-##        if topic in [
-##            "sport",
-##            "animal",
-##        ]:
-##            dispatcher.utter_message(template=f"utter_ask_reason_{topic}")
-##        return []
-
-
-
-##class ActionCheckUserExist(Action):
-##
-##    def name(self) -> Text:
-##        return "action_check_user_exist"
-##
-##    def run(self, dispatcher, tracker, domain):
-##        intent = tracker.latest_message['intent'].get('name')
-##
-##        topic = tracker.get_slot("type_of_topic")
-##
-##        intent = tracker.latest_message["intent"].get("name")
-##
-##        # retrieve the correct chitchat utterance dependent on the intent
-##        if topic in [
-##            "sport",
-##            "animal",
-##        ]:
-##            dispatcher.utter_message(template=f"utter_ask_reason_{topic}")
-##        return []
-
-
-##class ActionReadFromCsv(Action):
-##
-##    def name(self) -> Text:
-##        return "action_read_from_csv"
-##
-##    def run(self, dispatcher, tracker, domain):
-##        df = pd.read_csv('output.csv')
-##            
-##        print(df)
-##        
-##        return []
