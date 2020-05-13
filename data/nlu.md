@@ -412,6 +412,7 @@
 - about [sport](topic_general)
 - [animal](topic_general)
 - [sport](topic_general)
+- about [sport](topic_general)
 - my favorite sport is [football](sport)
 - I like to [bowl](sport)
 - I like to play [pool](sport) with friends 
@@ -480,7 +481,7 @@
 - [dog](animal) for sure!
 - my favorite animal is [horse](animal)
 - definitely [rabbit](animal)
-- definitely [cat](animal)
+- about [cat](animal)
 - [bear](animal)
 - [cow](animal)
 - [bird](animal)
