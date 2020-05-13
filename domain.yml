@@ -28,6 +28,7 @@ forms:
   - request_email
   - request_detail
   - request_more_detail
+  - chit_chat_first
 
 actions:
   - action_take_path
@@ -37,6 +38,8 @@ actions:
   - action_more_topic
   - action_more_topic_process
   - action_ask_continue
+  - action_greet
+  - action_check_chit_chat_first
 
 entities:
   - PERSON
@@ -62,6 +65,8 @@ entities:
   - topic_general
 
 slots:
+  greeted:
+    type: bool
   email:
     type: unfeaturized
   user_exist:
@@ -84,11 +89,23 @@ slots:
     type: bool
   topic_request:
     type: unfeaturized
+  chit_chat_first:
+    type: bool
+  name:
+    type: unfeaturized
+  where_from:
+    type: unfeaturized
+  job:
+    type: unfeaturized
+  food:
+    type: unfeaturized
+  how_are:
+    type: unfeaturized
     
 
 responses:
   utter_ask_email:
-  - text: "First, please enter your email address in order to proceed. (You can enter a dummy address if you wish, but please remember it in case you want to erase the chat history.)"
+  - text: "Please enter your email address to continue. (You can enter a dummy address if you wish, but please remember it in case you want to erase the chat history.)"
   
   utter_opening_question:
   - text: "What would you like to talk about? (Enter one topic that is related to sport or animal.)"
@@ -112,13 +129,55 @@ responses:
   utter_ask_topic_request:
   - text: "Sorry, I wasn't able to extract the entity. I have submitted the whole sentence to the developers!"
 
-    
+
+
+  # ---------------------------- #
+  #  chit chat question (first)  #
+  # ---------------------------- #
+
+  utter_ask_name:
+  - text: "How should I call you?"
+
+  utter_ask_how_are:
+  - text: "Alright! How are you today?"
+
+  utter_ask_where_from:
+  - text: "Good, and where about are you from?"
+
+  utter_ask_food:
+  - text: "Mh I'm fron the clouds. Do you happen to like American food?"
+
+  utter_ask_job:
+  - text: "Haha ok, and what do you do for a living?"
+
+
+  # ----------------------------- #
+  #  chit chat question (second)  #
+  # ----------------------------- #
+
+  utter_ask_do_fun:
+  - text: "What do you do for fun?"
+
+  utter_ask_music:
+  - text: "What kind of music do you like?"
+
+  utter_ask_smoke:
+  - text: "Do you smoke?"
+
+  utter_ask_where_live:
+  - text: "Where do you live?"
+
+  utter_ask_spend_free_time:
+  - text: "How do you spend your free time?"
+
+
+
   # --------------------------- #
   #    generic conversations    #
   # --------------------------- #
   
   utter_greet.hi:
-  - text: "Hi and welcome! I'm a bot powered by Rasa."
+  - text: "Hi! I'm a bot powered by Rasa."
     
   utter_greet.bye:
   - text: "Ok see ya!"

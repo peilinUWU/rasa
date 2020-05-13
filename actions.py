@@ -32,6 +32,33 @@ from rasa_sdk.events import (
 ##
 ##        return []
 
+
+
+# ----------------------------------------------------
+# Check if the user is previously greeted,
+# if not, we will ask 5 questions
+# ----------------------------------------------------
+class ActionGreet(Action):
+    def name(self) -> Text:
+        return "action_greet"
+
+
+    def run(self, dispatcher, tracker, domain):
+        # Check if we greeted the user
+        greeted = tracker.get_slot("greeted")
+
+        if not greeted:
+            # Set the greeted slot to True
+            # Go to a chit chat action form to ask 5 specific questions
+            return[
+                SlotSet("greeted", True),
+                FollowupAction("request_email")
+                ]
+        else:
+            dispatcher.utter_message(template=f"utter_greet.hi")
+            return [FollowupAction("action_more_topic")]
+        
+
     
 # ----------------------------------------------------
 # Get the user's email for identification purpose
@@ -67,7 +94,68 @@ class RequestEmail(FormAction):
         #dispatcher.utter_message("Email " + email + " was recorded.")
          
         dispatcher.utter_message("(Email received, proceeding to the next step...)")
-        return []
+        return [FollowupAction("action_check_chit_chat_first")]
+
+
+
+# ----------------------------------------------------
+# Check if the user is previously greeted,
+# if not, we will ask 5 questions
+# ----------------------------------------------------
+class ActionCheckChitChatFirst(Action):
+    def name(self) -> Text:
+        return "action_check_chit_chat_first"
+
+
+    def run(self, dispatcher, tracker, domain):
+        # Check if we asked the user general questions
+        chit_chat_first = tracker.get_slot("chit_chat_first")
+
+        if not chit_chat_first:
+            return[
+                SlotSet("chit_chat_first", True),
+                FollowupAction("chit_chat_first"),
+                ]
+        else:
+            return[FollowupAction("action_take_path")]
+
+
+        
+# ----------------------------------------------------
+# Get the user's email for identification purpose
+# ----------------------------------------------------
+class ChitChatFirst(FormAction):   
+    def name(self) -> Text:
+        return "chit_chat_first"
+
+
+    @staticmethod
+    def required_slots(tracker) -> List[Text]:
+        return ["name", "how_are", "where_from", "food", "job"]
+
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {            
+            "how_are": [                
+                self.from_text(),                
+                ],            
+            "name": [
+                self.from_text(),
+                ],            
+            "where_from": [
+                self.from_text(),
+                ],            
+            "food": [
+                self.from_text(),
+                ],                 
+            "job": [
+                self.from_text(),
+                ],       
+        }
+
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        return [FollowupAction("action_take_path")]
 
 
 
