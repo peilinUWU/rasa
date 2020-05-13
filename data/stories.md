@@ -1,65 +1,10 @@
-## story - user first time, recent active true
+## story new
 * user.hello
-  - utter_greet.hi
-  - request_email
-  - form{"name": "request_email"}
-  - form{"name": null}
-  - action_take_path
+  - action_greet
 * enter_data
   - request_detail
   - form{"name": "request_detail"}
   - form{"name": null}
-  - request_more_detail
-  - form{"name": "request_more_detail"}
-  - slot{"requested_slot": "recent_active"}
-* form: affirm
-  - form: request_more_detail
-  - slot{"recent_active": true}
-  - form{"name": null}
-  - action_store_detail
-  - action_ask_continue
-
-
-
-## story - user first time, own animal false
-* user.hello
-  - utter_greet.hi
-  - request_email
-  - form{"name": "request_email"}
-  - form{"name": null}
-  - action_take_path
-* enter_data
-  - request_detail
-  - form{"name": "request_detail"}
-  - form{"name": null}
-  - request_more_detail
-  - form{"name": "request_more_detail"}
-  - slot{"requested_slot": "own_animal"}
-* form: deny
-  - form: request_more_detail
-  - slot{"own_animal": false}
-  - form{"name": null}
-  - action_store_detail
-  - action_ask_continue
-
-
-## story - user first time and continue
-* user.hello
-  - utter_greet.hi
-  - request_email
-  - form{"name": "request_email"}
-  - form{"name": null}
-  - action_take_path
-  - action_opening_question
-* enter_data
-  - request_detail
-  - form{"name": "request_detail"}
-  - form{"name": null}
-  - request_more_detail
-  - form{"name": "request_more_detail"}
-  - form{"name": null}
-  - action_store_detail
-  - action_ask_continue
 * affirm
   - action_more_topic
 * enter_data
@@ -67,32 +12,9 @@
 
 
 
-## story - user first time and discontinue
-* user.hello
-  - utter_greet.hi
-  - request_email
-  - form{"name": "request_email"}
-  - form{"name": null}
-  - action_take_path
-* enter_data
-  - request_detail
-  - form{"name": "request_detail"}
-  - form{"name": null}
-  - request_more_detail
-  - form{"name": "request_more_detail"}
-  - form{"name": null}
-  - action_store_detail
-  - action_ask_continue
-* deny
-  - utter_greet.bye
-
-
-
 ## story - user refuse give email
 * user.hello
-  - utter_greet.hi
-  - request_email
-  - form{"name": "request_email"}
+  - action_greet
 * user.reject OR deny OR out.of.scope.other
   - utter_reply.to.reject
   - utter_greet.bye
@@ -103,15 +25,10 @@
 
 ## story - user has no interest
 * user.hello
-  - utter_greet.hi
-  - request_email
-  - form{"name": "request_email"}
-  - form{"name": null}
-  - action_take_path
+  - action_greet
 * enter_data
   - request_detail
   - form{"name": "request_detail"}
-  - slot{"requested_slot": "type_of_topic"}
 * user.reject OR deny OR out.of.scope.other
   - utter_reply.to.reject
   - utter_greet.bye
