@@ -27,7 +27,7 @@ from rasa_sdk.events import (
 ##
 ##    def run(self, dispatcher, tracker, domain):
 ##
-##        ent = tracker.latest_message['entities']
+##        ent = tracker.latest_message['entities']['value']
 ##        dispatcher.utter_message("Rasa got entity: " + str(ent)) 
 ##
 ##        return []
@@ -261,8 +261,8 @@ class ActionStoreDetail(Action):
         else:
             search_term = animal
         
-        obj_has_property = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/HasProperty').json()
-        obj_receive_action = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/ReceivesAction').json()
+        obj_has_property = requests.get('http://api.conceptnet.io/query?start=/c/en/' + str(search_term) + '&rel=/r/HasProperty').json()
+        obj_receive_action = requests.get('http://api.conceptnet.io/query?start=/c/en/' + str(search_term) + '&rel=/r/ReceivesAction').json()
 
         # Randomly pick a topic with 50/50 chance
         random_topic_pick = random.randint(0,1)
@@ -276,7 +276,7 @@ class ActionStoreDetail(Action):
             edge_index = random.randint(0, len(decided_topic['edges'])-1)
             topic_property = decided_topic['edges'][edge_index]['end']['label']
             
-            dispatcher.utter_message("Triva: Did you know that " + search_term + " is " + topic_property + "!")
+            dispatcher.utter_message("Triva: Did you know that " + str(search_term) + " is " + topic_property + "!")
         
         else:
             dispatcher.utter_message("Thank you for participating")
@@ -340,51 +340,51 @@ class ActionMoreTopicProcess(Action):
 
     def run(self, dispatcher, tracker, domain):
 
-        ent = tracker.latest_message['entities']
+        ent = tracker.latest_message['entities'][0]['value']
         
         if ent == None:
             dispatcher.utter_message("Sorry I wasn't able to get the entity from your last message.")
             return []
         else:
-            dispatcher.utter_message("Ok, here are some possible replies related to " + ent + ".")   
+            dispatcher.utter_message("Ok, here are some possible replies related to " + str(ent) + ".")   
             search_term = ent
+            
+            # Q1
+            obj_has_prerequisite = requests.get('http://api.conceptnet.io/query?start=/c/en/' + str(search_term) + '&rel=/r/HasPrerequisite').json()
+            if len(obj_has_prerequisite['edges'])> 0:
+                edge_index = random.randint(0, len(obj_has_prerequisite['edges'])-1)
+                prerequisite = obj_has_prerequisite['edges'][edge_index]['end']['label']
+                dispatcher.utter_message("Q1: Can you " + str(search_term) + " without " + prerequisite + "?")
 
-        # Q1
-        obj_has_prerequisite = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/HasPrerequisite').json()
-        if len(obj_has_prerequisite['edges'])> 0:
-            edge_index = random.randint(0, len(obj_has_prerequisite['edges'])-1)
-            prerequisite = obj_has_prerequisite['edges'][edge_index]['end']['label']
-            dispatcher.utter_message("Q1: Can you " + search_term + " without " + prerequisite + "?")
+            # Q2
+            obj_has_property = requests.get('http://api.conceptnet.io/query?start=/c/en/' + str(search_term) + '&rel=/r/HasProperty').json()
+            if len(obj_has_property['edges'])> 0:
+                edge_index = random.randint(0, len(obj_has_property['edges'])-1)
+                has_property = obj_has_property['edges'][edge_index]['end']['label']
+                dispatcher.utter_message("Q2: Is " + str(search_term) + " really " + has_property + "?") 
 
-        # Q2
-        obj_has_property = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/HasProperty').json()
-        if len(obj_has_property['edges'])> 0:
-            edge_index = random.randint(0, len(obj_has_property['edges'])-1)
-            has_property = obj_has_property['edges'][edge_index]['end']['label']
-            dispatcher.utter_message("Q2: Is " + search_term + " really " + has_property + "?") 
+            # Q3
+            obj_antonym = requests.get('http://api.conceptnet.io/query?start=/c/en/' + str(search_term) + '&rel=/r/Antonym').json()
+            if len(obj_antonym['edges'])> 0:
+                edge_index = random.randint(0, len(obj_antonym['edges'])-1)
+                antonym = obj_antonym['edges'][edge_index]['end']['label']
+                dispatcher.utter_message("Q3: I'm guessing you dislike " + antonym + "?")
 
-        # Q3
-        obj_antonym = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/Antonym').json()
-        if len(obj_antonym['edges'])> 0:
-            edge_index = random.randint(0, len(obj_antonym['edges'])-1)
-            antonym = obj_antonym['edges'][edge_index]['end']['label']
-            dispatcher.utter_message("Q3: I'm guessing you dislike " + antonym + "?")
+            # Q4
+            obj_synonym = requests.get('http://api.conceptnet.io/query?start=/c/en/' + str(search_term) + '&rel=/r/Synonym').json()
+            if len(obj_synonym['edges'])> 0:
+                edge_index = random.randint(0, len(obj_synonym['edges'])-1)
+                synonym = obj_synonym['edges'][edge_index]['end']['label']
+                dispatcher.utter_message("Q4: Maybe you also like " + synonym + "?")
 
-        # Q4
-        obj_synonym = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/Synonym').json()
-        if len(obj_synonym['edges'])> 0:
-            edge_index = random.randint(0, len(obj_synonym['edges'])-1)
-            synonym = obj_synonym['edges'][edge_index]['end']['label']
-            dispatcher.utter_message("Q4: Maybe you also like " + synonym + "?")
+            # Q5
+            obj_has_first_subevent = requests.get('http://api.conceptnet.io/query?start=/c/en/' + str(search_term) + '&rel=/r/HasFirstSubevent').json()
+            if len(obj_has_first_subevent['edges'])> 0:
+                edge_index = random.randint(0, len(obj_has_first_subevent['edges'])-1)
+                first_subevent = obj_has_first_subevent['edges'][edge_index]['end']['label']
+                dispatcher.utter_message("Q5: Ever tried " + str(search_term) + " without " + first_subevent + "?")
 
-        # Q5
-        obj_has_first_subevent = requests.get('http://api.conceptnet.io/query?start=/c/en/' + search_term + '&rel=/r/HasFirstSubevent').json()
-        if len(obj_has_first_subevent['edges'])> 0:
-            edge_index = random.randint(0, len(obj_has_first_subevent['edges'])-1)
-            first_subevent = obj_has_first_subevent['edges'][edge_index]['end']['label']
-            dispatcher.utter_message("Q5: Ever tried " + search_term + " without " + first_subevent + "?")
-
-        return []
+            return []
 
 
 

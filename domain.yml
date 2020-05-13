@@ -36,12 +36,24 @@ actions:
   - action_store_detail
   - action_more_topic
   - action_more_topic_process
-  - action_entity_test
   - action_ask_continue
 
 entities:
   - PERSON
   - CARDINAL
+  - NORP
+  - FAC
+  - ORG
+  - GPE
+  - LOC
+  - PRODUCT
+  - EVENT
+  - WORK_OF_ART
+  - LAW
+  - LANGUAGE
+  - DATE
+  - MONEY
+  - ORDINAL
   - email
   - topic
   - sport
