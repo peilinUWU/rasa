@@ -1541,6 +1541,12 @@
 - you will know it from the single red rose it carries between its teeth
 - you're a woman
 - i am learning python
+- [goat](animal)
+- [frog](animal)
+- [toad](animal)
+- [fish](animal)
+- [ferret](animal)
+- [alpaca](animal)
 
 intent:ask_howdoing
 - i'm fine, and you
