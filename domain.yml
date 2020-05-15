@@ -2,7 +2,11 @@ intents:
   - affirm
   - deny
   - inform_reason
-  - enter_data
+  - enter_data:
+      use_entities:
+      - email
+      - sport
+      - animal
   - user.first_time
   - user.second_time
   - user.bye
@@ -15,12 +19,13 @@ intents:
   - user.insult
   - ask_howdoing
   - nicetomeeyou
-  - sport
-  - animal
   - food
   - travel
   - chit_chat_non_english
-  - chit_chat
+  - chit_chat:
+      use_entities:
+      - sport
+      - animal
   - bot_challenge
   - trigger_rephrase
 
@@ -59,10 +64,8 @@ entities:
   - MONEY
   - ORDINAL
   - email
-  - topic
   - sport
   - animal
-  - reason
 
 slots:
   greeted:
@@ -251,7 +254,7 @@ responses:
   - text: "Awesome! 🎉"
 
   utter_default:
-  - text: "I can't say that I'm 100% certain about what you saying."
+  - text: "I can't say that I'm 100% certain about what you saying. Can you rephrase?"
 
   utter_ask_rephrase:
   - text: "Can you rephrase your last sentence and give it another try?"
