@@ -1,21 +1,13 @@
 ## story new
 * user.hello
   - action_greet
-* enter_data
-  - request_detail
-  - form{"name": "request_detail"}
-  - form{"name": null}
-* affirm
-  - action_more_topic
-* enter_data
-  - action_more_topic_process
+  - slot{"greeted": true}
 
 
-
-## story - user refuse give email
+## story - user first greet refuse give email
 * user.hello
   - action_greet
-* user.reject OR deny OR out.of.scope.other
+* user.reject OR deny
   - utter_reply.to.reject
   - utter_greet.bye
   - action_deactivate_form
@@ -23,24 +15,6 @@
 
 
 
-## story - user has no interest
-* user.hello
-  - action_greet
-* enter_data
-  - request_detail
-  - form{"name": "request_detail"}
-* user.reject OR deny OR out.of.scope.other
-  - utter_reply.to.reject
-  - utter_greet.bye
-  - action_deactivate_form
-  - form{"name": null}
-
-
-## story - user wants more topics
-* wants_to_talk OR enter_data
-  - request_detail
-  - form{"name": "request_detail"}
-  - form{"name": null}
 
 <!---------------------------->
 <!-- generic conversations  -->
@@ -64,7 +38,7 @@
 
 ## story - affirm deny
 * affirm OR deny
-  - utter_thumbsup
+  - utter_acknowledge
 
 ## story - affirm v2
 * affirm 
@@ -86,19 +60,21 @@
 * nicetomeeyou
   - utter_reply.to_nicetomeetyou
 
-
+## story - user enter data
+* enter_data
+  - utter_acknowledge
 
 <!---------------------------->
-<!--     out of scope       -->
+<!--       chit chat        -->
 <!---------------------------->
 
-## out of scope - non english
-* out.of.scope.non.english
-  - utter_reply.to_out_of_scope_non_english
+## chit chat - non english
+* chit_chat_non_english
+  - utter_default
     
-## out of scope - other
-* out.of.scope.other
-  - utter_reply.to_out_of_scope_other
+## chit chat
+* chit_chat
+  - utter_default
 
 ## bot challenge
 * bot_challenge

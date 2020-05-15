@@ -372,47 +372,7 @@
 
 
 
-## intent:wants_to_talk
-- can we talk
-- talk about
-- about
-- can we talk about 
-- do you have more 
-- do you have more to say
-- can we discuss something else
-- can we talk about something
-- can we talk more
-- do you have more topics
-- do you have more questions
-- anything els
-- are there any other options?
-- come back
-- cool! can I do something else here?
-- hello what can you do for me
-- um what now
-- so what next?
-- talk to me
-- talk to me!
-- tell me something you can do
-- show me the menu
-- show me what's possible
-- so now what
-- so what can you do
-- more info
-
-
-
 ## intent:enter_data
-- can we talk about [sport](topic_general)?
-- can we talk about [animal](topic_general)?
-- let's talk about [sport](topic_general)!
-- lets talk about [animal](topic_general)
-- sure, i want to talk about [sport](topic_general)
-- i like to talk about [animal](topic_general)
-- about [sport](topic_general)
-- [animal](topic_general)
-- [sport](topic_general)
-- about [sport](topic_general)
 - my favorite sport is [football](sport)
 - I like to [bowl](sport)
 - I like to play [pool](sport) with friends 
@@ -642,7 +602,38 @@
 - Close this talk
 
 
+
 ## intent:user.question
+- can we talk
+- talk about
+- about
+- can we talk about 
+- do you have more 
+- do you have more to say
+- can we discuss something else
+- can we talk about something
+- can we talk more
+- do you have more topics
+- do you have more questions
+- anything els
+- are there any other options?
+- come back
+- cool! can I do something else here?
+- hello what can you do for me
+- um what now
+- so what next?
+- talk to me
+- talk to me!
+- tell me something you can do
+- show me the menu
+- show me what's possible
+- so now what
+- so what can you do
+- more info
+- ?
+- ??
+- ???
+- ??????????
 - where are you from?
 - How are you?
 - what do you like to do for fun during the weekend?
@@ -809,8 +800,8 @@
 - What's your football team?
 - What's your favorite soccer team?
 - Who is your favorite team?
-- Have you ever played basketball?
-- Do you watch basketball at all?
+- Have you ever played (basketball)[sport]?
+- Do you watch (basketball)[sport] at all?
 - Do you follow football?
 - do you watch a lot of football?
 - How are you today?
@@ -1092,6 +1083,15 @@
 - whats up
 - yo
 - yoo
+- ey
+- ho
+- i'm back
+- me again
+- hi, i'm back!
+- hello i'm here
+- i'm back again
+- hi it's me again
+- hi remember me
 
 
 
@@ -1184,7 +1184,7 @@
 - nothing
 
 
-## intent:out.of.scope.non.english
+## intent:chit_chat_non_english
 - Wie fange ich mit Rasa an?
 - hilf mir beim start
 - tschüssikowski
@@ -1205,7 +1205,17 @@
 - tu parles francais?
 - tudo bom
 
-## intent:out.of.scope.other
+## intent:chit_chat
+- can we talk about sport?
+- can we talk about animal)?
+- let's talk about sport!
+- lets talk about animal
+- sure, i want to talk about sport
+- i like to talk about animal
+- about sport
+- animal
+- sport
+- about sport
 - I am asking you an out of scope question
 - 4 + 2 = ?
 - After registration I see that I have an available balance of 0.00000000. What does this balance represent?
@@ -1530,6 +1540,8 @@
 - i am learning python
 
 intent:ask_howdoing
+- i'm fine, and you
+- I'm fine, and how are you?
 - Ahoy matey how are you?
 - Are you ok?
 - Do you feel good?
