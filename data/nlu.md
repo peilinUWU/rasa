@@ -1,3 +1,10 @@
+## lookup:animal.txt
+data/animal.txt	
+
+
+## lookup:sport.txt
+data/sport.txt
+
 ## intent:affirm
 - Accept
 - Awesome!
@@ -408,31 +415,7 @@
 - i got a lot, but let's go with [Tennis](sport) this time
 - i would say [Skateboarding](sport)
 - well, [Surfing](sport) for sure
-- [Hockey](sport)
-- [Yoga](sport)
-- [Fencing](sport)
-- [Fitness](sport)
-- [Gymnastics](sport)
-- [Karate](sport)
-- [Weightlifting](sport)
-- [Baseball](sport)
-- [Rugby](sport)
-- [Wrestling](sport)
-- [High jumping](sport)
-- [Hang gliding](sport)
-- [Car racing](sport)
-- [Cycling](sport)
-- [Running](sport)
-- [Table tennis](sport)
-- [Fishing](sport)
-- [Judo](sport)
-- [Climbing](sport)
-- [Billiards](sport)
-- [Pool](sport)
-- [Shooting](sport)
-- [Horse racing](sport)
-- [Horseback riding](sport)
-- i like [dog](animal)
+- i like [dogs](animal)
 - i like [cat](animal)
 - i like [sheep](animal)
 - i like [fish](animal)
@@ -453,38 +436,6 @@
 - always [squirrel](animal)
 - that will have to be [dolphin](animal)
 - that got to be [fox](animal)
-- [rabbit](animal)
-- [deer](animal)
-- [snake](animal)
-- [ferret](animal)
-- [beaver](animal)
-- [tiger](animal)
-- [squirrel](animal)
-- [horse](animal)
-- [bear](animal)
-- [cow](animal)
-- [bird](animal)
-- [pig](animal)
-- [chicken](animal)
-- [duck](animal)
-- [turtle](animal)
-- [tortoise](animal)
-- [spider](animal)
-- [sheep](animal)
-- [rat](animal)
-- [mouse](animal)
-- [rabbit](animal)
-- [pig](animal)
-- [newt](animal)
-- [hedgehog](animal)
-- [hamster](animal)
-- [guinea pig](animal)
-- [goat](animal)
-- [frog](animal)
-- [toad](animal)
-- [fish](animal)
-- [ferret](animal)
-- [alpaca](animal)
 - my email is Elizabeth@yahoo.com
 - It is Drew@Mccarthy.com
 - My email is Richard@Simmons.com
@@ -771,7 +722,8 @@
 - Do you have any sisters?
 - Do you have any brothers?
 - how old are your kids?
-- Do you have dogs or cats?
+- Do you have [dogs](animal)?
+- Do you have [cats](animal)?
 - Do you want kids?
 - Are you married?
 - Do you live in the city or country?
@@ -783,8 +735,8 @@
 - What part of the world do you live in?
 - Where in the world do you live?
 - where in the world are you?
-- Do you have dogs?
-- Do you have any dogs of your own?
+- Do you have [dogs](animal)?
+- Do you have any [dogs](animal) of your own?
 - What types of things do you like to cook?
 - what type of food do you like to cook?
 - what type of food do you like to eat?
@@ -1518,7 +1470,7 @@
 - who is the MD of samsung bangalore ?
 - who is the president of india ?
 - who is your favourite robot?
-- who let the dog out
+- who let the [dog](animal) out
 - who was hitler
 - who will anser my email?
 - who's Bill Gates?
@@ -1531,7 +1483,7 @@
 - winter is already leaving
 - with you recommend me?
 - would you like some water
-- yeah, my dog was drinking a couple of litres of water per day and tried drinking the swimming pool
+- yeah, my [dog](animal) was drinking a couple of litres of water per day and tried drinking the swimming pool
 - you already have that
 - you can learn how to make a coffe
 - you have children?
@@ -1541,12 +1493,6 @@
 - you will know it from the single red rose it carries between its teeth
 - you're a woman
 - i am learning python
-- [goat](animal)
-- [frog](animal)
-- [toad](animal)
-- [fish](animal)
-- [ferret](animal)
-- [alpaca](animal)
 
 intent:ask_howdoing
 - i'm fine, and you
@@ -1814,3 +1760,4 @@ intent:ask_howdoing
 - doggo
 - dogo
 - doge
+
