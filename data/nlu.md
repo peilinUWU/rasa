@@ -188,6 +188,9 @@ data/sport.txt
 - yes
 - yes ...
 - yes I do
+- yea i did
+- did
+- yes i have done
 - yes accept please
 - yes baby
 - yes cool
@@ -235,7 +238,13 @@ data/sport.txt
 - That's awesome.
 - Got it
 - will do
-
+- yes, i have a [cat](animal)
+- yes, i own two [dogs](animal)
+- yeah, i had a few [rabbits](animal) 
+- yes i had
+- yes i have
+- of course i do
+- of course i have
 
 
 ## intent:deny
