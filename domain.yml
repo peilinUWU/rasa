@@ -1,6 +1,6 @@
 intents:
-  - affirm
-      use_entities:[]
+  - affirm:
+      use_entities: []
   - deny
   - inform_reason
   - enter_data:
