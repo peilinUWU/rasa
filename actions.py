@@ -86,13 +86,14 @@ class RequestEmail(FormAction):
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
         # Create the csv file if it's not there              
-        if not os.path.isfile('output2.csv'):
+        if not os.path.isfile('df.csv'):
             df = pd.DataFrame(columns = ['user', 'sport', 'recent_active', 'animal', 'own'])  
-            df.to_csv('output2.csv', index=False, header='columns')
+            df.to_csv('df.csv', index=False, header='columns')
 
 
         # Proceed to next step: check if user exists        
 ##        dispatcher.utter_message("(Email received, proceeding to the next step...)")
+        dispatcher.utter_message("Welcome!")
         return[FollowupAction("action_take_path")]
             
          
@@ -111,7 +112,7 @@ class ActionTakePath(Action):
         email = tracker.get_slot("email")
 
         # Read the csv file, the first column is the email address and has heading "user"
-        user_list = pd.read_csv('output2.csv', usecols=[0])
+        user_list = pd.read_csv('df.csv', usecols=[0])
         user_list = user_list.user.tolist()
 
         # Decide on follow up action accordingly
@@ -296,17 +297,27 @@ class ActionStoreDetail(Action):
         recent_active = tracker.get_slot("recent_active_sport")
         animal        = tracker.get_slot("type_of_animal")
         own_animal    = tracker.get_slot("own_animal")
+
+        if recent_active:
+            bool_recent_active = "yes"
+        else:
+            bool_recent_active = "no"
+
+        if own_animal:
+            bool_own_animal = "yes"
+        else:
+            bool_own_animal = "no"
         
         Data = { 'user': [user],
                  'sport': [sport],
-                 'recent_active': [recent_active],
+                 'recent_active': [bool_recent_active],
                  'animal': [animal],
-                 'own': [own_animal]
+                 'own': [bool_own_animal]
                }
         
         # Store relevant data to a csv file
         df = pd.DataFrame(Data, columns = ['user', 'sport', 'recent_active', 'animal', 'own'])  
-        df.to_csv('output2.csv', index=False, mode='a', header=False)
+        df.to_csv('df.csv', index=False, mode='a', header=False)
 
         # Clear the following slots
         return [SlotSet("type_of_sport", None),
@@ -373,7 +384,7 @@ class ActionFetchFromDB(Action):
         col_list = ['user', 'sport', 'recent_active', 'animal', 'own']
             
         # Read the csv file
-        df = pd.read_csv("output2.csv", usecols=col_list)
+        df = pd.read_csv("df.csv", usecols=col_list)
 
         # Extract the 'user' column and turn it into a list
         user_list = df["user"]
@@ -390,15 +401,17 @@ class ActionFetchFromDB(Action):
         user_own_animal    = df["own"][index]            # Returns if user owns animal
 
         # Conver to bool
-        if user_recent_active == "TRUE":
+        if user_recent_active == "yes":
             bool_user_recent_active = True
         else:
             bool_user_recent_active = False
 
-        if user_own_animal == "TRUE":
+        if user_own_animal == "yes":
             bool_user_own_animal = True
         else:
             bool_user_own_animal = False
+
+        dispatcher.utter_message("(Debug message), user_recent_active: " + str(bool_user_recent_active) + "\nuser_own_animal: " + str(bool_user_own_animal))
 
         
         return [SlotSet("type_of_sport", user_sport),
@@ -430,13 +443,13 @@ class LongTermQuestion(FormAction):
 
         # - If user did the activity: ask how did it go
         # - If not, ask if user will do in the future
-        if recent_active and own_animal:
+        if recent_active == True and own_animal == True:
             return ["how_go_sport", "watch_sport", "how_old_is_animal", "animal_color"]
-        elif recent_active and not own_animal:
+        elif recent_active == True and own_animal == False:
             return ["how_go_sport", "watch_sport", "why_like_animal", "animal_size"]
-        elif not recent_active and own_animal:
+        elif recent_active == False and own_animal == True:
             return ["play_in_future", "watch_sport", "how_old_is_animal", "animal_color"]
-        else:
+        elif recent_active == False and own_animal == False:
             return ["play_in_future", "watch_sport", "why_like_animal", "animal_size"]
         
         
