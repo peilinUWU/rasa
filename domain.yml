@@ -190,7 +190,7 @@ responses:
   - text: "Alright! How are you today?"
 
   utter_ask_where_from:
-  - text: "I see, and where about are you from?"
+  - text: "I see, and where are you from originally?"
 
   utter_ask_food:
   - text: "Mh I'm from the clouds. Do you happen to like American food?"

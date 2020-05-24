@@ -411,7 +411,7 @@ class ActionFetchFromDB(Action):
         else:
             bool_user_own_animal = False
 
-        dispatcher.utter_message("(Debug message), user_recent_active: " + str(bool_user_recent_active) + "\nuser_own_animal: " + str(bool_user_own_animal))
+##        dispatcher.utter_message("(Debug message), user_recent_active: " + str(bool_user_recent_active) + "\nuser_own_animal: " + str(bool_user_own_animal))
 
         
         return [SlotSet("type_of_sport", user_sport),
@@ -509,7 +509,8 @@ class ActionEndConversationFinal(Action):
         return "action_end_conversation_final"
 
     def run(self, dispatcher, tracker, domain):
-           
+
+        dispatcher.utter_message("Great, it was nice talking to you!")
         dispatcher.utter_message("Thank you! You are almost done! Please proceed to the form to answer a few final questions.")
         return []
 
