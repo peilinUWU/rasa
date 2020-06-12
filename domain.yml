@@ -2,40 +2,28 @@ intents:
   - affirm:
       use_entities: []
   - deny
-  - inform_reason
-  - enter_data:
-      use_entities:
-      - email
-      - sport
-      - animal
-  - user.first_time
-  - user.second_time
+  - enter_data
   - user.bye
+  - chit_chat_question
   - user.good
   - user.hello
   - user.sad
   - user.thank
-  - user.reject
-  - user.question
-  - user.insult
-  - ask_howdoing
-  - nicetomeeyou
-  - food
-  - travel
-  - chit_chat_non_english
-  - chit_chat:
-      use_entities:
-      - sport
-      - animal
   - bot_challenge
-  - trigger_rephrase
+  - user.reject
+  - chit_chat_non_english
+  - chit_chat
+  - nice_to_meet_you
+  - user.insult
+
 
 forms:
   - request_email
   - request_sport_detail
+  - request_more_sport_detail
   - request_animal_detail
   - request_more_animal_detail
-  - chit_chat_first
+  - chit_chat_1
   - chit_chat_second
   - long_term_question
 
@@ -47,6 +35,9 @@ actions:
   - action_store_detail
   - action_end_conversation
   - action_end_conversation_final
+  - action_self_disclosure
+  - action_get_answer
+  - action_optional_get_answer
 
 entities:
   - PERSON
@@ -133,9 +124,9 @@ responses:
   - text: "Now, what's your number one favorite sport?"
 
   utter_ask_reason_of_like_sport:
-  - text: "Cool! Why do you like {type_of_sport}?"
-  - text: "Interesting! What do you like about {type_of_sport}?"
-  - text: "I see! Why does {type_of_sport} interest you?"
+  - text: "Why do you like {type_of_sport}?"
+  - text: "What do you like about {type_of_sport}?"
+  - text: "Why does {type_of_sport} interest you?"
 
   utter_ask_recent_active_sport:
   - text: "Did you do it recently (<30 days)?"
@@ -172,7 +163,7 @@ responses:
   - text: "We were also talking about {type_of_animal} last time. What do you like about it?"
 
   utter_ask_animal_size:
-  - text: "I see. If you get to keep one, would you prefer a big one or a small one?"
+  - text: "If you get to keep one, would you prefer a big one or a small one?"
 
 
   utter_ask_topic_request:
@@ -187,7 +178,7 @@ responses:
   - text: "How should I call you?"
 
   utter_ask_how_are:
-  - text: "Alright! How are you today?"
+  - text: "Good day! How are you?"
 
   utter_ask_where_from:
   - text: "I see, and where are you from originally?"
@@ -223,9 +214,6 @@ responses:
   # --------------------------- #
   #    generic conversations    #
   # --------------------------- #
-  
-  utter_greet.hi:
-  - text: "Hi! I'm a bot powered by Rasa."
     
   utter_greet.bye:
   - text: "Ok see ya!"
@@ -255,17 +243,18 @@ responses:
   - text: "Awesome! 🎉"
 
   utter_default:
-  - text: "I can't say that I'm 100% certain about what you saying. Can you rephrase?"
+  - text: "Sorry I don't understand?"
+
+  utter_only_english:
+  - text: "I'm only fluent in English."
 
   utter_ask_rephrase:
   - text: "Can you rephrase your last sentence and give it another try?"
 
+
   # --------------------------- #
   #         out of scope        #
   # --------------------------- #
-
-  utter_reply.to_questions:
-  - text: "This feature will be available in a future version."
 
   utter_iamabot:
   - text: "I am a beta bot, powered by Rasa."
@@ -273,13 +262,10 @@ responses:
   utter_reply.to.reject:
   - text: "I see, so that's how the conversation going to end then!"
 
-  utter_reply.to_howdoing:
-  - text: "I'm always feeling great!"
-
   utter_reply.to_insult:
   - text: "No u."
 
-  utter_reply.to_nicetomeetyou:
+  utter_reply.to_nice_to_meet_you:
   - text: "Likewise!"
   - text: "Pleasure is mine!"
   - text: "Same same!"

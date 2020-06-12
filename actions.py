@@ -27,7 +27,7 @@ from rasa_sdk.events import (
 ##
 ##    def run(self, dispatcher, tracker, domain):
 ##
-##        ent = tracker.latest_message['entities']['value']
+##        ent = tracker.latest_message['entities'][0]['entity']
 ##        dispatcher.utter_message("Rasa got entity: " + str(ent)) 
 ##
 ##        return []
@@ -55,8 +55,7 @@ class ActionGreet(Action):
                 FollowupAction("request_email")
                 ]
         else:
-            dispatcher.utter_message(template=f"utter_greet.hi")
-            return []
+            return [FollowupAction("action_get_answer")]
         
 
     
@@ -119,7 +118,7 @@ class ActionTakePath(Action):
         if email not in user_list:
            
 ##            dispatcher.utter_message("(User is not found in the databse, requesting more details...)")
-            return [FollowupAction("chit_chat_first")]
+            return [FollowupAction("chit_chat_1")]
         else:          
 ##            dispatcher.utter_message("(User found in database...)")
             return [FollowupAction("chit_chat_second")]
@@ -130,43 +129,63 @@ class ActionTakePath(Action):
 # Chit chat questions for first session
 #
 # ----------------------------------------------------
-class ChitChatFirst(FormAction):   
+class ChitChat1(FormAction):   
     def name(self) -> Text:
-        return "chit_chat_first"
+        return "chit_chat_1"
 
+
+##    def run(self, dispatcher, tracker, domain):
+##        dispatcher.utter_message(template=f"utter_ask_how_are")
+##        return[]
 
     @staticmethod
-    def required_slots(tracker) -> List[Text]:
-        return ["name", "how_are", "where_from", "food", "job"]
-
+    def required_slots(tracker) -> List[Text]:   
+        return ["name"]
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         return {            
-            "how_are": [                
-                self.from_text(),                
-                ],            
             "name": [
+                self.from_entity(entity="PERSON"),
                 self.from_text(),
                 ],            
-            "where_from": [
-                self.from_text(),
-                ],            
-            "food": [
-                self.from_text(),
-                ],                 
-            "job": [
-                self.from_text(),
-                ],       
+##            "how_are": [                
+##                self.from_text(),                
+##                ],            
+##            "where_from": [
+##                self.from_text(),
+##                ],
         }
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+
+        # Get the latest message's intent
+        intent = intent = tracker.latest_message['intent'].get('name')
+
+        # If the message is not a question,
+        # then proceed to the next step
+        if intent == "chit_chat_question":
+            # Get the user
+            userID = tracker.get_slot("email")
+
+            # Get the user's input
+            data = tracker.latest_message.get('text')
+
+            # API call
+            r = requests.post('https://aebfc2ed232f.ngrok.io/get_answer',
+                              json={"userID": str(userID), "data": str(data)} )
+
+            if r.json()["error"] == None:
+                response = r.json()["answer"]
+                dispatcher.utter_message(str(response))
+            #else:
+                #Ask new question instead because unexpected error occurred
+
         return [FollowupAction("request_sport_detail")]
 
 
 
-
 # ----------------------------------------------------
-# Ask user for details when user mentioned a general topic
+# Ask user for details related to sport
 #   
 # ----------------------------------------------------
 class RequestSportDetail(FormAction):
@@ -176,12 +195,7 @@ class RequestSportDetail(FormAction):
 
     @staticmethod
     def required_slots(tracker) -> List[Text]:
-        # If user's topic is general      - ask for specific
-        # If user's topic is about sport  - ask why it's interesting
-        # If user's topic is about animal - ask if user owns one
-        # Else the bot can't say much about the topic  and will take it as a request
-        # slot "topic_general" is auto filled and can be used
-        return ["type_of_sport", "reason_of_like_sport", "recent_active_sport"]
+        return ["type_of_sport"]
 
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
@@ -189,6 +203,96 @@ class RequestSportDetail(FormAction):
             "type_of_sport": [
                 self.from_entity(entity="sport")
                 ],
+            }              
+
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+
+        # Run self disclosure module (maybe make a class for easier call)
+        
+        # Get the user
+        userID = tracker.get_slot("email")
+
+        # Get the user's input
+        data = tracker.latest_message.get('text')
+
+        # Get the entity
+        topic = tracker.latest_message['entities'][0]['entity']
+
+        # API call
+        r = requests.post("https://aebfc2ed232f.ngrok.io/get_disclosure",
+                          json={"userID": str(userID), "data": str(data), "topic": str(topic)} )
+
+        # Test thread number
+        #print(threading.current_thread().name)
+
+        if r.json()["error"] == None:
+            response = r.json()["answer"]
+            dispatcher.utter_message(str(response))
+
+            
+        return [FollowupAction("action_optional_get_answer")]
+        #return [FollowupAction("action_self_disclosure")]
+
+
+
+# ----------------------------------------------------
+# A self disclosure component that is used after
+# asking the opening question
+# ----------------------------------------------------
+class ActionOptionalGetAnswer(Action):
+    def name(self) -> Text:
+        return "action_optional_get_answer"
+
+    def run(self, dispatcher, tracker, domain): # -> List[EventType]:
+
+        # Get the latest message's intent
+        intent = intent = tracker.latest_message['intent'].get('name')
+
+        # If the message is not a question,
+        # then proceed to the next step
+        if intent == "affirm":
+            return [FollowupAction("request_more_sport_detail")]
+        # If the message is a question,
+        # then call the API before proceeding to the next step
+        else:
+            # Get the user
+            userID = tracker.get_slot("email")
+
+            # Get the user's input
+            data = tracker.latest_message.get('text')
+
+            # API call
+            r = requests.post('https://aebfc2ed232f.ngrok.io/get_answer',
+                              json={"userID": str(userID), "data": str(data)} )
+
+
+            if r.json()["error"] == None:
+                response = r.json()["answer"]
+                dispatcher.utter_message(str(response))
+            #else:
+                #Ask new question instead because unexpected error occurred
+
+            return [FollowupAction("request_more_sport_detail")]
+
+
+
+# ----------------------------------------------------
+# Ask user for more details related to sport
+#   
+# ----------------------------------------------------
+class RequestMoreSportDetail(FormAction):
+    def name(self) -> Text:
+        return "request_more_sport_detail"
+
+
+    @staticmethod
+    def required_slots(tracker) -> List[Text]:
+        return ["reason_of_like_sport", "recent_active_sport"]
+
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {
             "reason_of_like_sport": [
                 self.from_text()
                 ],
@@ -336,7 +440,7 @@ class ActionStoreDetail(Action):
 # Chit chat questions for second session
 #
 # ----------------------------------------------------
-class ChitChatFirst(FormAction):   
+class ChitChatSecond(FormAction):   
     def name(self) -> Text:
         return "chit_chat_second"
 
@@ -516,3 +620,68 @@ class ActionEndConversationFinal(Action):
 
 
 
+# ----------------------------------------------------
+# A self disclosure component that is used after
+# asking the opening question
+# ----------------------------------------------------
+class ActionSelfDisclosure(Action):
+    def name(self) -> Text:
+        return "action_self_disclosure"
+
+    def run(self, dispatcher, tracker, domain): # -> List[EventType]:
+
+        # Get the user
+        userID = tracker.get_slot("email")
+
+        # Get the user's input
+        data = tracker.latest_message.get('text')
+
+        # Get the entity
+        topic = tracker.latest_message['entities'][0]['entity']
+
+        # API call
+        r = requests.post("https://aebfc2ed232f.ngrok.io/get_disclosure",
+                          json={"userID": str(userID), "data": str(data), "topic": str(topic)} )
+
+        # Test thread number
+        #print(threading.current_thread().name)
+
+        if r.json()["error"] == None:
+            response = r.json()["answer"]
+            dispatcher.utter_message(str(response))
+        #else:
+            #Ask new question instead because unexpected error occurred
+
+        return []
+
+    
+
+# ----------------------------------------------------
+# A self disclosure component that is used after
+# asking the opening question
+# ----------------------------------------------------
+class ActionGetAnswer(Action):
+    def name(self) -> Text:
+        return "action_get_answer"
+
+    def run(self, dispatcher, tracker, domain): # -> List[EventType]:         
+
+        # Get the user
+        userID = tracker.get_slot("email")
+
+        # Get the user's input
+        data = tracker.latest_message.get('text')
+
+        # API call
+        r = requests.post('https://aebfc2ed232f.ngrok.io/get_answer',
+                          json={"userID": str(userID), "data": str(data)} )
+
+
+        if r.json()["error"] == None:
+            response = r.json()["answer"]
+            dispatcher.utter_message(str(response))
+        else:
+            dispatcher.utter_message("Something went wrong")
+            #Ask new question instead because unexpected error occurred
+
+        return []
