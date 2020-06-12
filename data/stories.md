@@ -7,6 +7,7 @@
 ## story - user first greet refuse give email
 * user.hello
   - action_greet
+  - slot{"greeted": true}
 * user.reject OR deny
   - utter_reply.to.reject
   - utter_greet.bye
@@ -14,6 +15,13 @@
   - form{"name": null}
 
 
+## story - 
+* user.hello
+  - action_greet
+  - slot{"greeted": true}
+* chit_chat_question OR chit_chat
+  - action_get_answer
+  - request_email
 
 
 <!---------------------------->
@@ -44,41 +52,39 @@
 * affirm 
   - utter_great
 
-## story - user ask question
-* user.question
-  - utter_reply.to_questions
-
-## story - user ask how doing
-* ask_howdoing
-  - utter_reply.to_howdoing
-
 ## story - user insult
 * user.insult
   - utter_reply.to_insult
 
 ## story - user nice to meet you
-* nicetomeeyou
-  - utter_reply.to_nicetomeetyou
+* nice_to_meet_you
+  - utter_reply.to_nice_to_meet_you
 
 ## story - user enter data
 * enter_data
   - utter_acknowledge
+  - action_self_disclosure
 
 <!---------------------------->
 <!--       chit chat        -->
 <!---------------------------->
 
+
 ## chit chat - non english
 * chit_chat_non_english
-  - utter_default
+  - utter_only_english
     
 ## chit chat
 * chit_chat
-  - utter_default
+  - action_get_answer
+
+## story - user ask question
+* chit_chat_question
+  - action_get_answer
 
 ## bot challenge
 * bot_challenge
-  - utter_iamabot
+  - action_get_answer
 
 ## user reject
 * user.reject

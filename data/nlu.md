@@ -566,7 +566,136 @@ data/sport.txt
 
 
 
-## intent:user.question
+## intent:chit_chat_question
+- can we talk about sport?
+- can we talk about animal?
+- Are you ready?
+- 4 + 2 = ?
+- Can I ask you questions first?
+- Can I die
+- Can I get a hamburger?
+- Can YouTube talk?
+- Can you call me back ?
+- Can you give me your datacenter's password?
+- Do I have to accept?
+- Have we met before?
+- Can you make sandwiches?
+- Is today saturday?
+- you have children?
+- will u kill me
+- will u kill me?
+- why do you need that?
+- who will anser my email?
+- who's Bill Gates?
+- whta you think about gdpr?
+- which is the LNU asynchronism ?
+- which kind
+- who are the engineers at rasa?
+- who are they?
+- who is the MD of samsung bangalore ?
+- who is the president of india ?
+- what?
+- whats that
+- whats the sign
+- when is the next train is coming?
+- where do i get install files for mac?
+- where is Oslo?
+- where is mexico?
+- wheres the party?
+- which city are you talking about?
+- which email
+- which email should i send to ?
+- what about wheather
+- what are contextual AI assistants and how different are they from chatbots?
+- what are you doing now?
+- what are your uses for universities
+- what did you eat for lunch?
+- what do oyu think about siri?
+- what do you think abou siri?
+- what do you think of alexa
+- what does your soul feel my friend
+- what doing
+- what else?
+- what films do you like
+- what i do after cd starter-pack-rasa-stack?
+- what is a discourse?
+- what is a mascot
+- what is adlingo
+- what is differance between bot and mascot?
+- what is evolution ?
+- what is google rcs
+- what is machine learning
+- what is nice?
+- what is the capital of delhi
+- what is the capital of india
+- what is the current petrol price
+- what is the day ?
+- what is the real use case where we can use this one
+- what is your address?
+- what is your purpose
+- what lnu mean?
+- what the latest news ?
+- what you ate today?
+- what's 5 + 5
+- what's a newsletter?
+- what's gingerale
+- what's your wife doing this weekend
+- who was hitler
+- who is your favourite robot?
+- so, I'm helping right now to training you?
+- really? you're so touchy?
+- personal or work?
+- lunch??
+- is it a wasteland full of broken robot parts?
+- i am hungry, what should i do?
+- how to go to newyork ?
+- how long have you been online?
+- how come you say ok ?
+- how can i get them?
+- hey, I contacted you a couple of days ago but didn't get any response, any news?
+- do you sell vacuum robots?
+- do you want to marry me?
+- do you believe in god?
+- do you have a phone number?
+- do you have your photo?
+- do you know me
+- do you know ras
+- do you liek cheese?
+- do you like football
+- do you like movies
+- can we keep chatting?
+- can you book dinner
+- can you cheer me up
+- can you cook dinner
+- can you give me a cup of coffee
+- can you help me with the docs?
+- can you help me with your docs
+- can you help me with your docs?
+- can you learn from our conversation?
+- can you speak about politic ?
+- can you understand ?
+- are u facebook
+- are u, facebook?
+- are you single?
+- are you dev?
+- are you human ?
+- are you russian?
+- are you sick
+- are you vegan
+- What day is it today?
+- What did you eat yesterday?
+- What do you prefer?
+- What is todays date
+- What is your hobbies?
+- What makes you better than a human?
+- What's 1 + 1?
+- What's do YouTube do
+- What's your backend system?
+- Where am I right now?
+- Where am I?
+- Who ?
+- Who are your customers
+- Why don’t you answer?
 - can we talk
 - talk about
 - about
@@ -707,7 +836,8 @@ data/sport.txt
 - What kind of research are you doing?
 - Do you have a specific area of research?
 - what type of research are you doing?
-- My name is Ian, what is your name?
+- My name is [Ian](PERSON), what is your name?
+- I am [david](PERSON), and you?
 - What's your name?
 - Hello, what is your name?
 - What is your first name?
@@ -1169,9 +1299,8 @@ data/sport.txt
 - tu parles francais?
 - tudo bom
 
+
 ## intent:chit_chat
-- can we talk about sport?
-- can we talk about animal)?
 - let's talk about sport!
 - lets talk about animal
 - sure, i want to talk about sport
@@ -1181,21 +1310,8 @@ data/sport.txt
 - sport
 - about sport
 - I am asking you an out of scope question
-- 4 + 2 = ?
-- After registration I see that I have an available balance of 0.00000000. What does this balance represent?
-- Are you ready?
 - But you're an english site :(
-- Can I ask you questions first?
-- Can I die
-- Can I get a hamburger?
-- Can YouTube talk?
-- Can you call me back ?
-- Can you give me your datacenter's password
-- Can you give me your datacenter's password?
-- Can you make sandwiches?
 - Can you please send me an uber
-- Do I have to accept?
-- Have we met before?
 - HomeBase is advertised as a community. Is there a way to interact with other members of the community?
 - How long does it take to set up a Rasa bot?
 - I already told you! I'm a shitmuncher
@@ -1224,7 +1340,6 @@ data/sport.txt
 - I'm a shitmuncher
 - Is Rasa really smart?
 - Is this Goal-Oriented Chatbot?
-- Is today saturday?
 - Mail me the guide
 - Make me a sandwich
 - NLW
@@ -1237,20 +1352,6 @@ data/sport.txt
 - The weather is good
 - Today
 - Try it out broken
-- What day is it today?
-- What did you eat yesterday?
-- What do you prefer?
-- What is todays date
-- What is your hobbies?
-- What makes you better than a human?
-- What's 1 + 1?
-- What's do YouTube do
-- What's your backend system?
-- Where am I right now?
-- Where am I?
-- Who ?
-- Who are your customers
-- Why don’t you answer?
 - Why is my TRUST score set to 50 after I completed the registration process?
 - Won't you ask me how I am?
 - You'r blue.
@@ -1260,14 +1361,6 @@ data/sport.txt
 - alexa, order 5 tons of natrium chloride
 - and make chicken noises into the phone
 - are the newsletter worth the subscription?
-- are u facebook
-- are u, facebook?
-- are you single?
-- are you dev?
-- are you human ?
-- are you russian?
-- are you sick
-- are you vegan
 - better than you
 - book a ticket
 - but I just told you that :(
@@ -1275,17 +1368,6 @@ data/sport.txt
 - buy one please
 - buy groceries
 - call me father
-- can we keep chatting?
-- can you book dinner
-- can you cheer me up
-- can you cook dinner
-- can you give me a cup of coffee
-- can you help me with the docs?
-- can you help me with your docs
-- can you help me with your docs?
-- can you learn from our conversation?
-- can you speak about politic ?
-- can you understand ?
 - cannot see
 - chgfhgh
 - chinese ok?
@@ -1296,16 +1378,6 @@ data/sport.txt
 - custom service
 - did i break you
 - dinner
-- do you believe in god?
-- do you have a phone number?
-- do you have your photo?
-- do you know me
-- do you know ras
-- do you liek cheese?
-- do you like football
-- do you like movies
-- do you sell vacuum robots?
-- do you want to marry me?
 - docs
 - doctor
 - everything
@@ -1321,26 +1393,20 @@ data/sport.txt
 - hang on let me find it
 - help with my life
 - hey little mama let em whisper in your ear
-- hey, I contacted you a couple of days ago but didn't get any response, any news?
 - how
 - how about NYC
 - how are the kids
-- how can i get them?
 - how can i test this
-- how come you say ok ?
 - how come?
 - how do you learn
 - how good is Rasa
 - how it compares to alexa
-- how long have you been online?
 - how long will the next version will launch?
 - how many lines of codes
 - how much is 10 + 89 ?
 - how much is 10 + 89
 - how to get rasa studio
-- how to go to newyork ?
 - i am hungry
-- i am hungry, what should i do?
 - i am not a developer but need this for business
 - i am qq
 - i can't deal with _your_ request
@@ -1368,7 +1434,6 @@ data/sport.txt
 - i want to order a pizza
 - i want to see your happy customers
 - i will tame a mouse for you
-- is it a wasteland full of broken robot parts?
 - is it allow to
 - is rasa a studio?
 - is rasa any good
@@ -1379,7 +1444,6 @@ data/sport.txt
 - license
 - ljljl
 - lunch
-- lunch??
 - machine learning
 - mail me the steps
 - mascot means?
@@ -1395,14 +1459,12 @@ data/sport.txt
 - only that?
 - order good
 - order pizza
-- personal or work?
 - pizza
 - please help with my ice cream it's dripping
 - please hjave lunchj
 - please hurry, i have deadline in two weeks to deliver the bot it is for very big company
 - please play music
 - rasa topics
-- really? you're so touchy?
 - refresh
 - region with no. of records
 - remember my name
@@ -1411,7 +1473,6 @@ data/sport.txt
 - show me a picture of a chicken
 - silly bot
 - sing me a song
-- so, I'm helping right now to training you?
 - some thing else
 - someone call the police i think the bot died
 - sorry, i cannot rephrase
@@ -1425,77 +1486,15 @@ data/sport.txt
 - turn off my stove
 - umm
 - wait a bit i am still reading
-- what about wheather
-- what are contextual AI assistants and how different are they from chatbots?
-- what are you doing now?
-- what are your uses for universities
-- what did you eat for lunch?
-- what do oyu think about siri?
-- what do you think abou siri?
-- what do you think of alexa
-- what does your soul feel my friend
-- what doing
-- what else?
-- what films do you like
-- what i do after cd starter-pack-rasa-stack?
-- what is a discourse?
-- what is a mascot
-- what is adlingo
-- what is differance between bot and mascot?
-- what is evolution ?
-- what is google rcs
-- what is machine learning
-- what is nice?
-- what is the capital of delhi
-- what is the capital of india
-- what is the current petrol price
-- what is the day ?
-- what is the real use case where we can use this one
-- what is your address?
-- what is your purpose
-- what lnu mean?
-- what the latest news ?
-- what you ate today?
-- what's 5 + 5
-- what's a newsletter?
-- what's gingerale
-- what's your wife doing this weekend
-- what?
-- whats that
-- whats the sign
-- when is the next train is coming?
-- where do i get install files for mac?
-- where is Oslo?
-- where is mexico?
-- wheres the party?
-- which city are you talking about?
-- which email
-- which email should i send to ?
 - which file is created first while developing chat bot
-- which is the LNU asynchronism ?
-- which kind
-- who are the engineers at rasa?
-- who are they?
-- who is the MD of samsung bangalore ?
-- who is the president of india ?
-- who is your favourite robot?
 - who let the [dog](animal) out
-- who was hitler
-- who will anser my email?
-- who's Bill Gates?
-- whta you think about gdpr?
 - why
-- why do you need that?
 - why its called rasa ?
-- will u kill me
-- will u kill me?
 - winter is already leaving
-- with you recommend me?
 - would you like some water
 - yeah, my [dog](animal) was drinking a couple of litres of water per day and tried drinking the swimming pool
 - you already have that
 - you can learn how to make a coffe
-- you have children?
 - you have job opening
 - you lock sweety
 - you should learn to count
@@ -1598,7 +1597,7 @@ intent:ask_howdoing
 
 
 
-## intent:nicetomeeyou
+## intent:nice_to_meet_you
 - Delighted to make your acquaintance.
 - Feels great to see you!
 - Glad to finally meet you!
@@ -1763,6 +1762,8 @@ intent:ask_howdoing
 - kittens
 - kitten
 - catz
+- neko
+- nya
 
 ## synonym:dog
 - dogs
