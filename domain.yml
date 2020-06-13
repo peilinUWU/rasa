@@ -37,7 +37,7 @@ actions:
   - action_end_conversation_final
   - action_self_disclosure
   - action_get_answer
-  - action_optional_get_answer
+  - action_optional_get_answer_sport
 
 entities:
   - PERSON
@@ -117,11 +117,11 @@ slots:
 
 responses:
   utter_ask_email:
-  - text: "Hello! Please enter your email address to continue."
+  - text: "Please enter your email address to continue."
   
   utter_ask_type_of_sport:
-  - text: "Now, what's one sport that you like?"
-  - text: "Now, what's your number one favorite sport?"
+  - text: "What's one sport that you like?"
+  - text: "What's your number one favorite sport?"
 
   utter_ask_reason_of_like_sport:
   - text: "Why do you like {type_of_sport}?"
@@ -130,6 +130,7 @@ responses:
 
   utter_ask_recent_active_sport:
   - text: "Did you do it recently (<30 days)?"
+
 
   utter_ask_how_go_sport:
   - text: "So last time we talked about {type_of_sport}, and you did that recently. How did it go?"
@@ -142,7 +143,7 @@ responses:
 
 
   utter_ask_type_of_animal:
-  - text: "I see. Another question, what's your one favorite pet?"
+  - text: "Another question, what's your one favorite pet?"
 
   utter_ask_own_animal:
   - text: "That's cool! Do you happen to own one?"
@@ -175,23 +176,21 @@ responses:
   # ---------------------------- #
 
   utter_ask_name:
-  - text: "How should I call you?"
+  - text: "Hi! What's your name?"
+
+
+
+  # ---------------------------- #
+  #  chit chat question (first)  #
+  # ---------------------------- #
 
   utter_ask_how_are:
   - text: "Good day! How are you?"
 
-  utter_ask_where_from:
-  - text: "I see, and where are you from originally?"
-
-  utter_ask_food:
-  - text: "Mh I'm from the clouds. Do you happen to like American food?"
-
-  utter_ask_job:
-  - text: "Haha ok, and what do you do for a living?"
 
 
   # ----------------------------- #
-  #  chit chat question (second)  #
+  #  chit chat question (third)  #
   # ----------------------------- #
 
   utter_ask_how_been:
