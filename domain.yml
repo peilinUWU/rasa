@@ -23,7 +23,6 @@ forms:
   - request_sport_detail_1
   - request_sport_detail_2
   - request_animal_detail
-
   - request_more_animal_detail
   - chit_chat_1
   - chit_chat_second
@@ -37,7 +36,6 @@ actions:
   - action_set_reminder
   - action_react_to_reminder
   - action_topic_animal
-
   - action_store_detail
   - action_fetch_from_db
   - action_end_conversation
