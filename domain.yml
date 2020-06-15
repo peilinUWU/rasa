@@ -20,6 +20,7 @@ intents:
 
 forms:
   - request_email
+  - ask_name
   - request_sport_detail_1
   - request_sport_detail_2
   - request_animal_detail
