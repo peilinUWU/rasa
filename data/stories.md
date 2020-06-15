@@ -1,13 +1,3 @@
-## story 1
-* user.hello
-  - action_greet
-  - slot{"greeted": true}
-* enter_data{"PERSON": "Peter"}
-  - action_topic_sport_1
-* affirm OR chit_chat_question OR chit_chat OR enter_data{"sport": "football"}
-  - action_topic_sport_2
-* affirm OR chit_chat_question OR chit_chat
-  - action_topic_animal
 
 
 ## story - user first greet refuse give email
@@ -93,3 +83,41 @@
 ## chit chat 4
 * bot_challenge
   - action_get_answer
+
+
+<!---------------------------->
+<!--      generated         -->
+<!---------------------------->
+
+## Generated 1
+* user.hello
+  - action_greet
+  - slot{"greeted":true}
+  - request_email
+  - form{"name":"request_email"}
+  - slot{"requested_slot":"email"}
+* enter_data
+  - request_email
+  - slot{"email":"test12@google.com"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - action_take_path
+  - ask_name
+  - form{"name":"ask_name"}
+  - slot{"requested_slot":"name"}
+* chit_chat
+  - ask_name
+  - slot{"name":"my name is haldan"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - action_topic_sport_1
+  - request_sport_detail_1
+  - form{"name":"request_sport_detail_1"}
+  - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"football"}
+  - request_sport_detail_1
+  - slot{"type_of_sport":"football"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+* affirm
+  - action_topic_sport_2

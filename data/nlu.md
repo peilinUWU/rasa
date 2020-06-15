@@ -11,6 +11,8 @@ data/sport.txt
 - Cool
 - Good
 - Great
+- i see
+- i see!
 - I accept
 - I accept.
 - I agree
