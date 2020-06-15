@@ -1,7 +1,13 @@
-## story new
+## story 1
 * user.hello
   - action_greet
   - slot{"greeted": true}
+* enter_data{"PERSON": "Peter"}
+  - action_topic_sport_1
+* affirm OR chit_chat_question OR chit_chat
+  - action_topic_sport_2
+* affirm OR chit_chat_question OR chit_chat
+  - action_topic_animal
 
 
 ## story - user first greet refuse give email
@@ -15,7 +21,7 @@
   - form{"name": null}
 
 
-## story - 
+## story - chit chat
 * user.hello
   - action_greet
   - slot{"greeted": true}
@@ -24,69 +30,66 @@
   - request_email
 
 
+
 <!---------------------------->
-<!-- generic conversations  -->
+<!-- default conversations  -->
 <!---------------------------->
 
-## story - thank
+## story - default 1
+* affirm
+  - action_get_answer
+
+## story - default 2
 * user.thank
-  - utter_reply.to_thank
+  - action_get_answer
 
-## story - sad
+## story - default 3
 * user.sad
-  - utter_reply.to_sad
+  - action_get_answer
 
-## story - good
+## story - default 4
 * user.good
-  - utter_reply.to_good
+  - action_get_answer
 
-## story - bye
+## story - default 5
 * user.bye  
   - utter_greet.bye
 
-## story - affirm deny
-* affirm OR deny
-  - utter_acknowledge
-
-## story - affirm v2
-* affirm 
-  - utter_great
-
-## story - user insult
+## story - default 6
 * user.insult
   - utter_reply.to_insult
 
-## story - user nice to meet you
+## story - default 7
 * nice_to_meet_you
   - utter_reply.to_nice_to_meet_you
 
-## story - user enter data
+## story - default 8
 * enter_data
   - utter_acknowledge
   - action_self_disclosure
+
+## story - default 9
+* user.reject
+  - utter_reply.to.reject
+  - utter_greet.bye
+
 
 <!---------------------------->
 <!--       chit chat        -->
 <!---------------------------->
 
-
-## chit chat - non english
+## chit chat 1
 * chit_chat_non_english
   - utter_only_english
     
-## chit chat
+## chit chat 2
 * chit_chat
   - action_get_answer
 
-## story - user ask question
+## chit chat 3
 * chit_chat_question
   - action_get_answer
 
-## bot challenge
+## chit chat 4
 * bot_challenge
   - action_get_answer
-
-## user reject
-* user.reject
-  - utter_reply.to.reject
-  - utter_greet.bye
