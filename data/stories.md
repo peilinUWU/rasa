@@ -4,7 +4,7 @@
   - slot{"greeted": true}
 * enter_data{"PERSON": "Peter"}
   - action_topic_sport_1
-* affirm OR chit_chat_question OR chit_chat
+* affirm OR chit_chat_question OR chit_chat OR enter_data{"sport": "football"}
   - action_topic_sport_2
 * affirm OR chit_chat_question OR chit_chat
   - action_topic_animal
