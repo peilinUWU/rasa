@@ -35,7 +35,7 @@
 
 ## story - default 3
 * user.sad
-  - action_get_answer
+  - action_set_reminder
 
 ## story - default 4
 * user.good
@@ -44,10 +44,6 @@
 ## story - default 5
 * user.bye  
   - utter_greet.bye
-
-## story - default 6
-* user.insult
-  - utter_reply.to_insult
 
 ## story - default 7
 * nice_to_meet_you
