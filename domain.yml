@@ -21,29 +21,26 @@ intents:
 forms:
   - request_email
   - ask_name
-  - request_sport_detail_1
-  - request_sport_detail_2
-  - request_animal_detail
-  - request_more_animal_detail
-  - chit_chat_1
-  - chit_chat_second
-  - long_term_question
+  - request_fav_sport
+  - request_fav_sport_reason
+  - request_fav_animal
+  - ask_how_are
+  - request_recent_sport
+  - follow_up_recent_sport
+  - request_own_pet
+  - follow_up_own_pet
 
 actions:
   - action_greet
   - action_take_path
-  - action_topic_sport_1
-  - action_topic_sport_2
-  - action_set_reminder
-  - action_react_to_reminder
-  - action_topic_animal
+  - action_add_on_1
+  - action_add_on_2
   - action_store_detail
   - action_fetch_from_db
-  - action_end_conversation
-  - action_end_conversation_final
+  - action_end_session_1
+  - action_end_session_2
   - action_self_disclosure
   - action_get_answer
-  - action_optional_get_answer_sport
 
 entities:
   - PERSON
@@ -139,7 +136,7 @@ responses:
 
 
   utter_ask_how_go_sport:
-  - text: "So last time we talked about {type_of_sport}, and you did that recently. How did it go?"
+  - text: "How did it go?"
 
   utter_ask_play_in_future:
   - text: "I remember that you were interested in {type_of_sport} right. You think you will try it out in the future?"
@@ -173,10 +170,6 @@ responses:
   - text: "If you get to keep one, would you prefer a big one or a small one?"
 
 
-  utter_ask_topic_request:
-  - text: "Sorry, I wasn't able to extract the entity. I have submitted the whole sentence to the developers!"
-
-
   # ---------------------------- #
   #   opening question (first)   #
   # ---------------------------- #
@@ -191,7 +184,7 @@ responses:
   # ---------------------------- #
 
   utter_ask_how_are:
-  - text: "Good day! How are you?"
+  - text: "Good day {name}! How are you?"
 
 
 
