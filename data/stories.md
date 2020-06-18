@@ -1,12 +1,3 @@
-## story
-* user.hello
-  - action_greet
-  - slot{"greeted": true}
-* affirm OR chit_chat_question OR chit_chat
-  - action_add_on_1
-* affirm OR chit_chat_question OR chit_chat
-  - action_add_on_2
-
 ## story - user first greet refuse give email
 * user.hello
   - action_greet
