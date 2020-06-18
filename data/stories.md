@@ -102,5 +102,38 @@
   - slot{"type_of_sport":"football"}
   - form{"name":null}
   - slot{"requested_slot":null}
-* affirm OR chit_chat_question OR chit_chat
+* chit_chat_question
   - action_add_on_1
+
+## Generated 2
+* user.hello
+  - action_greet
+  - slot{"greeted":true}
+  - request_email
+  - form{"name":"request_email"}
+  - slot{"requested_slot":"email"}
+* enter_data
+  - request_email
+  - slot{"email":"sheep4@google.com"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - action_take_path
+  - ask_name
+  - form{"name":"ask_name"}
+  - slot{"requested_slot":"name"}
+* enter_data{"PERSON":"eric"}
+  - ask_name
+  - slot{"name":"eric"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - request_fav_sport
+  - form{"name":"request_fav_sport"}
+  - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"rugby"}
+  - request_fav_sport
+  - slot{"type_of_sport":"rugby"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+* affirm
+  - action_add_on_1
+
