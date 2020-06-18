@@ -18,9 +18,6 @@
   - form{"name": null}
 
 
-
-
-
 <!---------------------------->
 <!-- default conversations  -->
 <!---------------------------->
@@ -35,7 +32,7 @@
 
 ## story - default 3
 * user.sad
-  - action_set_reminder
+  - action_get_answer
 
 ## story - default 4
 * user.good
