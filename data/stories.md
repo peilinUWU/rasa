@@ -91,26 +91,25 @@
   - slot{"requested_slot":"email"}
 * enter_data
   - request_email
-  - slot{"email":"test12@google.com"}
+  - slot{"email":"sheep1@google.com"}
   - form{"name":null}
   - slot{"requested_slot":null}
   - action_take_path
   - ask_name
   - form{"name":"ask_name"}
   - slot{"requested_slot":"name"}
-* chit_chat
+* chit_chat_question{"PERSON":"Jack"}
   - ask_name
-  - slot{"name":"my name is haldan"}
+  - slot{"name":"Jack"}
   - form{"name":null}
   - slot{"requested_slot":null}
-  - action_topic_sport_1
-  - request_sport_detail_1
-  - form{"name":"request_sport_detail_1"}
+  - request_fav_sport
+  - form{"name":"request_fav_sport"}
   - slot{"requested_slot":"type_of_sport"}
 * enter_data{"sport":"football"}
-  - request_sport_detail_1
+  - request_fav_sport
   - slot{"type_of_sport":"football"}
   - form{"name":null}
   - slot{"requested_slot":null}
-* affirm
-  - action_topic_sport_2
+* affirm OR chit_chat_question OR chit_chat
+  - action_add_on_1
