@@ -15,8 +15,6 @@ intents:
   - chit_chat
   - nice_to_meet_you
   - user.insult
-  - EXTERNAL_reminder:
-      triggers: action_react_to_reminder
 
 forms:
   - request_email
