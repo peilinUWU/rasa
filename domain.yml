@@ -1,6 +1,5 @@
 intents:
-  - affirm:
-      use_entities: []
+  - affirm
   - deny
   - enter_data
   - user.bye
@@ -14,7 +13,6 @@ intents:
   - chit_chat_non_english
   - chit_chat
   - nice_to_meet_you
-  - user.insult
 
 forms:
   - request_email
@@ -44,6 +42,8 @@ entities:
   - email
   - sport
   - animal
+  - PERSON
+  - ORG
 
 slots:
   greeted:

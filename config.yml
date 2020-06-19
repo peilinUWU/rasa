@@ -6,8 +6,8 @@ pipeline:
     case_sensitive: False
   - name: SpacyTokenizer
   - name: SpacyFeaturizer
-  - name: "SpacyEntityExtractor"
-    dimensions: ["PERSON"]
+  - name: SpacyEntityExtractor
+    dimensions: ["PERSON", "ORG"]
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
