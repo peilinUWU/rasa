@@ -1,11 +1,8 @@
 language: "en"
 
 pipeline:
-  - name: SpacyNLP
-    model: en_core_web_md
-    case_sensitive: False
-  - name: SpacyTokenizer
-  - name: SpacyFeaturizer
+  - name: ConveRTTokenizer
+  - name: ConveRTFeaturizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
@@ -13,7 +10,6 @@ pipeline:
     analyzer: "char_wb"
     min_ngram: 1
     max_ngram: 4
-  - name: SpacyEntityExtractor
   - name: DIETClassifier
     epochs: 100
   - name: EntitySynonymMapper
