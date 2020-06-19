@@ -130,7 +130,7 @@ responses:
   - text: "Why does {type_of_sport} interest you?"
 
   utter_ask_recent_active_sport:
-  - text: "Did you do it recently (<30 days)?"
+  - text: "Last time we talked about {type_of_sport}, did you do it recently (<30 days)?"
 
 
   utter_ask_how_go_sport:
@@ -183,27 +183,6 @@ responses:
 
   utter_ask_how_are:
   - text: "Good day {name}! How are you?"
-
-
-
-  # ----------------------------- #
-  #  chit chat question (third)  #
-  # ----------------------------- #
-
-  utter_ask_how_been:
-  - text: "Haven't seen you since last time we talked. How have you been?"
-
-  utter_ask_free_time:
-  - text: "Alright! What did you do in your free time?"
-
-  utter_ask_where_live:
-  - text: "I see, and where do you currently live?"
-
-  utter_ask_how_is_place:
-  - text: "How is the city?"
-
-  utter_ask_weather:
-  - text: "And how is the weather there?"
 
 
 
