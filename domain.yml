@@ -41,21 +41,6 @@ actions:
   - action_get_answer
 
 entities:
-  - PERSON
-  - CARDINAL
-  - NORP
-  - FAC
-  - ORG
-  - GPE
-  - LOC
-  - PRODUCT
-  - EVENT
-  - WORK_OF_ART
-  - LAW
-  - LANGUAGE
-  - DATE
-  - MONEY
-  - ORDINAL
   - email
   - sport
   - animal

@@ -2,8 +2,12 @@ language: "en"
 
 pipeline:
   - name: SpacyNLP
+    model: en_core_web_lg
+    case_sensitive: False
   - name: SpacyTokenizer
   - name: SpacyFeaturizer
+  - name: "SpacyEntityExtractor"
+    dimensions: ["PERSON"]
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
@@ -26,10 +30,3 @@ policies:
     epochs: 100
   - name: MappingPolicy
   - name: FormPolicy
-  - name: TwoStageFallbackPolicy
-    nlu_threshold: 0.3
-    ambiguity_threshold: 0.1
-    core_threshold: 0.3
-    fallback_core_action_name: "action_default_fallback"
-    fallback_nlu_action_name: "action_default_fallback"
-    deny_suggestion_intent_name: "chit_chat"
