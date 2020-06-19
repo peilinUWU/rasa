@@ -23,7 +23,7 @@
 
 ## story - default 3
 * user.sad
-  - action_get_answer
+  - action_add_on_1
 
 ## story - default 4
 * user.good
@@ -107,33 +107,50 @@
 
 ## Generated 2
 * user.hello
-  - action_greet
-  - slot{"greeted":true}
-  - request_email
-  - form{"name":"request_email"}
-  - slot{"requested_slot":"email"}
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
 * enter_data
-  - request_email
-  - slot{"email":"sheep4@google.com"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-  - action_take_path
-  - ask_name
-  - form{"name":"ask_name"}
-  - slot{"requested_slot":"name"}
-* enter_data{"PERSON":"eric"}
-  - ask_name
-  - slot{"name":"eric"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-  - request_fav_sport
-  - form{"name":"request_fav_sport"}
-  - slot{"requested_slot":"type_of_sport"}
-* enter_data{"sport":"rugby"}
-  - request_fav_sport
-  - slot{"type_of_sport":"rugby"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-* affirm
-  - action_add_on_1
-
+    - request_email
+    - slot{"email":"sheep6@google.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
+    - ask_name
+    - form{"name":"ask_name"}
+    - slot{"requested_slot":"name"}
+* chit_chat_question
+    - ask_name
+    - slot{"name":"Lars"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_fav_sport
+    - form{"name":"request_fav_sport"}
+    - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"swimming"}
+    - request_fav_sport
+    - slot{"type_of_sport":"swimming"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* chit_chat_question OR chit_chat OR affirm
+    - action_add_on_1
+    - request_fav_sport_reason
+    - form{"name":"request_fav_sport_reason"}
+    - slot{"requested_slot":"reason_of_like_sport"}
+* chit_chat
+    - request_fav_sport_reason
+    - slot{"reason_of_like_sport":"i like being in water, it feels like i'm in space"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_fav_animal
+    - form{"name":"request_fav_animal"}
+    - slot{"requested_slot":"type_of_animal"}
+* enter_data{"animal":"pig"}
+    - request_fav_animal
+    - slot{"type_of_animal":"pig"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* chit_chat_question OR chit_chat OR affirm
+    - action_add_on_2
