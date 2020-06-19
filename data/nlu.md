@@ -391,10 +391,6 @@ data/sport.txt
 
 
 ## intent:enter_data
-- i'm [david](PERSON)
-- my name is [carl](PERSON)
-- you can call me [Peter](PERSON)
-- [John](PERSON)
 - my favorite sport is [football](sport)
 - I like to [bowl](sport)
 - I like to play [pool](sport) with friends 
@@ -842,8 +838,6 @@ data/sport.txt
 - What kind of research are you doing?
 - Do you have a specific area of research?
 - what type of research are you doing?
-- My name is [Ian](PERSON), what is your name?
-- I am [david](PERSON), and you?
 - What's your name?
 - Hello, what is your name?
 - What is your first name?
