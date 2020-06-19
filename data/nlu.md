@@ -569,6 +569,97 @@ data/sport.txt
 
 
 ## intent:chit_chat_question
+- i'm fine, and you
+- I'm fine, and how are you?
+- Ahoy matey how are you?
+- Are you ok?
+- Do you feel good?
+- Do you have a great day?
+- HI what are you up to?
+- Hi How are you?
+- How are You?
+- How are things?
+- How are you
+- How are you men?
+- How are you today?
+- How are you?
+- How was your day?
+- How you doing?
+- How's it going
+- How's it hanging?
+- How's life treating you friend?
+- How've you been?
+- Hows it going
+- I'm fine and you
+- Is everything ok?
+- What's going on?
+- What's new?
+- What's up
+- What's up man
+- and you
+- are you alright
+- are you happy
+- are you having a good day
+- are you ok
+- are you okay
+- h r u ?
+- hello, how are you?
+- hey how are you?
+- hi how are you?
+- hi how u doing
+- hi how are you?
+- how ?
+- how are things going
+- how are things with you?
+- how are u
+- how are u?
+- how are xou
+- how are you
+- how are you ?
+- how are you doing
+- how are you doing this morning
+- how are you doing today my sweet friend
+- how are you doing today?
+- how are you doing?
+- how are you feeling
+- how are you today
+- how are you'
+- how are you?
+- how are you????
+- how are yuo
+- how do you do?
+- how have you been
+- how is it going
+- how is your day
+- how is your day going
+- how is your evening
+- how r u
+- how r u ?
+- how r u>
+- how you doing
+- how you doing?
+- how's it going?
+- how's life
+- how's life been treating you?
+- how's your day going
+- howareyou
+- hw r u?
+- is everything all right
+- is everything okay
+- nah, I'm good - how are you doing?
+- okay hi how are you?
+- wassup>
+- what about your day
+- what are you up to?
+- what's good
+- what's up
+- what's up?
+- whatchcha doing
+- whatchya upto ?
+- whats goin on
+- whats new
+- whatsapp
+- yow are you
 - can we talk about sport?
 - can we talk about animal?
 - Are you ready?
@@ -1022,6 +1113,8 @@ data/sport.txt
 - hehe
 - huehue
 
+
+
 ## intent:user.hello
 - greetings
 - hallo
@@ -1212,6 +1305,7 @@ data/sport.txt
 - i am not in a good mood
 
 
+
 ## intent:user.thank
 - you helped a lot thank you
 - appreciate your help
@@ -1250,11 +1344,14 @@ data/sport.txt
 - tqsm
 - ty
 
+
+
 ## intent:bot_challenge
 - are you a bot?
 - are you a human?
 - am I talking to a bot?
 - am I talking to a human?
+
 
 
 ## intent:user.reject
@@ -1278,6 +1375,7 @@ data/sport.txt
 - nothing
 
 
+
 ## intent:chit_chat_non_english
 - Wie fange ich mit Rasa an?
 - hilf mir beim start
@@ -1298,6 +1396,7 @@ data/sport.txt
 - que puedes hacer?
 - tu parles francais?
 - tudo bom
+
 
 
 ## intent:chit_chat
@@ -1504,99 +1603,6 @@ data/sport.txt
 - you will know it from the single red rose it carries between its teeth
 - you're a woman
 - i am learning python
-
-intent:ask_howdoing
-- i'm fine, and you
-- I'm fine, and how are you?
-- Ahoy matey how are you?
-- Are you ok?
-- Do you feel good?
-- Do you have a great day?
-- HI what are you up to?
-- Hi How are you?
-- How are You?
-- How are things?
-- How are you
-- How are you men?
-- How are you today?
-- How are you?
-- How was your day?
-- How you doing?
-- How's it going
-- How's it hanging?
-- How's life treating you friend?
-- How've you been?
-- Hows it going
-- I'm fine and you
-- Is everything ok?
-- What's going on?
-- What's new?
-- What's up
-- What's up man
-- and you
-- are you alright
-- are you happy
-- are you having a good day
-- are you ok
-- are you okay
-- h r u ?
-- hello, how are you?
-- hey how are you?
-- hi how are you?
-- hi how u doing
-- hi how are you?
-- how ?
-- how are things going
-- how are things with you?
-- how are u
-- how are u?
-- how are xou
-- how are you
-- how are you ?
-- how are you doing
-- how are you doing this morning
-- how are you doing today my sweet friend
-- how are you doing today?
-- how are you doing?
-- how are you feeling
-- how are you today
-- how are you'
-- how are you?
-- how are you????
-- how are yuo
-- how do you do?
-- how have you been
-- how is it going
-- how is your day
-- how is your day going
-- how is your evening
-- how r u
-- how r u ?
-- how r u>
-- how you doing
-- how you doing?
-- how's it going?
-- how's life
-- how's life been treating you?
-- how's your day going
-- howareyou
-- hw r u?
-- is everything all right
-- is everything okay
-- nah, I'm good - how are you doing?
-- okay hi how are you?
-- wassup>
-- what about your day
-- what are you up to?
-- what's good
-- what's up
-- what's up?
-- whatchcha doing
-- whatchya upto ?
-- whats goin on
-- whats new
-- whatsapp
-- yow are you
 
 
 

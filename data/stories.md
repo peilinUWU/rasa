@@ -75,50 +75,59 @@
 
 ## Generated 1
 * user.hello
-    - action_greet
-    - slot{"greeted":true}
-    - request_email
-    - form{"name":"request_email"}
-    - slot{"requested_slot":"email"}
+  - action_greet
+  - slot{"greeted":true}
+  - request_email
+  - form{"name":"request_email"}
+  - slot{"requested_slot":"email"}
 * enter_data
-    - request_email
-    - slot{"email":"sheep6@google.com"}
-    - form{"name":null}
-    - slot{"requested_slot":null}
-    - action_take_path
-    - ask_name
-    - form{"name":"ask_name"}
-    - slot{"requested_slot":"name"}
+  - request_email
+  - slot{"email":"sheep6@google.com"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - action_take_path
+  - ask_name
+  - form{"name":"ask_name"}
+  - slot{"requested_slot":"name"}
 * chit_chat_question
-    - ask_name
-    - slot{"name":"Lars"}
-    - form{"name":null}
-    - slot{"requested_slot":null}
-    - request_fav_sport
-    - form{"name":"request_fav_sport"}
-    - slot{"requested_slot":"type_of_sport"}
+  - ask_name
+  - slot{"name":"Lars"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - request_fav_sport
+  - form{"name":"request_fav_sport"}
+  - slot{"requested_slot":"type_of_sport"}
 * enter_data{"sport":"swimming"}
-    - request_fav_sport
-    - slot{"type_of_sport":"swimming"}
-    - form{"name":null}
-    - slot{"requested_slot":null}
+  - request_fav_sport
+  - slot{"type_of_sport":"swimming"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
 * chit_chat_question OR chit_chat OR affirm
-    - action_add_on_1
-    - request_fav_sport_reason
-    - form{"name":"request_fav_sport_reason"}
-    - slot{"requested_slot":"reason_of_like_sport"}
+  - action_add_on_1
+  - request_fav_sport_reason
+  - form{"name":"request_fav_sport_reason"}
+  - slot{"requested_slot":"reason_of_like_sport"}
 * chit_chat
-    - request_fav_sport_reason
-    - slot{"reason_of_like_sport":"i like being in water, it feels like i'm in space"}
-    - form{"name":null}
-    - slot{"requested_slot":null}
-    - request_fav_animal
-    - form{"name":"request_fav_animal"}
-    - slot{"requested_slot":"type_of_animal"}
+  - request_fav_sport_reason
+  - slot{"reason_of_like_sport":"i like being in water, it feels like i'm in space"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - request_fav_animal
+  - form{"name":"request_fav_animal"}
+  - slot{"requested_slot":"type_of_animal"}
 * enter_data{"animal":"pig"}
-    - request_fav_animal
-    - slot{"type_of_animal":"pig"}
-    - form{"name":null}
-    - slot{"requested_slot":null}
+  - request_fav_animal
+  - slot{"type_of_animal":"pig"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
 * chit_chat_question OR chit_chat OR affirm
-    - action_add_on_2
+  - action_add_on_2
+  - action_store_detail
+  - slot{"type_of_sport":null}
+  - slot{"reason_of_like_sport":null}
+  - slot{"recent_active_sport":null}
+  - slot{"type_of_animal":null}
+  - slot{"own_animal":null}
+  - slot{"animal_breed":null}
+  - slot{"plan_to_own_animal":null}
+  - action_end_session_1
