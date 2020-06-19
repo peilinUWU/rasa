@@ -1,12 +1,6 @@
 ## story - user first greet refuse give email
 * user.hello
   - action_greet
-  - slot{"greeted": true}
-* user.reject OR deny
-  - utter_reply.to.reject
-  - utter_greet.bye
-  - action_deactivate_form
-  - form{"name": null}
 
 
 <!---------------------------->
@@ -23,7 +17,7 @@
 
 ## story - default 3
 * user.sad
-  - action_add_on_1
+  - action_get_answer
 
 ## story - default 4
 * user.good
