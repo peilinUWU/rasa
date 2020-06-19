@@ -147,7 +147,7 @@ responses:
   - text: "Another question, what's your one favorite pet?"
 
   utter_ask_own_animal:
-  - text: "That's cool! Do you happen to own one?"
+  - text: "We also talked about {type_of_animal}. Do you happen to own one?"
 
   utter_ask_animal_breed:
   - text: "I see. So what breed of {type_of_animal} do you have?"
