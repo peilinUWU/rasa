@@ -157,7 +157,7 @@ responses:
   #   opening question (first)   #
   # ---------------------------- #
 
-  utter_ask_name:
+  utter_ask_PERSON:
   - text: "Hi! What's your name?"
 
 
