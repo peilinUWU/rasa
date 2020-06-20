@@ -16,7 +16,6 @@ intents:
 
 forms:
   - request_email
-  - name
   - request_fav_sport
   - request_fav_sport_reason
   - request_fav_animal
@@ -29,6 +28,7 @@ forms:
 actions:
   - action_greet
   - action_take_path
+  - action_set_name
   - action_add_on_1
   - action_add_on_2
   - action_store_detail
