@@ -16,7 +16,7 @@ intents:
 
 forms:
   - request_email
-  - ask_name
+  - name
   - request_fav_sport
   - request_fav_sport_reason
   - request_fav_animal
@@ -78,7 +78,7 @@ slots:
     type: unfeaturized
   why_like_animal:
     type: unfeaturized   
-  name:
+  PERSON:
     type: unfeaturized
   where_from:
     type: unfeaturized
@@ -167,7 +167,7 @@ responses:
   # ---------------------------- #
 
   utter_ask_how_are:
-  - text: "Good day {name}! How are you?"
+  - text: "Good day {PERSON}! How are you?"
 
 
 
