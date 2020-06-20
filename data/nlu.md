@@ -391,13 +391,6 @@ data/sport.txt
 
 
 ## intent:enter_data
-- my name is [james](PERSON)
-- hi, my name is [peter](PERSON)
-- i'm [jake](PERSON)
-- you can call me [madison](PERSON)
-- i am [alice](PERSON)
-- hi, i'm [lucy](PERSON)
-- [david](PERSON)
 - my favorite sport is [football](sport)
 - I like to [bowl](sport)
 - I like to play [pool](sport) with friends 

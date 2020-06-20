@@ -1,7 +1,8 @@
 ## story - user first greet refuse give email
 * user.hello
   - action_greet
-
+* enter_data
+  - action_set_name
 
 <!---------------------------->
 <!-- default conversations  -->
