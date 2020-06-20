@@ -397,6 +397,7 @@ data/sport.txt
 - you can call me [madison](PERSON)
 - i am [alice](PERSON)
 - hi, i'm [lucy](PERSON)
+- [david](PERSON)
 - my favorite sport is [football](sport)
 - I like to [bowl](sport)
 - I like to play [pool](sport) with friends 
