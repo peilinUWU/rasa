@@ -2,10 +2,13 @@ language: "en"
 
 pipeline:
   - name: SpacyNLP
+    model: "en_core_web_lg"
     case_sensitive: False
   - name: SpacyTokenizer
-  - name: SpacyFeaturizer
   - name: SpacyEntityExtractor
+    dimensions: ["PERSON", "ORG"]
+  - name: SpacyFeaturizer
+    pooling: mean
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
