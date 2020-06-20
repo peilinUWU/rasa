@@ -6,8 +6,6 @@ pipeline:
     case_sensitive: False
   - name: SpacyTokenizer
   - name: SpacyEntityExtractor
-    case_sensitive: False
-    dimensions: ["PERSON", "ORG"]
   - name: SpacyFeaturizer
     pooling: mean
   - name: RegexFeaturizer
