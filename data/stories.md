@@ -1,12 +1,9 @@
-## story - user first greet refuse give email
+## story - default
 * user.hello
   - action_greet
-* enter_data
+  - slot{"greeted":true}
+* enter_data OR chit_chat
   - action_set_name
-
-<!---------------------------->
-<!-- default conversations  -->
-<!---------------------------->
 
 ## story - default 1
 * affirm
@@ -43,9 +40,6 @@
   - utter_greet.bye
 
 
-<!---------------------------->
-<!--       chit chat        -->
-<!---------------------------->
 
 ## chit chat 1
 * chit_chat_non_english
@@ -53,7 +47,7 @@
     
 ## chit chat 2
 * chit_chat
-  - action_get_answer
+  - action_set_name
 
 ## chit chat 3
 * chit_chat_question
@@ -64,22 +58,3 @@
   - action_get_answer
 
 
-<!---------------------------->
-<!--      generated         -->
-<!---------------------------->
-
-## generated 1
-* user.hello
-  - action_greet
-  - slot{"greeted":true}
-  - request_email
-  - form{"name":"request_email"}
-  - slot{"requested_slot":"email"}
-* enter_data
-  - request_email
-  - slot{"email":"sheep9@google.com"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-  - action_take_path
-* chit_chat
-  - action_set_name
