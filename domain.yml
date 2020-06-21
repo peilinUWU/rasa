@@ -29,6 +29,7 @@ actions:
   - action_greet
   - action_take_path
   - action_set_name
+  - action_process_name
   - action_add_on_1
   - action_add_on_2
   - action_store_detail
