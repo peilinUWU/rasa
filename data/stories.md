@@ -81,5 +81,5 @@
   - form{"name":null}
   - slot{"requested_slot":null}
   - action_take_path
-* chit_chat{"PERSON":"Howie"}
+* chit_chat
   - action_set_name
