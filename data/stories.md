@@ -68,9 +68,21 @@
   - slot{"requested_slot":"email"}
 * enter_data
   - request_email
-  - slot{"email":"sheep9@google.com"}
+  - slot{"email":"sheep10@google.com"}
   - form{"name":null}
   - slot{"requested_slot":null}
   - action_take_path
 * chit_chat
   - action_set_name
+  - slot{"PERSON":"simon"}
+  - action_process_name
+  - request_fav_sport
+  - form{"name":"request_fav_sport"}
+  - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"football"}
+  - request_fav_sport
+  - slot{"type_of_sport":"football"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+* affirm OR chit_chat OR chit_chat_question
+  - action_add_on_1
