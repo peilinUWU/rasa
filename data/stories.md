@@ -47,7 +47,7 @@
     
 ## chit chat 2
 * chit_chat
-  - action_set_name
+  - action_get_answer
 
 ## chit chat 3
 * chit_chat_question
