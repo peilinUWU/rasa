@@ -104,3 +104,12 @@
     - slot{"requested_slot":null}
 * chit_chat_question OR affirm OR chit_chat
     - action_add_on_2
+    - action_store_detail
+    - slot{"type_of_sport":null}
+    - slot{"reason_of_like_sport":null}
+    - slot{"recent_active_sport":null}
+    - slot{"type_of_animal":null}
+    - slot{"own_animal":null}
+    - slot{"animal_breed":null}
+    - slot{"plan_to_own_animal":null}
+    - action_end_session_1
