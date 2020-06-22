@@ -84,7 +84,7 @@
     - slot{"type_of_sport":"swimming"}
     - form{"name":null}
     - slot{"requested_slot":null}
-* affirm
+* affirm OR chit_chat OR chit_chat_question
     - action_add_on_1
     - request_fav_sport_reason
     - form{"name":"request_fav_sport_reason"}
@@ -97,10 +97,10 @@
     - request_fav_animal
     - form{"name":"request_fav_animal"}
     - slot{"requested_slot":"type_of_animal"}
-* enter_data{"animal":"pig"}
+* enter_data{"animal":"pig"} OR affirm{"animal":"pig"}
     - request_fav_animal
     - slot{"type_of_animal":"pig"}
     - form{"name":null}
     - slot{"requested_slot":null}
-* chit_chat_question
-    - action_get_answer
+* chit_chat_question OR affirm OR chit_chat
+    - action_add_on_2
