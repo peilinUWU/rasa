@@ -153,6 +153,11 @@ responses:
   utter_ask_animal_size:
   - text: "If you get to keep one, would you prefer a big one or a small one?"
 
+  utter_end_session_1:
+  - text: "Thank you {PERSON}! You have now finished the first session, please proceed to the form for a small survey then come back to restart the session."
+
+  utter_end_session_2:
+  - text "Thank you {PERSON}! Please proceed to the form to answer a few questions to complete the test."
 
   # ---------------------------- #
   #   opening question (first)   #
