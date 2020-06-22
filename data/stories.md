@@ -61,28 +61,46 @@
 
 ## generated 1
 * user.hello
-  - action_greet
-  - slot{"greeted":true}
-  - request_email
-  - form{"name":"request_email"}
-  - slot{"requested_slot":"email"}
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
 * enter_data
-  - request_email
-  - slot{"email":"sheep10@google.com"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-  - action_take_path
+    - request_email
+    - slot{"email":"sheep10@google.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
 * chit_chat
-  - action_set_name
-  - slot{"PERSON":"simon"}
-  - action_process_name
-  - request_fav_sport
-  - form{"name":"request_fav_sport"}
-  - slot{"requested_slot":"type_of_sport"}
-* enter_data{"sport":"football"}
-  - request_fav_sport
-  - slot{"type_of_sport":"football"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-* affirm OR chit_chat OR chit_chat_question
-  - action_add_on_1
+    - action_set_name
+    - slot{"PERSON":"david"}
+    - action_process_name
+    - request_fav_sport
+    - form{"name":"request_fav_sport"}
+    - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"swimming"}
+    - request_fav_sport
+    - slot{"type_of_sport":"swimming"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* affirm
+    - action_add_on_1
+    - request_fav_sport_reason
+    - form{"name":"request_fav_sport_reason"}
+    - slot{"requested_slot":"reason_of_like_sport"}
+* chit_chat
+    - request_fav_sport_reason
+    - slot{"reason_of_like_sport":"because it's a good exercise and you can't sweat because you are in water"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_fav_animal
+    - form{"name":"request_fav_animal"}
+    - slot{"requested_slot":"type_of_animal"}
+* enter_data{"animal":"pig"}
+    - request_fav_animal
+    - slot{"type_of_animal":"pig"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* chit_chat_question
+    - action_get_answer
