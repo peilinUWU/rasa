@@ -2,8 +2,8 @@
 * user.hello
   - action_greet
   - slot{"greeted":true}
-* enter_data OR chit_chat
-  - action_set_name
+
+
 
 ## story - default 1
 * affirm
@@ -58,3 +58,19 @@
   - action_get_answer
 
 
+
+## generated 1
+* user.hello
+  - action_greet
+  - slot{"greeted":true}
+  - request_email
+  - form{"name":"request_email"}
+  - slot{"requested_slot":"email"}
+* enter_data
+  - request_email
+  - slot{"email":"sheep9@google.com"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - action_take_path
+* chit_chat
+  - action_set_name
