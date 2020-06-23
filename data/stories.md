@@ -113,3 +113,115 @@
     - slot{"animal_breed":null}
     - slot{"plan_to_own_animal":null}
     - action_end_session_1
+
+
+## generated 2
+* user.hello
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
+* enter_data
+    - request_email
+    - slot{"email":"sheep10@google.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
+* chit_chat
+    - action_set_name
+    - slot{"PERSON":"howie"}
+    - action_process_name
+    - request_fav_sport
+    - form{"name":"request_fav_sport"}
+    - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"football"}
+    - request_fav_sport
+    - slot{"type_of_sport":"football"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* affirm
+    - action_add_on_1
+    - request_fav_sport_reason
+    - form{"name":"request_fav_sport_reason"}
+    - slot{"requested_slot":"reason_of_like_sport"}
+* chit_chat_question
+    - request_fav_sport_reason
+    - slot{"reason_of_like_sport":"it's a team play and it's fun to play with friends"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_fav_animal
+    - form{"name":"request_fav_animal"}
+    - slot{"requested_slot":"type_of_animal"}
+* enter_data{"animal":"cat"}
+    - request_fav_animal
+    - slot{"type_of_animal":"cat"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* chit_chat_question{"animal":"cat"}
+    - action_add_on_2
+    - action_store_detail
+    - slot{"type_of_sport":null}
+    - slot{"reason_of_like_sport":null}
+    - slot{"type_of_animal":null}
+    - action_end_session_1
+
+
+## generated 3
+* user.hello
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
+* enter_data
+    - request_email
+    - slot{"email":"sheep10@google.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
+    - action_fetch_from_db
+    - slot{"PERSON":"howie"}
+    - slot{"type_of_sport":"football"}
+    - slot{"type_of_animal":"cat"}
+    - ask_how_are
+    - form{"name":"ask_how_are"}
+    - slot{"requested_slot":"how_are"}
+* chit_chat_question
+    - ask_how_are
+    - slot{"how_are":"i am doing fine, thank you! how about you?"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_recent_sport
+    - form{"name":"request_recent_sport"}
+    - slot{"requested_slot":"recent_active_sport"}
+* deny
+    - request_recent_sport
+    - slot{"recent_active_sport":false}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - follow_up_recent_sport
+    - form{"name":"follow_up_recent_sport"}
+    - slot{"requested_slot":"play_in_future"}
+* affirm
+    - follow_up_recent_sport
+    - slot{"play_in_future":"yea of course!"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_own_pet
+    - form{"name":"request_own_pet"}
+    - slot{"requested_slot":"own_animal"}
+* deny
+    - request_own_pet
+    - slot{"own_animal":false}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - follow_up_own_pet
+    - form{"name":"follow_up_own_pet"}
+    - slot{"requested_slot":"plan_to_own_animal"}
+* chit_chat
+    - follow_up_own_pet
+    - slot{"plan_to_own_animal":"maybe, i can't decide right now"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_end_session_2
