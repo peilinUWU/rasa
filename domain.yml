@@ -104,7 +104,7 @@ slots:
 
 responses:
   utter_ask_email:
-  - text: "Please enter your email address to continue."
+  - text: "SYSTEM: Please enter your email address to continue."
   
   utter_ask_type_of_sport:
   - text: "What's one sport that you like?"
@@ -123,7 +123,7 @@ responses:
   - text: "How did it go?"
 
   utter_ask_play_in_future:
-  - text: "I remember that you were interested in {type_of_sport} right. You think you will try it out in the future?"
+  - text: "You think you will do it again in the near future?"
 
   utter_ask_watch_sport:
   - text: "Do you happen to also watch {type_of_sport}?"
@@ -157,7 +157,7 @@ responses:
   - text: "Thank you {PERSON}! You have now finished the first session, please proceed to the form for a small survey then come back to restart the session."
 
   utter_end_session_2:
-  - text "Thank you {PERSON}! Please proceed to the form to answer a few questions to complete the test."
+  - text: "Thank you {PERSON}! Please proceed to the form to answer a few questions to complete the test."
 
   # ---------------------------- #
   #   opening question (first)   #
