@@ -128,7 +128,7 @@
     - form{"name":null}
     - slot{"requested_slot":null}
     - action_take_path
-* chit_chat{"PERSON":"howie"}
+* chit_chat{"PERSON":"howie"} OR uer.hello{"PERSON":"howie"} 
     - action_set_name
     - slot{"PERSON":"howie"}
     - action_process_name
