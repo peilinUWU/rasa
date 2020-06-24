@@ -49,7 +49,7 @@
     
 ## chit chat 2
 * chit_chat
-  - request_fav_sport
+  - action_get_answer
 
 ## chit chat 3
 * chit_chat_question
