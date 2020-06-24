@@ -2,6 +2,8 @@
 * user.hello
   - action_greet
   - slot{"greeted":true}
+* chit_chat OR uer.hello OR chit_chat_non_english
+  - action_set_name
 
 
 
@@ -56,6 +58,10 @@
 ## chit chat 4
 * bot_challenge
   - action_get_answer
+
+
+
+
 
 
 
@@ -128,7 +134,7 @@
     - form{"name":null}
     - slot{"requested_slot":null}
     - action_take_path
-* chit_chat{"PERSON":"howie"} OR uer.hello{"PERSON":"howie"} 
+* chit_chat{"PERSON":"howie"}
     - action_set_name
     - slot{"PERSON":"howie"}
     - action_process_name
@@ -165,3 +171,19 @@
     - slot{"reason_of_like_sport":null}
     - slot{"type_of_animal":null}
     - action_end_session_1
+
+
+* user.hello
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
+* enter_data
+    - request_email
+    - slot{"email":"sheep20@google.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
+* chit_chat
+    - action_set_name
