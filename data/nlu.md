@@ -1680,4 +1680,5 @@ data/sport.txt
 - doggo
 - dogo
 - doge
-
+- puppy
+- puppies
