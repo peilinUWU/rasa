@@ -186,5 +186,5 @@
     - form{"name":null}
     - slot{"requested_slot":null}
     - action_take_path
-* chit_chat OR chit_chat_non_english
+* chit_chat OR chit_chat_non_english OR enter_data
     - action_set_name
