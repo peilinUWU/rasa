@@ -569,6 +569,8 @@ data/sport.txt
 
 
 ## intent:chit_chat_question
+- i like (football)[sport], what about you?
+- i like (running)[sport], and you?
 - i'm fine, and you
 - I'm fine, and how are you?
 - Ahoy matey how are you?
@@ -754,7 +756,7 @@ data/sport.txt
 - do you know me
 - do you know ras
 - do you liek cheese?
-- do you like football
+- do you like (football)[sport]
 - do you like movies
 - can we keep chatting?
 - can you book dinner
@@ -982,13 +984,13 @@ data/sport.txt
 - Do you play on a team?
 - Do you have a team you support?
 - do you have a favorite team?
-- What's your football team?
+- What's your (football)[sport] team?
 - What's your favorite soccer team?
 - Who is your favorite team?
 - Have you ever played (basketball)[sport]?
 - Do you watch (basketball)[sport] at all?
-- Do you follow football?
-- do you watch a lot of football?
+- Do you follow (football)[sport]?
+- do you watch a lot of (football)[sport]?
 - How are you today?
 - Do you have anything you'd like to do today?
 - anything fun planned today?
