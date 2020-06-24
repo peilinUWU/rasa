@@ -2,7 +2,7 @@
 * user.hello
   - action_greet
   - slot{"greeted":true}
-* chit_chat OR uer.hello OR chit_chat_non_english
+* chit_chat OR user.hello OR chit_chat_non_english
   - action_set_name
 
 
@@ -49,7 +49,7 @@
     
 ## chit chat 2
 * chit_chat
-  - action_get_answer
+  - request_fav_sport
 
 ## chit chat 3
 * chit_chat_question
@@ -78,7 +78,7 @@
     - form{"name":null}
     - slot{"requested_slot":null}
     - action_take_path
-* chit_chat{"PERSON":"david"} OR uer.hello{"PERSON":"david"}
+* chit_chat{"PERSON":"david"} OR user.hello{"PERSON":"david"}
     - action_set_name
     - slot{"PERSON":"david"}
     - action_process_name
@@ -180,11 +180,11 @@
     - request_email
     - form{"name":"request_email"}
     - slot{"requested_slot":"email"}
-* enter_data
+* enter_data 
     - request_email
     - slot{"email":"sheep20@google.com"}
     - form{"name":null}
     - slot{"requested_slot":null}
     - action_take_path
-* chit_chat
+* chit_chat OR chit_chat_non_english
     - action_set_name
