@@ -6,6 +6,29 @@
   - action_set_name
 
 
+## story - failed name reg
+* user.hello
+  - action_greet
+  - slot{"greeted":true}
+  - request_email
+  - form{"name":"request_email"}
+  - slot{"requested_slot":"email"}
+* enter_data
+  - request_email
+  - slot{"email":"sheep22@google.com"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - action_take_path
+* chit_chat
+  - action_set_name
+  - action_take_path
+* chit_chat
+  - action_set_name
+  - slot{"PERSON":"popo"}
+  - action_process_name
+  - request_fav_sport
+  - form{"name":"request_fav_sport"}
+  - slot{"requested_slot":"type_of_sport"}
 
 ## story - default 1
 * affirm
@@ -188,3 +211,8 @@
   - action_take_path
 * chit_chat OR chit_chat_non_english OR enter_data OR user.bye OR user.hello
   - action_set_name
+  - slot{"PERSON":"popo"}
+  - action_process_name
+  - request_fav_sport
+  - form{"name":"request_fav_sport"}
+  - slot{"requested_slot":"type_of_sport"}
