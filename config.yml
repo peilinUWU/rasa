@@ -16,7 +16,8 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 100
+    epochs: 200
+    ranking_length: 5
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100
