@@ -78,7 +78,7 @@
   - form{"name":null}
   - slot{"requested_slot":null}
   - action_take_path
-* chit_chat{"PERSON":"david"} OR chit_chat_non_english{"PERSON":"david"} OR enter_data{"PERSON":"david"} OR user.bye{"PERSON":"david"} OR user.hello{"PERSON":"david"}
+* chit_chat_question{"PERSON":"david"} OR chit_chat{"PERSON":"david"} OR chit_chat_non_english{"PERSON":"david"} OR enter_data{"PERSON":"david"} OR user.bye{"PERSON":"david"} OR user.hello{"PERSON":"david"}
   - action_set_name
   - slot{"PERSON":"david"}
   - action_process_name
@@ -134,7 +134,7 @@
   - form{"name":null}
   - slot{"requested_slot":null}
   - action_take_path
-* chit_chat{"PERSON":"howie"} OR chit_chat_non_english{"PERSON":"howie"} OR enter_data{"PERSON":"howie"} OR user.bye{"PERSON":"howie"} OR user.hello{"PERSON":"howie"}
+* chit_chat_question{"PERSON":"howie"} OR chit_chat{"PERSON":"howie"} OR chit_chat_non_english{"PERSON":"howie"} OR enter_data{"PERSON":"howie"} OR user.bye{"PERSON":"howie"} OR user.hello{"PERSON":"howie"}
   - action_set_name
   - slot{"PERSON":"howie"}
   - action_process_name
