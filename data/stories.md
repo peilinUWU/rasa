@@ -113,7 +113,7 @@
   - slot{"type_of_sport":"swimming"}
   - form{"name":null}
   - slot{"requested_slot":null}
-* affirm OR chit_chat OR chit_chat_question
+* affirm OR chit_chat OR chit_chat_question OR enter_data
   - action_add_on_1
   - request_fav_sport_reason
   - form{"name":"request_fav_sport_reason"}
@@ -169,7 +169,7 @@
   - slot{"type_of_sport":"football"}
   - form{"name":null}
   - slot{"requested_slot":null}
-* affirm
+* affirm OR enter_data
   - action_add_on_1
   - request_fav_sport_reason
   - form{"name":"request_fav_sport_reason"}
