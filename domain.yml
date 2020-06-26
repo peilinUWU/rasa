@@ -89,6 +89,8 @@ slots:
     type: unfeaturized
   how_are:
     type: unfeaturized
+  how_are_no_name:
+    type: unfeaturized
   how_been:
     type: unfeaturized
   free_time:
@@ -156,8 +158,14 @@ responses:
   utter_end_session_1:
   - text: "Thank you {PERSON}! You have now finished the first session, please proceed to the form for a small survey then come back to restart the session."
 
+  utter_end_session_1_no_name:
+  - text: "Thank you! You have now finished the first session, please proceed to the form for a small survey then come back to restart the session."
+
   utter_end_session_2:
   - text: "Thank you {PERSON}! Please proceed to the form to answer a few questions to complete the test."
+
+  utter_end_session_2_no_name:
+  - text: "Thank you! Please proceed to the form to answer a few questions to complete the test."
 
   # ---------------------------- #
   #   opening question (first)   #
@@ -175,6 +183,8 @@ responses:
   utter_ask_how_are:
   - text: "Good day {PERSON}! How are you?"
 
+  utter_ask_how_are_no_name:
+  - text: "Good day! How are you?"
 
 
   # --------------------------- #
