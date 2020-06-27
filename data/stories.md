@@ -2,33 +2,8 @@
 * user.hello
   - action_greet
   - slot{"greeted":true}
-* chit_chat OR user.hello OR chit_chat_non_english
-  - action_set_name
 
 
-## story - failed name reg
-* user.hello
-  - action_greet
-  - slot{"greeted":true}
-  - request_email
-  - form{"name":"request_email"}
-  - slot{"requested_slot":"email"}
-* enter_data
-  - request_email
-  - slot{"email":"sheep22@google.com"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-  - action_take_path
-* chit_chat
-  - action_set_name
-  - action_take_path
-* chit_chat
-  - action_set_name
-  - slot{"PERSON":"popo"}
-  - action_process_name
-  - request_fav_sport
-  - form{"name":"request_fav_sport"}
-  - slot{"requested_slot":"type_of_sport"}
 
 ## story - default 1
 * affirm
@@ -85,9 +60,6 @@
 
 
 
-
-
-
 ## generated 1
 * user.hello
   - action_greet
@@ -118,7 +90,7 @@
   - request_fav_sport_reason
   - form{"name":"request_fav_sport_reason"}
   - slot{"requested_slot":"reason_of_like_sport"}
-* chit_chat
+* chit_chat OR affirm
   - request_fav_sport_reason
   - slot{"reason_of_like_sport":"because it's a good exercise and you can't sweat because you are in water"}
   - form{"name":null}
@@ -144,59 +116,9 @@
   - action_end_session_1
 
 
+
+
 ## generated 2
-* user.hello
-  - action_greet
-  - slot{"greeted":true}
-  - request_email
-  - form{"name":"request_email"}
-  - slot{"requested_slot":"email"}
-* enter_data
-  - request_email
-  - slot{"email":"sheep10@google.com"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-  - action_take_path
-* chit_chat_question{"PERSON":"howie"} OR chit_chat{"PERSON":"howie"} OR chit_chat_non_english{"PERSON":"howie"} OR enter_data{"PERSON":"howie"} OR user.bye{"PERSON":"howie"} OR user.hello{"PERSON":"howie"}
-  - action_set_name
-  - slot{"PERSON":"howie"}
-  - action_process_name
-  - request_fav_sport
-  - form{"name":"request_fav_sport"}
-  - slot{"requested_slot":"type_of_sport"}
-* enter_data{"sport":"football"}
-  - request_fav_sport
-  - slot{"type_of_sport":"football"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-* affirm OR enter_data
-  - action_add_on_1
-  - request_fav_sport_reason
-  - form{"name":"request_fav_sport_reason"}
-  - slot{"requested_slot":"reason_of_like_sport"}
-* chit_chat_question
-  - request_fav_sport_reason
-  - slot{"reason_of_like_sport":"it's a team play and it's fun to play with friends"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-  - request_fav_animal
-  - form{"name":"request_fav_animal"}
-  - slot{"requested_slot":"type_of_animal"}
-* enter_data{"animal":"cat"}
-  - request_fav_animal
-  - slot{"type_of_animal":"cat"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-* chit_chat_question{"animal":"cat"}
-  - action_add_on_2
-  - action_store_detail
-  - slot{"type_of_sport":null}
-  - slot{"reason_of_like_sport":null}
-  - slot{"type_of_animal":null}
-  - action_end_session_1
-
-
-## generated 3
 * user.hello
   - action_greet
   - slot{"greeted":true}
