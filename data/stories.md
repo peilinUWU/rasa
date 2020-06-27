@@ -2,7 +2,8 @@
 * user.hello
   - action_greet
   - slot{"greeted":true}
-
+* chit_chat OR chit_chat_non_english OR enter_data OR user.hello
+  - action_set_name
 
 
 ## story - default 1
@@ -120,21 +121,16 @@
 
 ## generated 2
 * user.hello
-  - action_greet
-  - slot{"greeted":true}
-  - request_email
-  - form{"name":"request_email"}
-  - slot{"requested_slot":"email"}
-* enter_data 
-  - request_email
-  - slot{"email":"sheep20@google.com"}
-  - form{"name":null}
-  - slot{"requested_slot":null}
-  - action_take_path
-* chit_chat OR chit_chat_non_english OR enter_data OR user.bye OR user.hello
-  - action_set_name
-  - slot{"PERSON":"popo"}
-  - action_process_name
-  - request_fav_sport
-  - form{"name":"request_fav_sport"}
-  - slot{"requested_slot":"type_of_sport"}
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
+* enter_data
+    - request_email
+    - slot{"email":"sheep23@google.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
+* chit_chat OR chit_chat_non_english OR enter_data OR user.hello
+    - action_set_name
