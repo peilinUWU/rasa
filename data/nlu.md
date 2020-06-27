@@ -253,8 +253,6 @@ data/sport.txt
 - don't
 - don't want
 - need not
-- don't come 
-- never help
 - never
 - not needed
 - of course not
@@ -377,28 +375,18 @@ data/sport.txt
 - not really
 - not right now
 - not yet
-- nö
 - sorry not right now
 - still dont want to tell
 - thanks but no thanks
 - this sucks
 - very bad
-- I do not need help installing
-- I don't wanna tell the name of my company
+- I don't wanna tell the name 
 - no stop
 - stop it, i do not care!!!
 
 
 
 ## intent:enter_data
-- [david](PERSON)
-- hi, my name is [Oliver](PERSON)
-- my name is [Harry](PERSON)
-- i'm [george](PERSON)
-- hi, i'm [Jack](PERSON)
-- you can call me [jacob](PERSON)
-- [leo](PERSON)
-- [Oscar](PERSON)
 - my favorite sport is [football](sport)
 - I like to [bowl](sport)
 - I like to play [pool](sport) with friends 
