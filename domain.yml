@@ -147,7 +147,7 @@ responses:
   - text: "I remember that you have a {type_of_animal}. How old is it?"
 
   utter_ask_animal_color:
-  - text: "And what color is it?"
+  - text: "And what color?"
 
   utter_ask_why_like_animal:
   - text: "We were also talking about {type_of_animal} last time. What do you like about it?"
