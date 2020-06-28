@@ -125,7 +125,7 @@ responses:
   - text: "How did it go?"
 
   utter_ask_play_in_future:
-  - text: "You think you will do it again in the near future?"
+  - text: "You think you will do it in the near future?"
 
   utter_ask_watch_sport:
   - text: "Do you happen to also watch {type_of_sport}?"
