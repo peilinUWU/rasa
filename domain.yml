@@ -56,7 +56,7 @@ slots:
   reason_of_like_sport:
     type: unfeaturized
   recent_active_sport:
-    type: unfeaturized
+    type: bool
   type_of_animal:
     type: unfeaturized
   own_animal:
