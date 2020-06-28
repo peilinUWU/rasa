@@ -250,6 +250,15 @@ data/sport.txt
 
 
 ## intent:deny
+- no, i only
+- no, but i do
+- actually no
+- no but i like to
+- no, i only watch [football](sport)
+- not really, but i do like watching it
+- no but 
+- i would love to, but sadly i can't
+- i would like to try, but it's impossible currently
 - don't
 - don't want
 - need not
