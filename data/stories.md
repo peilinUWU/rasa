@@ -117,9 +117,40 @@
   - action_end_session_1
 
 
-
-
 ## generated 2
+* user.hello
+  - action_greet
+  - slot{"greeted":true}
+  - request_email
+  - form{"name":"request_email"}
+  - slot{"requested_slot":"email"}
+* enter_data
+  - request_email
+  - slot{"email":"sheep33@google.com"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - action_take_path
+* enter_data
+  - action_set_name
+  - slot{"PERSON":"zero"}
+  - action_process_name
+  - request_fav_sport
+  - form{"name":"request_fav_sport"}
+  - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"swimming"}
+  - request_fav_sport
+  - slot{"type_of_sport":"swimming"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+* enter_data{"sport":"soccer"}
+  - action_add_on_1
+  - request_fav_sport_reason
+  - form{"name":"request_fav_sport_reason"}
+  - slot{"requested_slot":"reason_of_like_sport"}
+
+
+
+## generated 3
 * user.hello
     - action_greet
     - slot{"greeted":true}
