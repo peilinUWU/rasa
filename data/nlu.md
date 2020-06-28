@@ -387,6 +387,16 @@ data/sport.txt
 
 
 ## intent:enter_data
+- hi, my name is Oliver
+- my name is Harry
+- i'm george
+- hi, i'm Jack
+- you can call me jacob
+- most people call me leo
+- many call me
+- most people call me
+- my name is
+- they call me Oscar
 - my favorite sport is [football](sport)
 - I like to [bowl](sport)
 - I like to play [pool](sport) with friends 
