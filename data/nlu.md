@@ -29,6 +29,10 @@ data/sport.txt
 - Nice
 - OK
 - Ofcourse
+- of course
+- ofc
+- ofc!
+- for sure
 - Oh yes
 - Oh, ok
 - Ok
