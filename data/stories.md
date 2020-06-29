@@ -149,8 +149,63 @@
   - slot{"requested_slot":"reason_of_like_sport"}
 
 
-
 ## generated 3
+* user.hello
+  - action_greet
+  - slot{"greeted":true}
+  - request_email
+  - form{"name":"request_email"}
+  - slot{"requested_slot":"email"}
+* enter_data
+  - request_email
+  - slot{"email":"sheep37@google.com"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - action_take_path
+* enter_data
+  - action_set_name
+  - slot{"PERSON":"zero"}
+  - action_process_name
+  - request_fav_sport
+  - form{"name":"request_fav_sport"}
+  - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"pool"}
+  - request_fav_sport
+  - slot{"type_of_sport":"pool"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+* affirm
+  - action_add_on_1
+  - request_fav_sport_reason
+  - form{"name":"request_fav_sport_reason"}
+  - slot{"requested_slot":"reason_of_like_sport"}
+* chit_chat_question
+  - request_fav_sport_reason
+  - slot{"reason_of_like_sport":"it's cool to play"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+  - request_fav_animal
+  - form{"name":"request_fav_animal"}
+  - slot{"requested_slot":"type_of_animal"}
+* enter_data{"animal":"fish"}
+  - request_fav_animal
+  - slot{"type_of_animal":"fish"}
+  - form{"name":null}
+  - slot{"requested_slot":null}
+* chit_chat_question{"animal":"sheep"} OR deny{"animal":"sheep"}
+  - action_add_on_2
+  - action_store_detail
+  - slot{"type_of_sport":null}
+  - slot{"reason_of_like_sport":null}
+  - slot{"recent_active_sport":null}
+  - slot{"type_of_animal":null}
+  - slot{"own_animal":null}
+  - slot{"animal_breed":null}
+  - slot{"plan_to_own_animal":null}
+  - action_end_session_1
+
+
+## generated 4
 * user.hello
     - action_greet
     - slot{"greeted":true}
