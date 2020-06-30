@@ -24,6 +24,8 @@ forms:
   - follow_up_recent_sport
   - request_own_pet
   - follow_up_own_pet
+  - add_on_3
+  - add_on_4
 
 actions:
   - action_greet
@@ -101,6 +103,10 @@ slots:
     type: unfeaturized
   weather:
     type: unfeaturized
+  add_on_3:
+    type: unfeaturized
+  add_on_4:
+    type: unfeaturized
 
 
 
@@ -166,6 +172,19 @@ responses:
 
   utter_end_session_2_no_name:
   - text: "Thank you! Please proceed to the form for a small survey to complete the test."
+
+  utter_ask_add_on_3:
+  - text: "Mh okay."
+  - text: "I see."
+  - text: "Okay!"
+  - text: "Mh."
+
+  utter_ask_add_on_4:
+  - text: "Mh okay."
+  - text: "I see."
+  - text: "Okay!"
+  - text: "Mh."
+
 
   # ---------------------------- #
   #   opening question (first)   #
