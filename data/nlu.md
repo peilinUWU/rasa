@@ -17,7 +17,6 @@ data/sport.txt
 - I accept.
 - I agree
 - I am using it
-- I changed my mind. I want to accept it
 - I do
 - I get it
 - I guess so
@@ -30,6 +29,11 @@ data/sport.txt
 - OK
 - Ofcourse
 - of course
+- of course i do
+- of course i do, i'm from
+- yes i did
+- almost daily
+- hell yeah
 - ofc
 - ofc!
 - for sure
@@ -46,6 +50,9 @@ data/sport.txt
 - Sweet
 - That would be great
 - YES
+- ye
+- yee
+- yiss
 - YUP
 - Yea
 - Yeah
@@ -61,6 +68,7 @@ data/sport.txt
 - Yes, I accept
 - Yes.
 - Yup
+- mh-hm
 - a little
 - absolutely
 - accept
@@ -73,6 +81,8 @@ data/sport.txt
 - amazing!
 - awesome
 - awesome!
+- certainly
+- i'm certain yes
 - confirm
 - cool
 - cool :)
@@ -112,6 +122,7 @@ data/sport.txt
 - jo
 - k
 - kk
+- gg
 - lets do it
 - lets do this
 - nice
@@ -152,6 +163,7 @@ data/sport.txt
 - sure!
 - that is cool
 - that ok
+- that's for sure
 - that sounds fine
 - that's great
 - thats fine
@@ -265,6 +277,8 @@ data/sport.txt
 - i would like to try, but it's impossible currently
 - don't
 - don't want
+- lol no
+- n
 - need not
 - never
 - not needed
@@ -441,6 +455,7 @@ data/sport.txt
 - [Cricket](sport), i guess
 - [Bowling](sport) for sure
 - [Boxing](sport) is my favorite 
+- i like [mini golf](sport)
 - i have many, but i think my favorite one is [Curling](sport)
 - i got a lot, but let's go with [Tennis](sport) this time
 - i would say [Skateboarding](sport)
@@ -1431,6 +1446,13 @@ data/sport.txt
 
 
 ## intent:chit_chat
+- i have a black [cat](animal)
+- he is black
+- i have a brown one
+- it's a white one
+- one is black, the other is golden
+- it's a bengal [cat](animal)
+- i have a bulldog
 - that's fun
 - sounds fun
 - it's fun
