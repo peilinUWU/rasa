@@ -132,7 +132,7 @@ responses:
 
 
   utter_ask_type_of_animal:
-  - text: "Another question, what's your one favorite pet?"
+  - text: "Here's another question, what's your one favorite pet?"
 
   utter_ask_own_animal:
   - text: "We also talked about {type_of_animal}. Do you happen to own one?"
@@ -156,16 +156,16 @@ responses:
   - text: "If you get to keep one, would you prefer a big one or a small one?"
 
   utter_end_session_1:
-  - text: "Thank you {PERSON}! You have now finished the first session, please proceed to the form for a small survey then come back to restart the session."
+  - text: "Thank you {PERSON}! You have now finished the first session, please proceed to the form for a small survey then come back in a few days to start a second session. I will send you a reminder via email."
 
   utter_end_session_1_no_name:
-  - text: "Thank you! You have now finished the first session, please proceed to the form for a small survey then come back to restart the session."
+  - text: "Thank you! You have now finished the first session, please proceed to the form for a small survey then come back in a few days to start a second session. I will send you a reminder via email."
 
   utter_end_session_2:
-  - text: "Thank you {PERSON}! Please proceed to the form to answer a few questions to complete the test."
+  - text: "Thank you {PERSON}! Please proceed to the form for a small survey to complete the test."
 
   utter_end_session_2_no_name:
-  - text: "Thank you! Please proceed to the form to answer a few questions to complete the test."
+  - text: "Thank you! Please proceed to the form for a small survey to complete the test."
 
   # ---------------------------- #
   #   opening question (first)   #
@@ -211,7 +211,7 @@ responses:
     
   utter_acknowledge:
   - text: "Okay."
-  - text: "Got it."
+  - text: "I see"
 
   utter_great:
   - text: "Great! 👍"
