@@ -3,7 +3,10 @@ import random
 import pandas as pd
 import requests
 import csv
-import datetime
+import string
+
+import spacy
+nlp = spacy.load("en_core_web_md")
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -17,9 +20,12 @@ from rasa_sdk.events import (
     EventType,
     ActionExecuted,
     UserUttered,
-    FollowupAction,
-    ReminderScheduled
+    FollowupAction
 )
+
+##from threading import Thread
+##global api_data
+##api_data = []
 
         
 
@@ -64,8 +70,6 @@ class ActionGreet(Action):
             return [FollowupAction("action_get_answer")]
         
 
-
-
     
 # ----------------------------------------------------
 #
@@ -74,7 +78,7 @@ class ActionGreet(Action):
 #
 # ----------------------------------------------------
 class RequestEmail(FormAction):
-
+    
     def name(self) -> Text:
         return "request_email"
 
@@ -89,6 +93,7 @@ class RequestEmail(FormAction):
             "email": [
                 self.from_entity(entity="email"),
                 self.from_text(intent="enter_data"),
+                self.from_text(),
             ]
         }
 
@@ -102,8 +107,6 @@ class RequestEmail(FormAction):
         return[FollowupAction("action_take_path")]
             
 
-
-         
 
 # ----------------------------------------------------
 #
@@ -125,10 +128,11 @@ class ActionTakePath(Action):
         # Read the csv file, the first column is the email address and has heading "user"
         user_list = pd.read_csv('df2.csv', usecols=[0])
         user_list = user_list.user.tolist()
-
+        
         # Decide on follow up action accordingly
-        if email not in user_list:   
-            return [FollowupAction("ask_name")]
+        if email not in user_list:
+            dispatcher.utter_message("Hi! What's your name?")
+            return []
         else:          
             return [FollowupAction("action_fetch_from_db")]
 
@@ -136,45 +140,65 @@ class ActionTakePath(Action):
 
 # ----------------------------------------------------
 #
-# Actions for first encounter, starting with
-# asking for user's name
+# Custom extraction for name entity
 #
 # ----------------------------------------------------
-class AskName(FormAction):
+class ActionSetName(Action):
     
-    def name(self) -> Text:
-        return "ask_name"
+    def name(self):
+        return "action_set_name"
+
+    def run(self, dispatcher, tracker, domain):
+        # Take the user's message
+        input_txt = tracker.latest_message.get("text")
+        input_str = str(input_txt).lower()
+
+        # Pre process the text
+        punc_test = input_str[-1]
+        if punc_test not in string.punctuation:
+            input_str = input_str + "."
+                
+        dispatcher.utter_message("Cool!")
+        
+        tokens = nlp(input_str)
+
+        # If name is successfully extracted
+        if len(tokens.ents) == 1:
+            dispatcher.utter_message("Name entity found! (to remove)")
+            extracted_ent = str(tokens.ents[0])
+            return [SlotSet("PERSON", extracted_ent),
+                    FollowupAction("action_process_name")] 
+        else:
+            dispatcher.utter_message("Failed to extract name entity! (to remove)")
+            return [SlotSet("PERSON", "zero"),
+                    FollowupAction("action_process_name")] 
 
 
-    @staticmethod
-    def required_slots(tracker) -> List[Text]:
-        return ["name"]
 
 
-    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-        return {          
-            "name": [
-                self.from_entity(entity="PERSON"),
-                self.from_text(),
-                ],     
-            }
+
+# ----------------------------------------------------
+#
+# Process, and call API if user asks back
+#
+# ----------------------------------------------------
+class ActionProcessName(Action):
+    
+    def name(self):
+        return "action_process_name"
     
 
-    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+    def run(self, dispatcher, tracker, domain):
+        intent = tracker.latest_message['intent'].get('name')
 
-        # Calls API and reply a name to user
-        userID = tracker.get_slot("email")
-        data = tracker.latest_message.get('text')
-        r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                          json={"userID": str(userID), "data": str(data)} )
+        if intent == "chit_chat_question":
+            userID = tracker.get_slot("email")
+            data = tracker.latest_message.get('text')
 
-        if r.json()["error"] == None:            
-            response = r.json()["answer"]
+            response = call_api_question(userID, data)
             dispatcher.utter_message(str(response))
 
         return [FollowupAction("request_fav_sport")]
-
-
 
 
 
@@ -197,29 +221,38 @@ class RequestFavSport(FormAction):
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         return {
             "type_of_sport": [
-                self.from_entity(entity="sport")
+                self.from_entity(entity="sport"),
+                self.from_text(),
                 ],
             }
     
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
-        # Calls API and reveal something about the subject
         userID = tracker.get_slot("email")
+            
+        # If entity extraction failed, set it manually to a placeholder
+        result = tracker.get_slot("type_of_sport")
         data = tracker.latest_message.get('text')
-        topic = tracker.latest_message['entities'][0]['entity']
-        r = requests.post("https://546c412d1867.ngrok.io/get_disclosure",
-                          json={"userID": str(userID), "data": str(data), "topic": str(topic)} )
 
-        # Test thread number
-        #print(threading.current_thread().name)
-
-        if r.json()["error"] == None:
-            response = r.json()["answer"]
+        if result == data:            
+            response = call_api_self_disclosure(userID, data, "sport")
             dispatcher.utter_message(str(response))
-
-        return []
-
-
+            return [SlotSet("type_of_sport", "fail"),
+                    FollowupAction("request_fav_sport_reason")]
+        
+        # If the user doesn't have a favorite sport
+        # continue to topic about animal
+        intent = tracker.latest_message['intent'].get('name')
+        
+        if intent == "deny" or intent == "user.reject":
+            return [SlotSet("type_of_sport", "zero"),
+                    FollowupAction("request_fav_animal")]
+        else:
+            topic = tracker.latest_message['entities'][0]['entity']
+            response = call_api_self_disclosure(userID, data, topic)
+            dispatcher.utter_message(str(response))
+                
+            return []
 
 
 
@@ -242,19 +275,14 @@ class ActionAddOn1(Action):
         intent = tracker.latest_message['intent'].get('name')
 
         # If the message has more than acknowledge
-        if intent != "affirm":
+        if intent == "chit_chat_question":
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
-            r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                              json={"userID": str(userID), "data": str(data)} )
 
-            if r.json()["error"] == None:
-                response = r.json()["answer"]
-                dispatcher.utter_message(str(response))
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))
 
-        return [FollowupAction("request_sport_detail_2")]
-
-
+        return [FollowupAction("request_fav_sport_reason")]
 
 
 
@@ -283,26 +311,23 @@ class RequestFavSportReason(FormAction):
 
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:   
-        # If user reply with a question, calls API before continuing
         intent = tracker.latest_message['intent'].get('name')
         
-        if intent == "chit_chat_question" or "chit_chat":            
+        if intent == "chit_chat_question":            
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
-            r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                              json={"userID": str(userID), "data": str(data)} )
 
-            if r.json()["error"] == None:
-                response = r.json()["answer"]
-                dispatcher.utter_message(str(response))
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))
+        else:
+            dispatcher.utter_message("Okay.")
 
         return [FollowupAction("request_fav_animal")]
 
 
 
-
-
 # ----------------------------------------------------
+#
 # Ask user for details about animal
 #
 # ----------------------------------------------------
@@ -315,37 +340,43 @@ class RequestFavAnimal(FormAction):
     @staticmethod
     def required_slots(tracker) -> List[Text]:
         return ["type_of_animal"]
-##        return ["type_of_animal", "own_animal"]
 
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         return {                
                 "type_of_animal": [
                     self.from_entity(entity="animal"),
+                    self.from_text(),
                     ],
-##                "own_animal": [
-##                    self.from_intent(intent="affirm", value=True),
-##                    self.from_intent(intent="deny", value=False),
-##                    ],
                 }
 
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:       
-        # Calls API and reveal something about the subject
         userID = tracker.get_slot("email")
+
+        # If entity extraction failed, set it manually to a placeholder
+        result = tracker.get_slot("type_of_animal")
         data = tracker.latest_message.get('text')
-        topic = tracker.latest_message['entities'][0]['entity']
-        r = requests.post("https://546c412d1867.ngrok.io/get_disclosure",
-                          json={"userID": str(userID), "data": str(data), "topic": str(topic)} )
+        
+        if result == data:            
+            response = call_api_self_disclosure(userID, data, "animal")
+            dispatcher.utter_message(str(response))
+            return [SlotSet("type_of_animal", "fail"),
+                    FollowupAction("action_store_detail")]
 
-        # Test thread number
-        #print(threading.current_thread().name)
-
-        if r.json()["error"] == None:
-            response = r.json()["answer"]
+        # If the user doesn't have a favorite sport
+        # end the survey
+        intent = tracker.latest_message['intent'].get('name')
+        
+        if intent == "deny" or intent == "user.reject":
+            return [SlotSet("type_of_animal", "zero"),
+                    FollowupAction("action_store_detail")]
+        else:
+            topic = tracker.latest_message['entities'][0]['entity']
+            response = call_api_self_disclosure(userID, data, topic)
             dispatcher.utter_message(str(response))
 
-        return []
+            return []
 
 
 
@@ -364,19 +395,14 @@ class ActionAddOn2(Action):
 
 
     def run(self, dispatcher, tracker, domain): # -> List[EventType]:
-        # Get the latest message's intent
         intent = tracker.latest_message['intent'].get('name')
 
-        # If the message has more than acknowledge
-        if intent != "affirm":
+        if intent == "chit_chat_question":            
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
-            r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                              json={"userID": str(userID), "data": str(data)} )
 
-            if r.json()["error"] == None:
-                response = r.json()["answer"]
-                dispatcher.utter_message(str(response))
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))        
 
         return [FollowupAction("action_store_detail")]
 
@@ -392,17 +418,26 @@ class ActionStoreDetail(Action):
     def name(self) -> Text:
         return "action_store_detail"
 
-    def run(self, dispatcher, tracker, domain): # -> List[EventType]:         
-        
+    def run(self, dispatcher, tracker, domain): # -> List[EventType]:                
         user   = tracker.get_slot("email")
-        name   = tracker.get_slot("name")
+        name   = tracker.get_slot("PERSON")
         sport  = tracker.get_slot("type_of_sport")
         animal = tracker.get_slot("type_of_animal")
+
+        dispatcher.utter_message("storing details (remove)")
+        dispatcher.utter_message("user: " + str(user))
+        dispatcher.utter_message("name: " + str(name))
+        dispatcher.utter_message("sport: " + str(sport))
+        dispatcher.utter_message("animal: " + str(animal))
+
+        if sport == "zero" and animal == "zero":
+            dispatcher.utter_message("So it seems that you dislike topics related sport and animal, that's okay.")
+            
         
-        Data = { 'user'  : [user],
-                 'name'  : [name],
-                 'sport' : [sport],
-                 'animal': [animal],
+        Data = { 'user'  : [str(user)],
+                 'name'  : [str(name)],
+                 'sport' : [str(sport)],
+                 'animal': [str(animal)],
                }
         
         # Store relevant data to a csv file
@@ -412,13 +447,8 @@ class ActionStoreDetail(Action):
         # Clear the following slots
         return [SlotSet("type_of_sport", None),
                 SlotSet("reason_of_like_sport", None),
-                SlotSet("recent_active_sport", None),
-                SlotSet("type_of_animal", None),
-                SlotSet("own_animal", None),
-                SlotSet("animal_breed", None),
-                SlotSet("plan_to_own_animal", None),                
-                FollowupAction("action_end_session_1"),
-                ]
+                SlotSet("type_of_animal", None),              
+                FollowupAction("action_end_session_1")]
 
 
 
@@ -437,27 +467,36 @@ class ActionFetchFromDB(Action):
         col_list = ['user', 'name', 'sport', 'animal']
             
         # Read the csv file
+        dispatcher.utter_message("Reading csv")
         df = pd.read_csv("df2.csv", usecols=col_list)
+        dispatcher.utter_message("Done reading csv")
 
         # Extract the 'user' column and turn it into a list
+        
+        dispatcher.utter_message("Getting user index")
         user_list = df["user"]
         user_list = user_list.tolist()
+
 
         # Get the user's index
         user = tracker.get_slot("email")
         index = user_list.index(user)
+        dispatcher.utter_message("Done getting user index: " + str(index))
 
         # Get the user's topic and recent activity bool          
         user_name   = df["name"][index]  
         user_sport  = df["sport"][index]
-        user_animal = df["animal"][index]         
+        user_animal = df["animal"][index]
+
+        dispatcher.utter_message("name: " + str(user_name) )
+        dispatcher.utter_message("sport: " + str(user_sport))
+        dispatcher.utter_message("animal: " + str(user_animal))
 
         
-        return [SlotSet("name", user_name),
-                SlotSet("type_of_sport", user_sport),
-                SlotSet("type_of_animal", user_animal),
-                FollowupAction("ask_how_are"),
-                ]
+        return [SlotSet("PERSON", str(user_name)),
+                SlotSet("type_of_sport", str(user_sport)),
+                SlotSet("type_of_animal", str(user_animal)),
+                FollowupAction("ask_how_are")]
 
 
     
@@ -475,7 +514,11 @@ class AskHowAre(FormAction):
 
     @staticmethod
     def required_slots(tracker) -> List[Text]:
-        return ["how_are"]
+        user_name = tracker.get_slot("PERSON")
+        if user_name == "zero":
+            return ["how_are_no_name"]
+        else:
+            return ["how_are"]
 
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
@@ -483,22 +526,65 @@ class AskHowAre(FormAction):
             "how_are": [                
                 self.from_text(),                
                 ],        
+            "how_are_no_name": [                
+                self.from_text(),                
+                ],        
             }
     
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        intent = tracker.latest_message['intent'].get('name')
 
-        # Calls API and reply a name to user
-        userID = tracker.get_slot("email")
-        data = tracker.latest_message.get('text')
-        r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                          json={"userID": str(userID), "data": str(data)} )
-
-        if r.json()["error"] == None:            
-            response = r.json()["answer"]
+        if intent == "chit_chat_question" or intent == "chit_chat":
+            userID = tracker.get_slot("email")
+            data = tracker.latest_message.get('text')
+            
+            response = call_api_question(userID, data)
             dispatcher.utter_message(str(response))
 
+        sport  = tracker.get_slot("type_of_sport")
+        animal = tracker.get_slot("type_of_animal")
+        
+        if sport == "fail":
+            return [FollowupAction("request_fav_sport_again")]
+        elif sport == "zero" and animal == "zero":
+            dispatcher.utter_message("Well, it seems that we didn't have a chance to talk about anything.")
+            return [FollowupAction("action_end_session_2")]
+        elif sport == "zero":
+            return [FollowupAction("request_own_pet")]
+        else:
+            return [FollowupAction("request_recent_sport")]
+
+
+
+
+# ----------------------------------------------------
+#
+# Ask user for favorite sport again
+#   
+# ----------------------------------------------------
+class RequestFavSportAgain(FormAction):
+    
+    def name(self) -> Text:
+        return "request_fav_sport_again"
+
+
+    @staticmethod
+    def required_slots(tracker) -> List[Text]:
+        return ["type_of_sport_2"]
+
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {
+            "type_of_sport_2": [
+                self.from_text(),
+                ],
+            }
+    
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
         return [FollowupAction("request_recent_sport")]
+        
 
 
     
@@ -524,11 +610,19 @@ class RequestRecentSport(FormAction):
             "recent_active_sport": [
                 self.from_intent(intent="affirm", value=True),
                 self.from_intent(intent="deny", value=False),
+                self.from_text(),
                 ],
             }
     
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        # If entity extraction failed, set it manually to a placeholder
+        result = tracker.get_slot("recent_active_sport")
+        data = tracker.latest_message.get('text')
+        
+        if result == data:            
+            return [FollowupAction("add_on_3")]
+
         # Get the latest message's intent
         intent = tracker.latest_message['intent'].get('name')
 
@@ -536,12 +630,9 @@ class RequestRecentSport(FormAction):
         if intent == "chit_chat_question":
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
-            r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                              json={"userID": str(userID), "data": str(data)} )
 
-            if r.json()["error"] == None:
-                response = r.json()["answer"]
-                dispatcher.utter_message(str(response))
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))
 
         return [FollowupAction("follow_up_recent_sport")]
 
@@ -582,24 +673,98 @@ class FollwUpRecentSport(FormAction):
     
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        intent = tracker.latest_message['intent'].get('name')
+
+        if intent == "chit_chat_question":
+            userID = tracker.get_slot("email")
+            data = tracker.latest_message.get('text')
+
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))
+        
+        animal = tracker.get_slot("type_of_animal")
+        
+        if animal == "zero":
+            return [FollowupAction("action_end_session_2")]
+        elif animal == "fail":
+            return [FollowupAction("request_fav_animal_again")]
+        else:
+            return [FollowupAction("add_on_3")]
+        
+
+
+
+# ----------------------------------------------------
+#
+# Ask user for details about animal again
+#
+# ----------------------------------------------------
+class RequestFavAnimalAgain(FormAction):
+    
+    def name(self) -> Text:
+        return "request_fav_animal_again"
+
+
+    @staticmethod
+    def required_slots(tracker) -> List[Text]:
+        return ["type_of_animal_2"]
+
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {                
+                "type_of_animal_2": [
+                    self.from_text(),
+                    ],
+                }
+
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:       
+        return [FollowupAction("request_own_pet")]
+
+        
+
+
+# ----------------------------------------------------
+#
+# Leave room for user to ask question
+#
+# ----------------------------------------------------
+class AddOn3(FormAction):
+    
+    def name(self) -> Text:
+        return "add_on_3"
+
+
+    @staticmethod
+    def required_slots(tracker) -> List[Text]:
+        return ["add_on_3"]
+
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {
+            "add_on_3": [                
+                self.from_text(),
+                ],
+            }
+    
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
         # Get the latest message's intent
         intent = tracker.latest_message['intent'].get('name')
 
         # If the message has more than acknowledge
-        if intent == "chit_chat_question":
+        if intent != "affirm":
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
-            r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                              json={"userID": str(userID), "data": str(data)} )
 
-            if r.json()["error"] == None:
-                response = r.json()["answer"]
-                dispatcher.utter_message(str(response))
-                
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))
+
         return [FollowupAction("request_own_pet")]
 
-    
 
+
+    
 # ----------------------------------------------------
 #
 # Long term question, ask if user own pet
@@ -621,11 +786,19 @@ class RequestOwnPet(FormAction):
             "own_animal": [
                 self.from_intent(intent="affirm", value=True),
                 self.from_intent(intent="deny", value=False),
+                self.from_text(),
                 ],
             }
     
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        # If entity extraction failed, set it manually to a placeholder
+        result = tracker.get_slot("recent_active_sport")
+        data = tracker.latest_message.get('text')
+        
+        if result == data:            
+            return [FollowupAction("add_on_4")]
+
         # Get the latest message's intent
         intent = tracker.latest_message['intent'].get('name')
 
@@ -633,12 +806,9 @@ class RequestOwnPet(FormAction):
         if intent == "chit_chat_question":
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
-            r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                              json={"userID": str(userID), "data": str(data)} )
 
-            if r.json()["error"] == None:
-                response = r.json()["answer"]
-                dispatcher.utter_message(str(response))
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))
 
         return [FollowupAction("follow_up_own_pet")]
 
@@ -685,14 +855,55 @@ class FollwUpOwnPet(FormAction):
         if intent == "chit_chat_question":
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
-            r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                              json={"userID": str(userID), "data": str(data)} )
 
-            if r.json()["error"] == None:
-                response = r.json()["answer"]
-                dispatcher.utter_message(str(response))
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))
                 
+        return [FollowupAction("add_on_4")]
+
+
+
+# ----------------------------------------------------
+#
+# Leave room for user to ask question
+#
+# ----------------------------------------------------
+class AddOn3(FormAction):
+    
+    def name(self) -> Text:
+        return "add_on_4"
+
+
+    @staticmethod
+    def required_slots(tracker) -> List[Text]:
+        return ["add_on_4"]
+
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {
+            "add_on_4": [                
+                self.from_text(),
+                ],
+            }
+    
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        # Get the latest message's intent
+        intent = tracker.latest_message['intent'].get('name')
+
+        # If the message has more than acknowledge
+        if intent != "affirm":
+            userID = tracker.get_slot("email")
+            data = tracker.latest_message.get('text')
+
+            response = call_api_question(userID, data)
+            dispatcher.utter_message(str(response))
+
         return [FollowupAction("action_end_session_2")]
+
+
+
+
 
 
 
@@ -706,9 +917,18 @@ class ActionEndSession1(Action):
     def name(self) -> Text:
         return "action_end_session_1"
 
-    def run(self, dispatcher, tracker, domain):           
-        dispatcher.utter_message("Thank you! You have now finished the first session, please proceed to the form for a small survey then come back to restart the session.")
-        return []
+
+    def run(self, dispatcher, tracker, domain):
+        user_name = tracker.get_slot("PERSON")
+        if user_name == "zero":
+            dispatcher.utter_message(template="utter_end_session_1_no_name")
+        else:
+            dispatcher.utter_message(template="utter_end_session_1")
+            
+        return [SlotSet("email", None),
+                SlotSet("PERSON", None),
+                FollowupAction('action_listen')]
+
 
 
 class ActionEndSession2(Action):
@@ -716,10 +936,16 @@ class ActionEndSession2(Action):
     def name(self) -> Text:
         return "action_end_session_2"
 
-    def run(self, dispatcher, tracker, domain):
+
+    def run(self, dispatcher, tracker, domain):        
         dispatcher.utter_message("Great, it was nice talking to you!")
-        dispatcher.utter_message("Thank you! Please proceed to the form to answer a few questions to complete the test.")
-        return []
+        user_name = tracker.get_slot("PERSON")
+        if user_name == "zero":
+            dispatcher.utter_message(template="utter_end_session_2_no_name")
+        else:
+            dispatcher.utter_message(template="utter_end_session_2")
+            
+        return [FollowupAction('action_listen')]
 
 
 
@@ -728,63 +954,71 @@ class ActionEndSession2(Action):
 # asking the opening question
 # ----------------------------------------------------
 class ActionSelfDisclosure(Action):
+    
     def name(self) -> Text:
         return "action_self_disclosure"
 
+
     def run(self, dispatcher, tracker, domain): # -> List[EventType]:
-
-        # Get the user
         userID = tracker.get_slot("email")
-
-        # Get the user's input
         data = tracker.latest_message.get('text')
-
-        # Get the entity
         topic = tracker.latest_message['entities'][0]['entity']
 
-        # API call
-        r = requests.post("https://546c412d1867.ngrok.io/get_disclosure",
-                          json={"userID": str(userID), "data": str(data), "topic": str(topic)} )
-
-        # Test thread number
-        #print(threading.current_thread().name)
-
-        if r.json()["error"] == None:
-            response = r.json()["answer"]
-            dispatcher.utter_message(str(response))
-        #else:
-            #Ask new question instead because unexpected error occurred
-
+        response = call_api_self_disclosure(userID, data, topic)
+        dispatcher.utter_message(str(response))
+    
         return []
 
     
 
 # ----------------------------------------------------
+#
 # A self disclosure component that is used after
 # asking the opening question
+#
 # ----------------------------------------------------
 class ActionGetAnswer(Action):
+    
     def name(self) -> Text:
         return "action_get_answer"
 
+
     def run(self, dispatcher, tracker, domain): # -> List[EventType]:         
-
-        # Get the user
         userID = tracker.get_slot("email")
-
-        # Get the user's input
         data = tracker.latest_message.get('text')
 
-        # API call
-        r = requests.post('https://546c412d1867.ngrok.io/get_answer',
-                          json={"userID": str(userID), "data": str(data)} )
-
-
-        if r.json()["error"] == None:
-            response = r.json()["answer"]
-            dispatcher.utter_message(str(response))
-        else:
-            dispatcher.utter_message("Something went wrong")
-            #Ask new question instead because unexpected error occurred
+        response = call_api_question(userID, data)
+        dispatcher.utter_message(str(response))
+        
+##        Thread(target=call_api_question, args=(userID, data, dispatcher)).start()        
 
         return []
+
+
+
+# ----------------------------------------------------
+#
+# Call API functions
+#
+# ----------------------------------------------------
+def call_api_question(userID, data):
+    
+    r = requests.post('http://f8298a7a6831.ngrok.io/get_answer', json={"userID": userID, "data": data})
+    if r.json()["error"] == None:
+        response = r.json()["answer"]
+        return response
+    else:
+        response = "Something went wrong when calling the API."
+        return response
+
+
+
+def call_api_self_disclosure(userID, data, topic):
+        
+    r = requests.post('http://f8298a7a6831.ngrok.io/get_disclosure', json={"userID": userID, "data": data, "topic": topic})
+    if r.json()["error"] == None:
+        response = r.json()["answer"]
+        return response
+    else:
+        response = "Something went wrong when calling the API."
+        return response
