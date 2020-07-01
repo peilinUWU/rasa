@@ -212,11 +212,52 @@
     - request_email
     - form{"name":"request_email"}
     - slot{"requested_slot":"email"}
-* enter_data
+* enter_data OR chit_chat
     - request_email
     - slot{"email":"sheep23@google.com"}
     - form{"name":null}
     - slot{"requested_slot":null}
     - action_take_path
 * chit_chat OR chit_chat_non_english OR enter_data OR user.hello
+* enter_data{"PERSON":"Jimmy"}
+    - slot{"PERSON":"Jimmy"}
     - action_set_name
+    - slot{"PERSON":"jimmy"}
+    - action_process_name
+    - request_fav_sport
+    - form{"name":"request_fav_sport"}
+    - slot{"requested_slot":"type_of_sport"}
+* enter_data
+
+
+## generated 5
+* chit_chat_question
+    - action_get_answer
+* chit_chat_question
+    - action_get_answer
+* user.hello
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
+* enter_data
+    - request_email
+    - slot{"email":"email123@mail.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
+* enter_data
+    - action_set_name
+    - slot{"PERSON":"jimmy"}
+    - action_process_name
+    - request_fav_sport
+    - form{"name":"request_fav_sport"}
+    - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"basketball"}
+    - request_fav_sport
+    - slot{"type_of_sport":"basketball"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* chit_chat_question{"sport":"basketball"}
+    - action_add_on_1

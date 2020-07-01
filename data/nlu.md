@@ -424,6 +424,7 @@ data/sport.txt
 - most people call me
 - my name is
 - they call me Oscar
+- i like play [game](sport)
 - my favorite sport is [football](sport)
 - I like to [bowl](sport)
 - I like to play [pool](sport) with friends 
@@ -464,6 +465,7 @@ data/sport.txt
 - i like [cat](animal)
 - i like [sheep](animal)
 - i like [fish](animal)
+- my favorite pet is 
 - im a [cat](animal) person
 - i'm a [dog](animal) person
 - [dog](animal) for sure!
@@ -481,7 +483,7 @@ data/sport.txt
 - i own a [snake](animal)
 - [lizard](animal)
 - [ferret](animal)
-- i had two [turtle](animal)
+- i had two [turtles](animal)
 - i have a few [hamsters](animal)
 - [guinea pig](animal)
 - [gerbils](animal)
@@ -649,7 +651,7 @@ data/sport.txt
 - are you ok
 - are you okay
 - h r u ?
-- hello, how are you?
+- how are you?
 - hey how are you?
 - hi how are you?
 - hi how u doing
@@ -709,7 +711,6 @@ data/sport.txt
 - can we talk about sport?
 - can we talk about animal?
 - Are you ready?
-- 4 + 2 = ?
 - Can I ask you questions first?
 - Can I die
 - Can I get a hamburger?
@@ -777,7 +778,6 @@ data/sport.txt
 - what you ate today?
 - what's 5 + 5
 - what's a newsletter?
-- what's gingerale
 - what's your wife doing this weekend
 - who was hitler
 - who is your favourite robot?
@@ -786,7 +786,6 @@ data/sport.txt
 - personal or work?
 - lunch??
 - is it a wasteland full of broken robot parts?
-- i am hungry, what should i do?
 - how to go to newyork ?
 - how long have you been online?
 - how come you say ok ?
@@ -850,7 +849,7 @@ data/sport.txt
 - are there any other options?
 - come back
 - cool! can I do something else here?
-- hello what can you do for me
+- what can you do for me
 - um what now
 - so what next?
 - talk to me
@@ -976,7 +975,7 @@ data/sport.txt
 - Do you have a specific area of research?
 - what type of research are you doing?
 - What's your name?
-- Hello, what is your name?
+- what is your name?
 - What is your first name?
 - Can you tell me a few things about yourself?
 - What part of the world are you from?
@@ -1228,6 +1227,11 @@ data/sport.txt
 - I said, helllllloooooO!!!!
 - Well hello there ;)
 - What is up?
+- what's up
+- sup
+- wasup
+- what's good
+- what up
 - Whats up
 - Whats up my bot
 - Whats up?
@@ -1478,8 +1482,6 @@ data/sport.txt
 - I can barely see this white text on light gray background ...
 - I changed my mind
 - I have installed it
-- I ned a GP in 94301
-- I need a GP in 94301
 - I need a girl friend!
 - I need to eat cake
 - I wan to buy a plane
