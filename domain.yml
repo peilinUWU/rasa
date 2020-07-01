@@ -26,6 +26,8 @@ forms:
   - follow_up_own_pet
   - add_on_3
   - add_on_4
+  - request_fav_sport_again
+  - request_fav_animal_again
 
 actions:
   - action_greet
@@ -55,11 +57,15 @@ slots:
     type: unfeaturized
   type_of_sport:
     type: unfeaturized
+  type_of_sport_2:
+    type: unfeaturized
   reason_of_like_sport:
     type: unfeaturized
   recent_active_sport:
     type: bool
   type_of_animal:
+    type: unfeaturized
+  type_of_animal_2:
     type: unfeaturized
   own_animal:
     type: unfeaturized
@@ -118,6 +124,9 @@ responses:
   - text: "What's one sport that you like?"
   - text: "What's your number one favorite sport?"
 
+  utter_ask_type_of_sport_2:
+  - text: "Last time you told me about your favorite sport, what was it again? I forgot."
+
   utter_ask_reason_of_like_sport:
   - text: "Why do you like {type_of_sport}?"
   - text: "What do you like about {type_of_sport}?"
@@ -139,6 +148,9 @@ responses:
 
   utter_ask_type_of_animal:
   - text: "Here's another question, what's your one favorite pet?"
+
+  utter_ask_type_of_animal_2:
+  - text: "Last time you told me about your favorite animal, what was it again? I forgot."
 
   utter_ask_own_animal:
   - text: "We also talked about {type_of_animal}. Do you happen to own one?"
