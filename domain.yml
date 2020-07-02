@@ -14,30 +14,30 @@ intents:
   - chit_chat
   - nice_to_meet_you
 
+
 forms:
   - request_email
+  - set_name
   - request_fav_sport
   - request_fav_sport_reason
   - request_fav_animal
   - ask_how_are
+  - request_fav_sport_again
   - request_recent_sport
   - follow_up_recent_sport
+  - request_fav_animal_again
+  - add_on_3
   - request_own_pet
   - follow_up_own_pet
-  - add_on_3
   - add_on_4
-  - request_fav_sport_again
-  - request_fav_animal_again
+
 
 actions:
   - action_greet
   - action_take_path
-  - action_set_name
-  - action_process_name
-  - action_add_on_1
-  - action_add_on_2
   - action_store_detail
   - action_fetch_from_db
+  - action_custom_listen
   - action_end_session_1
   - action_end_session_2
   - action_self_disclosure
@@ -49,6 +49,7 @@ entities:
   - animal
   - PERSON
   - ORG
+  - GPE
 
 slots:
   greeted:
@@ -87,7 +88,7 @@ slots:
     type: unfeaturized
   why_like_animal:
     type: unfeaturized   
-  PERSON:
+  person:
     type: unfeaturized
   where_from:
     type: unfeaturized
@@ -174,13 +175,13 @@ responses:
   - text: "If you get to keep one, would you prefer a big one or a small one?"
 
   utter_end_session_1:
-  - text: "Thank you {PERSON}! You have now finished the first session, please proceed to the form for a small survey then come back in a few days to start a second session. I will send you a reminder via email."
+  - text: "Thank you {person}! You have now finished the first session, please proceed to the form for a small survey then come back in a few days to start a second session. I will send you a reminder via email."
 
   utter_end_session_1_no_name:
   - text: "Thank you! You have now finished the first session, please proceed to the form for a small survey then come back in a few days to start a second session. I will send you a reminder via email."
 
   utter_end_session_2:
-  - text: "Thank you {PERSON}! Please proceed to the form for a small survey to complete the test."
+  - text: "Thank you {person}! Please proceed to the form for a small survey to complete the test."
 
   utter_end_session_2_no_name:
   - text: "Thank you! Please proceed to the form for a small survey to complete the test."
@@ -202,7 +203,7 @@ responses:
   #   opening question (first)   #
   # ---------------------------- #
 
-  utter_ask_PERSON:
+  utter_ask_person:
   - text: "Hi! What's your name?"
 
 
@@ -212,7 +213,7 @@ responses:
   # ---------------------------- #
 
   utter_ask_how_are:
-  - text: "Good day {PERSON}! How are you?"
+  - text: "Good day {person}! How are you?"
 
   utter_ask_how_are_no_name:
   - text: "Good day! How are you?"
