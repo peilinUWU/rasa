@@ -1,4 +1,4 @@
-## story - default
+§## story - default
 * user.hello
   - action_greet
   - slot{"greeted":true}
@@ -88,10 +88,9 @@
 * enter_data{"sport":"swimming"}
     - request_fav_sport
     - slot{"type_of_sport":"swimming"}
-    - slot{"type_of_sport":"sport"}
+    - slot{"type_of_sport":"swimming"}
     - form{"name":null}
     - slot{"requested_slot":null}
-    - action_custom_listen
-    - action_get_answer
 * affirm
+    - action_custom_listen
     - request_fav_sport_reason
