@@ -60,3 +60,38 @@
 
 
 
+## generated 1
+* user.hello
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
+* enter_data
+    - request_email
+    - slot{"email":"sheep42@google.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
+    - set_name
+    - form{"name":"set_name"}
+    - slot{"requested_slot":"person"}
+* enter_data
+    - set_name
+    - slot{"person":"my name shrek"}
+    - slot{"person":"shrek"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_fav_sport
+    - form{"name":"request_fav_sport"}
+    - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"swimming"}
+    - request_fav_sport
+    - slot{"type_of_sport":"swimming"}
+    - slot{"type_of_sport":"sport"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_custom_listen
+    - action_get_answer
+* affirm
+    - request_fav_sport_reason
