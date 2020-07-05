@@ -1,4 +1,4 @@
-§## story - default
+## story - default
 * user.hello
   - action_greet
   - slot{"greeted":true}
@@ -91,6 +91,25 @@
     - slot{"type_of_sport":"swimming"}
     - form{"name":null}
     - slot{"requested_slot":null}
-* affirm
+* affirm OR deny OR enter_data OR user.bye OR chit_chat_question OR chit_chat
     - action_custom_listen
     - request_fav_sport_reason
+    - form{"name":"request_fav_sport_reason"}
+    - slot{"requested_slot":"reason_of_like_sport"}
+* chit_chat
+    - request_fav_sport_reason
+    - slot{"reason_of_like_sport":"because it's very fun"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_fav_animal
+    - form{"name":"request_fav_animal"}
+    - slot{"requested_slot":"type_of_animal"}
+* enter_data{"animal":"dog"}
+    - request_fav_animal
+    - slot{"type_of_animal":"dog"}
+    - slot{"type_of_animal":"dog"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* affirm OR deny OR enter_data OR user.bye OR chit_chat_question OR chit_chat
+    - action_custom_listen
+    - action_store_detail
