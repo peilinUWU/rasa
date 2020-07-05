@@ -113,3 +113,10 @@
 * affirm OR deny OR enter_data OR user.bye OR chit_chat_question OR chit_chat
     - action_custom_listen
     - action_store_detail
+    - slot{"type_of_sport":null}
+    - slot{"reason_of_like_sport":null}
+    - slot{"type_of_animal":null}
+    - action_end_session_1
+    - slot{"email":null}
+    - slot{"person":null}
+    - action_end_session_1
