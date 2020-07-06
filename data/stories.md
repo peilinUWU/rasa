@@ -113,10 +113,60 @@
 * affirm OR deny OR enter_data OR user.bye OR chit_chat_question OR chit_chat
     - action_custom_listen
     - action_store_detail
-    - slot{"type_of_sport":null}
-    - slot{"reason_of_like_sport":null}
-    - slot{"type_of_animal":null}
     - action_end_session_1
-    - slot{"email":null}
-    - slot{"person":null}
+
+
+## generated 2
+* user.hello
+    - action_greet
+    - slot{"greeted":true}
+    - request_email
+    - form{"name":"request_email"}
+    - slot{"requested_slot":"email"}
+* enter_data
+    - request_email
+    - slot{"email":"sheep44@google.com"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - action_take_path
+    - set_name
+    - form{"name":"set_name"}
+    - slot{"requested_slot":"person"}
+* enter_data
+    - set_name
+    - slot{"person":"my name is shrek"}
+    - slot{"person":"zero"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_fav_sport
+    - form{"name":"request_fav_sport"}
+    - slot{"requested_slot":"type_of_sport"}
+* enter_data{"sport":"football"}
+    - request_fav_sport
+    - slot{"type_of_sport":"football"}
+    - slot{"type_of_sport":"football"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* chit_chat_question
+    - action_custom_listen
+    - request_fav_sport_reason
+    - form{"name":"request_fav_sport_reason"}
+    - slot{"requested_slot":"reason_of_like_sport"}
+* chit_chat
+    - request_fav_sport_reason
+    - slot{"reason_of_like_sport":"because i can play with friends"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+    - request_fav_animal
+    - form{"name":"request_fav_animal"}
+    - slot{"requested_slot":"type_of_animal"}
+* enter_data{"animal":"cat"}
+    - request_fav_animal
+    - slot{"type_of_animal":"cat"}
+    - slot{"type_of_animal":"cat"}
+    - form{"name":null}
+    - slot{"requested_slot":null}
+* chit_chat
+    - action_custom_listen    
+    - action_store_detail
     - action_end_session_1
