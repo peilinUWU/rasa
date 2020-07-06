@@ -113,7 +113,12 @@
 * affirm OR deny OR enter_data OR user.bye OR chit_chat_question OR chit_chat
     - action_custom_listen
     - action_store_detail
+    - slot{"type_of_sport":null}
+    - slot{"reason_of_like_sport":null}
+    - slot{"type_of_animal":null}
     - action_end_session_1
+    - slot{"email":null}
+    - slot{"person":null}
 
 
 ## generated 2
@@ -125,7 +130,7 @@
     - slot{"requested_slot":"email"}
 * enter_data
     - request_email
-    - slot{"email":"sheep44@google.com"}
+    - slot{"email":"sheep45@google.com"}
     - form{"name":null}
     - slot{"requested_slot":null}
     - action_take_path
@@ -134,39 +139,38 @@
     - slot{"requested_slot":"person"}
 * enter_data
     - set_name
-    - slot{"person":"my name is shrek"}
+    - slot{"person":"my name is dom"}
     - slot{"person":"zero"}
     - form{"name":null}
     - slot{"requested_slot":null}
     - request_fav_sport
     - form{"name":"request_fav_sport"}
     - slot{"requested_slot":"type_of_sport"}
-* enter_data{"sport":"football"}
+* enter_data{"sport":"running"}
     - request_fav_sport
-    - slot{"type_of_sport":"football"}
-    - slot{"type_of_sport":"football"}
+    - slot{"type_of_sport":"running"}
+    - slot{"type_of_sport":"running"}
     - form{"name":null}
     - slot{"requested_slot":null}
-* chit_chat_question
+* affirm
     - action_custom_listen
     - request_fav_sport_reason
     - form{"name":"request_fav_sport_reason"}
     - slot{"requested_slot":"reason_of_like_sport"}
 * chit_chat
     - request_fav_sport_reason
-    - slot{"reason_of_like_sport":"because i can play with friends"}
+    - slot{"reason_of_like_sport":"i get to go outside"}
     - form{"name":null}
     - slot{"requested_slot":null}
     - request_fav_animal
     - form{"name":"request_fav_animal"}
     - slot{"requested_slot":"type_of_animal"}
-* enter_data{"animal":"cat"}
-    - request_fav_animal
-    - slot{"type_of_animal":"cat"}
-    - slot{"type_of_animal":"cat"}
-    - form{"name":null}
-    - slot{"requested_slot":null}
-* chit_chat
-    - action_custom_listen    
+* enter_data{"animal":"dog"} OR affirm{"animal":"dog"} OR deny{"animal":"dog"} OR user.bye{"animal":"dog"} OR chit_chat_question{"animal":"dog"} OR chit_chat{"animal":"dog"}
+    - action_custom_listen
     - action_store_detail
+    - slot{"type_of_sport":null}
+    - slot{"reason_of_like_sport":null}
+    - slot{"type_of_animal":null}
     - action_end_session_1
+    - slot{"email":null}
+    - slot{"person":null}
