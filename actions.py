@@ -23,9 +23,14 @@ from rasa_sdk.events import (
     FollowupAction
 )
 
-##from threading import Thread
-##global api_data
-##api_data = []
+
+
+## Thread related
+from threading import Thread, Lock
+global api_data
+api_data = []
+my_api_data_lock = Lock()
+
 
         
 
@@ -131,74 +136,93 @@ class ActionTakePath(Action):
         
         # Decide on follow up action accordingly
         if email not in user_list:
-            dispatcher.utter_message("Hi! What's your name?")
-            return []
+##            dispatcher.utter_message("Hi! What's your name?")
+            return [FollowupAction("set_name")]
         else:          
             return [FollowupAction("action_fetch_from_db")]
 
 
 
+
+
+
+
+
 # ----------------------------------------------------
 #
-# Custom extraction for name entity
-#
+# Ask user for favorite sport
+#   
 # ----------------------------------------------------
-class ActionSetName(Action):
+class SetName(FormAction):
     
-    def name(self):
-        return "action_set_name"
+    def name(self) -> Text:
+        return "set_name"
 
-    def run(self, dispatcher, tracker, domain):
-        # Take the user's message
-        input_txt = tracker.latest_message.get("text")
-        input_str = str(input_txt).lower()
 
-        # Pre process the text
-        punc_test = input_str[-1]
-        if punc_test not in string.punctuation:
-            input_str = input_str + "."
-                
+    @staticmethod
+    def required_slots(tracker) -> List[Text]:
+        return ["person"]
+
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {
+            "person": [
+                self.from_entity(entity="PERSON"),
+                self.from_entity(entity="ORG"),
+                self.from_entity(entity="GPE"),
+                self.from_text(),
+                ],
+            }
+    
+
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
         dispatcher.utter_message("Cool!")
-        
-        tokens = nlp(input_str)
 
-        # If name is successfully extracted
-        if len(tokens.ents) == 1:
-            dispatcher.utter_message("Name entity found! (to remove)")
-            extracted_ent = str(tokens.ents[0])
-            return [SlotSet("PERSON", extracted_ent),
-                    FollowupAction("action_process_name")] 
-        else:
-            dispatcher.utter_message("Failed to extract name entity! (to remove)")
-            return [SlotSet("PERSON", "zero"),
-                    FollowupAction("action_process_name")] 
-
-
-
-
-
-# ----------------------------------------------------
-#
-# Process, and call API if user asks back
-#
-# ----------------------------------------------------
-class ActionProcessName(Action):
-    
-    def name(self):
-        return "action_process_name"
-    
-
-    def run(self, dispatcher, tracker, domain):
+        # If user happen to ask the bot's name
         intent = tracker.latest_message['intent'].get('name')
-
+        
         if intent == "chit_chat_question":
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
 
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
+            
+        # If failed entity extraction in the first try
+        entity_list_len = len(tracker.latest_message['entities'])
+        
+        if entity_list_len == 0:            
+            # Take the user's message, and turn it lower-case
+            input_txt = tracker.latest_message.get("text")
+            input_str = str(input_txt).lower()
 
-        return [FollowupAction("request_fav_sport")]
+            # Pre process the text, add a period if there is no punctuation
+            punc_test = input_str[-1]
+            if punc_test not in string.punctuation:
+                input_str = input_str + "."                    
+            
+            tokens = nlp(input_str)
+
+            # If name is now successfully extracted
+            if len(tokens.ents) == 1:
+##                dispatcher.utter_message("Name entity found! (to remove)")
+                extracted_ent = str(tokens.ents[0])
+                return [SlotSet("person", extracted_ent),
+                        FollowupAction("request_fav_sport")] 
+            else:
+                return [SlotSet("person", "zero"),
+                        FollowupAction("request_fav_sport")]
+        else: ## the name entity was successfully extracted
+            return [FollowupAction("request_fav_sport")]
+            
+        # Print the entity type, e.g. sport, animal, PERSON, ORG        
+##        entity_type = tracker.latest_message['entities'][0]['entity']
+##        dispatcher.utter_message(str(entity_type))
+        
+        # Print the actual value
+##        entity_value = tracker.latest_message['entities'][0]['value']
+##        dispatcher.utter_message(str(entity_value))
+
 
 
 
@@ -227,62 +251,46 @@ class RequestFavSport(FormAction):
             }
     
 
-    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
-        userID = tracker.get_slot("email")
-            
+    def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:         
         # If entity extraction failed, set it manually to a placeholder
-        result = tracker.get_slot("type_of_sport")
-        data = tracker.latest_message.get('text')
-
-        if result == data:            
-            response = call_api_self_disclosure(userID, data, "sport")
-            dispatcher.utter_message(str(response))
-            return [SlotSet("type_of_sport", "fail"),
-                    FollowupAction("request_fav_sport_reason")]
-        
         # If the user doesn't have a favorite sport
         # continue to topic about animal
-        intent = tracker.latest_message['intent'].get('name')
+        userID = tracker.get_slot("email")
+        data = tracker.latest_message.get('text')
         
-        if intent == "deny" or intent == "user.reject":
+        intent = tracker.latest_message['intent'].get('name')
+
+        if intent == "chit_chat_question":
+            response = threaded_question(userID, data)
+            dispatcher.utter_message(str(response))
+        elif intent == "deny" or intent == "user.reject":
+            dispatcher.utter_message("Okay.")
             return [SlotSet("type_of_sport", "zero"),
                     FollowupAction("request_fav_animal")]
+
+        entity_list = tracker.latest_message['entities']
+        entity_list_len = len(entity_list)
+        
+        if entity_list_len > 0:
+            index = 0
+            while index < entity_list_len:
+                if entity_list[index]['entity'] == "sport":
+                    topic = entity_list[index]['entity']
+                    response = threaded_self_disclosure(userID, data, topic)
+                    dispatcher.utter_message(str(response))
+                    
+                    return [SlotSet("type_of_sport", entity_list[index]['value']),
+                            FollowupAction("action_listen")]
+                index += 1
         else:
-            topic = tracker.latest_message['entities'][0]['entity']
-            response = call_api_self_disclosure(userID, data, topic)
+        # It's probably that a sport was given, but failed extraction
+        #elif result == data:
+            response = threaded_self_disclosure(userID, data, "sport")
             dispatcher.utter_message(str(response))
-                
-            return []
+            
+            return [SlotSet("type_of_sport", "fail"),
+                    FollowupAction("request_fav_animal")]
 
-
-
-# ----------------------------------------------------
-#
-# Choose actions depending on if user acknowledge
-# or/and asked a question
-#   - if only acknowledge, continue to next action
-#   - if contains question, calls API before continuing 
-#   
-# ----------------------------------------------------
-class ActionAddOn1(Action):
-    
-    def name(self) -> Text:
-        return "action_add_on_1"
-
-
-    def run(self, dispatcher, tracker, domain): # -> List[EventType]:
-        # Get the latest message's intent
-        intent = tracker.latest_message['intent'].get('name')
-
-        # If the message has more than acknowledge
-        if intent == "chit_chat_question":
-            userID = tracker.get_slot("email")
-            data = tracker.latest_message.get('text')
-
-            response = call_api_question(userID, data)
-            dispatcher.utter_message(str(response))
-
-        return [FollowupAction("request_fav_sport_reason")]
 
 
 
@@ -317,12 +325,14 @@ class RequestFavSportReason(FormAction):
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
 
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
         else:
             dispatcher.utter_message("Okay.")
 
         return [FollowupAction("request_fav_animal")]
+
+
 
 
 
@@ -352,60 +362,46 @@ class RequestFavAnimal(FormAction):
 
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:       
-        userID = tracker.get_slot("email")
-
         # If entity extraction failed, set it manually to a placeholder
-        result = tracker.get_slot("type_of_animal")
+        # If the user doesn't have a favorite sport
+        # continue to topic about animal
+        userID = tracker.get_slot("email")
         data = tracker.latest_message.get('text')
         
-        if result == data:            
-            response = call_api_self_disclosure(userID, data, "animal")
-            dispatcher.utter_message(str(response))
-            return [SlotSet("type_of_animal", "fail"),
-                    FollowupAction("action_store_detail")]
-
-        # If the user doesn't have a favorite sport
-        # end the survey
-        intent = tracker.latest_message['intent'].get('name')
-        
-        if intent == "deny" or intent == "user.reject":
-            return [SlotSet("type_of_animal", "zero"),
-                    FollowupAction("action_store_detail")]
-        else:
-            topic = tracker.latest_message['entities'][0]['entity']
-            response = call_api_self_disclosure(userID, data, topic)
-            dispatcher.utter_message(str(response))
-
-            return []
-
-
-
-# ----------------------------------------------------
-#
-# Choose actions depending on if user acknowledge
-# or/and asked a question
-#   - if only acknowledge, continue to next action
-#   - if contains question, calls API before continuing 
-#   
-# ----------------------------------------------------
-class ActionAddOn2(Action):
-    
-    def name(self) -> Text:
-        return "action_add_on_2"
-
-
-    def run(self, dispatcher, tracker, domain): # -> List[EventType]:
         intent = tracker.latest_message['intent'].get('name')
 
-        if intent == "chit_chat_question":            
+        if intent == "chit_chat_question":
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
+            response = threaded_question(userID, data)
+            dispatcher.utter_message(str(response))
+        elif intent == "deny" or intent == "user.reject":            
+            return [SlotSet("type_of_animal", "zero"),
+                    FollowupAction("action_store_detail")]
 
-            response = call_api_question(userID, data)
-            dispatcher.utter_message(str(response))        
-
-        return [FollowupAction("action_store_detail")]
-
+        entity_list = tracker.latest_message['entities']
+        entity_list_len = len(entity_list)
+        
+        if entity_list_len > 0:
+            index = 0
+            while index < entity_list_len:
+                if entity_list[index]['entity'] == "animal":
+                    topic = entity_list[index]['entity']
+                    response = threaded_self_disclosure(userID, data, topic)
+                    dispatcher.utter_message(str(response))
+                    
+                    return [SlotSet("type_of_animal", entity_list[index]['value']),
+                            FollowupAction("action_listen")]
+                index += 1
+        else:
+        # It's probably that a sport was given, but failed extraction
+        #elif result == data:
+            response = threaded_self_disclosure(userID, data, "animal")
+            dispatcher.utter_message(str(response))
+            
+            return [SlotSet("type_of_animal", "fail"),
+                    FollowupAction("action_store_detail")]
+        
 
     
 # ----------------------------------------------------
@@ -420,15 +416,9 @@ class ActionStoreDetail(Action):
 
     def run(self, dispatcher, tracker, domain): # -> List[EventType]:                
         user   = tracker.get_slot("email")
-        name   = tracker.get_slot("PERSON")
+        name   = tracker.get_slot("person")
         sport  = tracker.get_slot("type_of_sport")
         animal = tracker.get_slot("type_of_animal")
-
-        dispatcher.utter_message("storing details (remove)")
-        dispatcher.utter_message("user: " + str(user))
-        dispatcher.utter_message("name: " + str(name))
-        dispatcher.utter_message("sport: " + str(sport))
-        dispatcher.utter_message("animal: " + str(animal))
 
         if sport == "zero" and animal == "zero":
             dispatcher.utter_message("So it seems that you dislike topics related sport and animal, that's okay.")
@@ -467,33 +457,22 @@ class ActionFetchFromDB(Action):
         col_list = ['user', 'name', 'sport', 'animal']
             
         # Read the csv file
-        dispatcher.utter_message("Reading csv")
         df = pd.read_csv("df2.csv", usecols=col_list)
-        dispatcher.utter_message("Done reading csv")
 
-        # Extract the 'user' column and turn it into a list
-        
-        dispatcher.utter_message("Getting user index")
+        # Extract the 'user' column and turn it into a list        
         user_list = df["user"]
         user_list = user_list.tolist()
-
 
         # Get the user's index
         user = tracker.get_slot("email")
         index = user_list.index(user)
-        dispatcher.utter_message("Done getting user index: " + str(index))
 
         # Get the user's topic and recent activity bool          
         user_name   = df["name"][index]  
         user_sport  = df["sport"][index]
         user_animal = df["animal"][index]
-
-        dispatcher.utter_message("name: " + str(user_name) )
-        dispatcher.utter_message("sport: " + str(user_sport))
-        dispatcher.utter_message("animal: " + str(user_animal))
-
         
-        return [SlotSet("PERSON", str(user_name)),
+        return [SlotSet("person", str(user_name)),
                 SlotSet("type_of_sport", str(user_sport)),
                 SlotSet("type_of_animal", str(user_animal)),
                 FollowupAction("ask_how_are")]
@@ -514,7 +493,7 @@ class AskHowAre(FormAction):
 
     @staticmethod
     def required_slots(tracker) -> List[Text]:
-        user_name = tracker.get_slot("PERSON")
+        user_name = tracker.get_slot("person")
         if user_name == "zero":
             return ["how_are_no_name"]
         else:
@@ -539,7 +518,7 @@ class AskHowAre(FormAction):
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
             
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
 
         sport  = tracker.get_slot("type_of_sport")
@@ -631,7 +610,7 @@ class RequestRecentSport(FormAction):
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
 
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
 
         return [FollowupAction("follow_up_recent_sport")]
@@ -679,7 +658,7 @@ class FollwUpRecentSport(FormAction):
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
 
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
         
         animal = tracker.get_slot("type_of_animal")
@@ -757,7 +736,7 @@ class AddOn3(FormAction):
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
 
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
 
         return [FollowupAction("request_own_pet")]
@@ -793,8 +772,8 @@ class RequestOwnPet(FormAction):
 
     def submit(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
         # If entity extraction failed, set it manually to a placeholder
-        result = tracker.get_slot("recent_active_sport")
-        data = tracker.latest_message.get('text')
+        result = str(tracker.get_slot("own_animal"))
+        data = str(tracker.latest_message.get('text'))
         
         if result == data:            
             return [FollowupAction("add_on_4")]
@@ -807,7 +786,7 @@ class RequestOwnPet(FormAction):
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
 
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
 
         return [FollowupAction("follow_up_own_pet")]
@@ -856,7 +835,7 @@ class FollwUpOwnPet(FormAction):
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
 
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
                 
         return [FollowupAction("add_on_4")]
@@ -896,7 +875,7 @@ class AddOn3(FormAction):
             userID = tracker.get_slot("email")
             data = tracker.latest_message.get('text')
 
-            response = call_api_question(userID, data)
+            response = threaded_question(userID, data)
             dispatcher.utter_message(str(response))
 
         return [FollowupAction("action_end_session_2")]
@@ -906,6 +885,31 @@ class AddOn3(FormAction):
 
 
 
+
+# ----------------------------------------------------
+#
+# Custom action for listening
+#
+# ----------------------------------------------------
+class ActionCustomListen(Action):
+    
+    def name(self) -> Text:
+        return "action_custom_listen"
+
+
+    def run(self, dispatcher, tracker, domain): # -> List[EventType]:
+        intent = tracker.latest_message['intent'].get('name')
+
+        if intent == "chit_chat_question":            
+            userID = tracker.get_slot("email")
+            data = tracker.latest_message.get('text')
+
+            response = threaded_question(userID, data)
+            dispatcher.utter_message(str(response))        
+
+        return []
+
+    
 
 # ----------------------------------------------------
 #
@@ -919,14 +923,14 @@ class ActionEndSession1(Action):
 
 
     def run(self, dispatcher, tracker, domain):
-        user_name = tracker.get_slot("PERSON")
+        user_name = tracker.get_slot("person")
         if user_name == "zero":
             dispatcher.utter_message(template="utter_end_session_1_no_name")
         else:
             dispatcher.utter_message(template="utter_end_session_1")
             
         return [SlotSet("email", None),
-                SlotSet("PERSON", None),
+                SlotSet("person", None),
                 FollowupAction('action_listen')]
 
 
@@ -939,7 +943,7 @@ class ActionEndSession2(Action):
 
     def run(self, dispatcher, tracker, domain):        
         dispatcher.utter_message("Great, it was nice talking to you!")
-        user_name = tracker.get_slot("PERSON")
+        user_name = tracker.get_slot("person")
         if user_name == "zero":
             dispatcher.utter_message(template="utter_end_session_2_no_name")
         else:
@@ -949,28 +953,7 @@ class ActionEndSession2(Action):
 
 
 
-# ----------------------------------------------------
-# A self disclosure component that is used after
-# asking the opening question
-# ----------------------------------------------------
-class ActionSelfDisclosure(Action):
     
-    def name(self) -> Text:
-        return "action_self_disclosure"
-
-
-    def run(self, dispatcher, tracker, domain): # -> List[EventType]:
-        userID = tracker.get_slot("email")
-        data = tracker.latest_message.get('text')
-        topic = tracker.latest_message['entities'][0]['entity']
-
-        response = call_api_self_disclosure(userID, data, topic)
-        dispatcher.utter_message(str(response))
-    
-        return []
-
-    
-
 # ----------------------------------------------------
 #
 # A self disclosure component that is used after
@@ -978,21 +961,103 @@ class ActionSelfDisclosure(Action):
 #
 # ----------------------------------------------------
 class ActionGetAnswer(Action):
-    
+
     def name(self) -> Text:
         return "action_get_answer"
 
-
-    def run(self, dispatcher, tracker, domain): # -> List[EventType]:         
+    def run(self, dispatcher, tracker, domain):
+        global api_data
         userID = tracker.get_slot("email")
-        data = tracker.latest_message.get('text')
+        data = tracker.latest_message.get("text")
 
-        response = call_api_question(userID, data)
+        my_thread = Thread(target=call_api_question, args=(userID, data))
+        my_thread.start()
+        my_thread.join()
+        item = None
+        my_api_data_lock.acquire()
+
+        try:
+            for i in range(len(api_data)):
+                if api_data[i][0] == userID:
+                    item = api_data.pop(i)
+                    break
+        finally:
+            my_api_data_lock.release()
+
+        if item[1]['error'] == None:
+            response = item[1]['answer']
+        else:
+            response = "Something went wrong when calling the API."
+
         dispatcher.utter_message(str(response))
-        
-##        Thread(target=call_api_question, args=(userID, data, dispatcher)).start()        
+        return[]
 
-        return []
+
+
+
+
+
+# ----------------------------------------------------
+#
+# Threaded API calls
+#
+# ----------------------------------------------------
+def threaded_question(userID, data):
+    global api_data
+##    userID = tracker.get_slot("email")
+##    data = tracker.latest_message.get("text")
+
+    my_thread = Thread(target=call_api_question, args=(userID, data))
+    my_thread.start()
+    my_thread.join()
+    item = None
+    my_api_data_lock.acquire()
+
+    try:
+        for i in range(len(api_data)):
+            if api_data[i][0] == userID:
+                item = api_data.pop(i)
+                break
+    finally:
+        my_api_data_lock.release()
+
+    if item[1]['error'] == None:
+        response = item[1]['answer']
+    else:
+        response = "Something went wrong when calling the API."
+
+##    dispatcher.utter_message(str(response))
+    return response
+
+
+    
+def threaded_self_disclosure(userID, data, topic):
+    global api_data
+##    userID = tracker.get_slot("email")
+##    data = tracker.latest_message.get("text")
+##    topic = tracker.latest_message['entities'][0]['entity']
+        
+    my_thread = Thread(target=call_api_self_disclosure, args=(userID, data, topic))
+    my_thread.start()
+    my_thread.join()
+    item = None
+    my_api_data_lock.acquire()
+
+    try:
+        for i in range(len(api_data)):
+            if api_data[i][0] == userID:
+                item = api_data.pop(i)
+                break
+    finally:
+        my_api_data_lock.release()
+
+    if item[1]['error'] == None:
+        response = item[1]['answer']
+    else:
+        response = "Something went wrong when calling the API."
+
+##    dispatcher.utter_message(str(response))
+    return response
 
 
 
@@ -1001,24 +1066,30 @@ class ActionGetAnswer(Action):
 # Call API functions
 #
 # ----------------------------------------------------
+
 def call_api_question(userID, data):
     
-    r = requests.post('http://f8298a7a6831.ngrok.io/get_answer', json={"userID": userID, "data": data})
-    if r.json()["error"] == None:
-        response = r.json()["answer"]
-        return response
-    else:
-        response = "Something went wrong when calling the API."
-        return response
+    global api_data
+    r = requests.post('http://a7e38b5edbf0.ngrok.io/get_answer',
+                      json={"userID": userID, "data": data})
+    my_api_data_lock.acquire()
+    
+    try:
+        api_data.append((userID, r.json()))
+    finally:
+        my_api_data_lock.release()
 
 
 
 def call_api_self_disclosure(userID, data, topic):
+
+    global api_data        
+    r = requests.post('http://a7e38b5edbf0.ngrok.io/get_disclosure',
+                      json={"userID": userID, "data": data, "topic": topic})
+    my_api_data_lock.acquire()
+
+    try:
+        api_data.append((userID, r.json()))
+    finally:
+        my_api_data_lock.release()
         
-    r = requests.post('http://f8298a7a6831.ngrok.io/get_disclosure', json={"userID": userID, "data": data, "topic": topic})
-    if r.json()["error"] == None:
-        response = r.json()["answer"]
-        return response
-    else:
-        response = "Something went wrong when calling the API."
-        return response
