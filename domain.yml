@@ -175,16 +175,16 @@ responses:
   - text: "If you get to keep one, would you prefer a big one or a small one?"
 
   utter_end_session_1:
-  - text: "Thank you {person}! You have now finished the first session, please proceed to the form for a small survey then come back in a few days to start a second session. I will send you a reminder via email."
+  - text: "Thank you {person}! You have now finished the first session, please go back to the form for a small survey, and start a second session in a few days. I will send you a reminder via email."
 
   utter_end_session_1_no_name:
-  - text: "Thank you! You have now finished the first session, please proceed to the form for a small survey then come back in a few days to start a second session. I will send you a reminder via email."
+  - text: "Thank you! You have now finished the first session, please go back to the form for a small survey, and start a second session in a few days. I will send you a reminder via email."
 
   utter_end_session_2:
-  - text: "Thank you {person}! Please proceed to the form for a small survey to complete the test."
+  - text: "Thank you {person}! Please proceed to the form for a small survey to complete the test. https://forms.gle/fSmejvyCv1odQWXi7"
 
   utter_end_session_2_no_name:
-  - text: "Thank you! Please proceed to the form for a small survey to complete the test."
+  - text: "Thank you! Please proceed to the form for a small survey to complete the test. https://forms.gle/fSmejvyCv1odQWXi7"
 
   utter_ask_add_on_3:
   - text: "Mh okay."
