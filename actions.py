@@ -1070,7 +1070,7 @@ def threaded_self_disclosure(userID, data, topic):
 def call_api_question(userID, data):
     
     global api_data
-    r = requests.post('http://a7e38b5edbf0.ngrok.io/get_answer',
+    r = requests.post('http://fe5a8940aedd.ngrok.io/get_answer',
                       json={"userID": userID, "data": data})
     my_api_data_lock.acquire()
     
@@ -1084,7 +1084,7 @@ def call_api_question(userID, data):
 def call_api_self_disclosure(userID, data, topic):
 
     global api_data        
-    r = requests.post('http://a7e38b5edbf0.ngrok.io/get_disclosure',
+    r = requests.post('http://fe5a8940aedd.ngrok.io/get_disclosure',
                       json={"userID": userID, "data": data, "topic": topic})
     my_api_data_lock.acquire()
 
