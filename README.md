@@ -11,3 +11,5 @@ For set up of Rasa X on a VM on Google Cloud Platform:
 - A video guide is also available [here](https://youtu.be/IUYdwy8HPVc) on YouTube.
 
 When Rasa X is set up and running, connect it to this repo using Integrated Version Control where you deploy a SSH key. After that you can train the model on Rasa X and start sharing it with users to let them interact with the chatbot.
+
+Note that the actions.py file is not pulled from there, instead the file that is used is located on the virtual machine when you build the docker. Also, the topic flow on my side is currently scripted (opening question -> topic sport -> topic animal) as mentioned before, so some re-designs on the story will be needed to make it more general.
